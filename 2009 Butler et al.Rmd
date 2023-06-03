@@ -1,0 +1,89 @@
+---
+title: "Butler et al., 2009"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants: 1) Schizophrenia n = 20 -\> n = 17 with schizophrenia -\> n = 3 with schizoaffective disorder
+
+2)  Control n = 17
+
+Contrast sensitivity (p4-5, experiment 1) 1) Significant main effects of Group F(1,35) = 7.0 , p = 0.01
+
+2)  Significant main effects of SF F(2,34) = 515.5 , p \< 0.001
+
+3)  Significant Group x SF interaction F(2,34) = 4.1 , p = 0.03 -\> Post-hoc analysis of the interaction 3A) Significant 0.5 cycle/degree t = 3.0 , df = 35 , p = 0.005
+
+    3B) 7 cycle/degree (not significant) t = 0.6 , df = 35 , p = 0.6
+
+    3C) 21 cycle/degree (not significant) t = 1.0 , df = 35 , p = 0.3
+
+## Calculate effect size:
+
+use the F-statistic (see bookdown.org)
+
+1)  Significant main effects of Group F(1,35) = 7.0 , p = 0.01
+
+```{r}
+library(esc)
+esc_f(f = 7.0,      # F value of the one-way anova
+      grp1n = 20,   # sample size of group 1 
+      grp2n = 17,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+2)  Significant main effects of SF F(2,34) = 515.5 , p \< 0.001
+
+```{r}
+library(esc)
+esc_f(f = 515.5,      # F value of the one-way anova
+      grp1n = 20,   # sample size of group 1 
+      grp2n = 17,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+3)  Significant Group x SF interaction F(2,34) = 4.1 , p = 0.03
+
+```{r}
+library(esc)
+esc_f(f = 4.1,      # F value of the one-way anova
+      grp1n = 20,   # sample size of group 1 
+      grp2n = 17,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+-\> Post-hoc analysis of the interaction 3A) Significant 0.5 cycle/degree t = 3.0 , df = 35 , p = 0.005
+
+```{r}
+library(esc)
+esc_t(t = 3.0, # t-statistic
+      grp1n = 20, # sample size 1
+      grp2n = 17, # sample size 2
+      es.type = "g") 
+```
+
+-\> Post-hoc analysis of the interaction 3B) 7 cycle/degree (not significant) t = 0.6 , df = 35 , p = 0.6
+
+```{r}
+library(esc)
+esc_t(t = 0.6, # t-statistic
+      grp1n = 20, # sample size 1
+      grp2n = 17, # sample size 2
+      es.type = "g") 
+```
+
+-\> Post-hoc analysis of the interaction 3C) 21 cycle/degree (not significant) t = 1.0 , df = 35 , p = 0.3
+
+```{r}
+library(esc)
+esc_t(t = 1.0, # t-statistic
+      grp1n = 20, # sample size 1
+      grp2n = 17, # sample size 2
+      es.type = "g") 
+```

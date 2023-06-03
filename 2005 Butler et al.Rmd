@@ -1,0 +1,42 @@
+---
+title: "Butler et al, 2005"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants: 1) Schizophrenia n = 33 -\> n = 27 with schizophrenia -\> n = 6 with schizoaffective disorder
+
+2)  Control n = 21
+
+Contrast sensitivity (p5) 1) Significant between-group effect F(1,49) = 81.6 , p\<0.001
+
+2)  Significant group x spatial frequency interaction F(6,44) = 13.1 , p\<0.001
+
+## Calculate effect size:
+
+use the F-statistic (see bookdown.org)
+
+1)  Significant between-group effect F(1,49) = 81.6 , p\<0.001
+
+```{r}
+library(esc)
+esc_f(f = 81.6,      # F value of the one-way anova
+      grp1n = 33,   # sample size of group 1 
+      grp2n = 21,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+2)  Significant group x spatial frequency interaction F(6,44) = 13.1 , p\<0.001
+
+```{r}
+library(esc)
+esc_f(f = 13.1,      # F value of the one-way anova
+      grp1n = 33,   # sample size of group 1 
+      grp2n = 21,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```

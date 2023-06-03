@@ -1,0 +1,22 @@
+---
+title: "Fernandes et al., 2019"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants: 1) Schizophrenia n = 50 -\> n = 25 taking atypical medication -\> n = 25 taking typical medication
+
+2)  Control n = 50
+
+Contrast sensitivity (p4, experiment 1) 1) Significant differences in the CSF between groups for all sF (including subgroups of scz) F(14),182) = 9.230 , p \< 0.001
+
+## Calculate effect size:
+
+use the F-statistic (see bookdown.org)
+
+## Side note 1
+
+Need to ask data from the authors - I mailed tham a while ago, but still no answer

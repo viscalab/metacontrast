@@ -1,0 +1,81 @@
+---
+title: "Dias et al., 2011"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants: 1) Schizophrenia n = 27 -\> n = 20 Subgroup (same characteristics) for contrast sensitivity
+
+2)  Control n = 15 -\> n = 9 Subgroup (same characteristics) for contrast sensitivity
+
+Contrast sensitivity (p6) 1) Significant main effects of Group F(1,27) = 11.3 , p = 0.002
+
+2)  Significant Group x SF interaction F(2,26) = 5.49 , p = 0.01
+
+3)  Low SF (0.5c/deg) vs controls (significantly reduced contrast) F(1,27) = 10.7 , p = 0.003
+
+4)  Medium SF (7c/deg) vs controls (not significantly reduced contrast) F(1,27) = 2.28 , p = 0.14
+
+5)  High SF (21c/deg) vs controls (not significantly reduced contrast) F(1,27) = 2.08 , p = 0.16
+
+## Calculate effect size:
+
+use the F-statistic (see bookdown.org)
+
+1)  Significant main effects of Group F(1,27) = 11.3 , p = 0.002
+
+```{r}
+library(esc)
+esc_f(f = 11.3,      # F value of the one-way anova
+      grp1n = 20,   # sample size of group 1 
+      grp2n = 9,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+2)  Significant Group x SF interaction F(2,26) = 5.49 , p = 0.01
+
+```{r}
+library(esc)
+esc_f(f = 5.49,      # F value of the one-way anova
+      grp1n = 20,   # sample size of group 1 
+      grp2n = 9,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+3)  Low SF (0.5c/deg) vs controls (significantly reduced contrast) F(1,27) = 10.7 , p = 0.003
+
+```{r}
+library(esc)
+esc_f(f = 10.7,      # F value of the one-way anova
+      grp1n = 20,   # sample size of group 1 
+      grp2n = 9,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+4)  Medium SF (7c/deg) vs controls (not significantly reduced contrast) F(1,27) = 2.28 , p = 0.14
+
+```{r}
+library(esc)
+esc_f(f = 2.28,      # F value of the one-way anova
+      grp1n = 20,   # sample size of group 1 
+      grp2n = 9,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+ 
+```
+
+5)  High SF (21c/deg) vs controls (not significantly reduced contrast) F(1,27) = 2.08 , p = 0.16
+
+```{r}
+library(esc)
+esc_f(f = 2.08,      # F value of the one-way anova
+      grp1n = 20,   # sample size of group 1 
+      grp2n = 9,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+ 
+```

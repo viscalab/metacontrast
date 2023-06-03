@@ -1,0 +1,76 @@
+---
+title: "Kéri et al., 2002"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants: 
+1) Schizophrenia
+  n = 20
+
+2) Control
+  n = 15
+
+
+Contrast sensitivity (p4)
+1) Significant main effects of Group
+  F(1,33) = 13.93 , p < 0.001
+
+2) Significant main effects of SF (spatial frequency)
+  F(8,264) = 131.78 , p < 0.0001
+
+3) Significant Group x SF interaction
+  F(8,264) = 2.28 , p < 0.05
+  -> Post-hoc comparison
+  See Figure 3 (mean and standard deviation) + 
+  Table 2 (P-values and correlation coefficients)
+  
+
+Dynamic contrast sensitivity (Is this motion sensitivity?)
+
+
+## Calculate effect size:
+  use the F-statistic (see bookdown.org)
+  
+1) Significant main effects of Group
+  F(1,33) = 13.93 , p < 0.001
+```{r}
+library(esc)
+esc_f(f = 13.93,      # F value of the one-way anova
+      grp1n = 20,   # sample size of group 1 
+      grp2n = 15,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+2) Significant main effects of SF (spatial frequency)
+  F(8,264) = 131.78 , p < 0.0001
+```{r}
+library(esc)
+esc_f(f = 131.78,      # F value of the one-way anova
+      grp1n = 20,   # sample size of group 1 
+      grp2n = 15,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+3) Significant Group x SF interaction
+  F(8,264) = 2.28 , p < 0.05
+```{r}
+library(esc)
+esc_f(f = 2.28,      # F value of the one-way anova
+      grp1n = 20,   # sample size of group 1 
+      grp2n = 15,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+## Side note 1
+The authors also look at dynamic contrast sensitivity. I think this is motion sensitivity, therefore I did not calculate the effect size.
+
+## Side note 2
+I did not calculate the effect size for the post-hoc analysis, since it is a figure and I am not sure how to retrieve information from this. It also has a table with p-values, I'm not sure if the formula for extracting effect size from p-values is allowed in this case. 
+

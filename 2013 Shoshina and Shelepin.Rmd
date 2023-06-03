@@ -1,0 +1,57 @@
+---
+title: "2013 Shoshina & Shelepin"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants: 1) Schizophrenia n = 43 -\> n = 23 group 1: duration schizophrenia \< 10 years -\> n = 20 group 2: duration schizophrenia \> 10 years
+
+2)  Control n = 20
+
+Contrast sensitivity (p2-3) 1) Threshold contrast sensitivity for low SF Control: mean = 15.2 ; sd = 12.0 Schizophrenia: mean = 10.1 ; sd = 8.1 -\> p = 0.001
+
+2)  Threshold contrast sensitivity for medium SF Control: mean = 73.4 ; sd = 39.8 Schizophrenia: mean = 64.4 ; sd = 40.7 -\> p = 0.02
+
+3)  Threshold contrast sensitivity for high SF Control: mean = 16.4 ; sd = 13.1 Schizophrenia: mean = 16.1 ; sd = 13.4 -\> p = 0.9 (not significant)
+
+The contrast sensitivities for group 1 and group 2 of schizophrenia based on disease duration is also given in the article. However, I think we don't need to use this information?
+
+## Calculate effect size:
+
+use the mean and sd (see bookdown.org)
+
+1)  Threshold contrast sensitivity for low SF Control: mean = 15.2 ; sd = 12.0 Schizophrenia: mean = 10.1 ; sd = 8.1 -\> p = 0.001
+
+```{r}
+library(esc)
+esc_mean_sd(grp1m = 15.2, grp2m = 10.1,  # group mean
+            grp1sd = 12.0, grp2sd = 8.1, # group sd
+            grp1n = 43, grp2n = 20, 
+            es.type = "g")
+
+```
+
+2)  Threshold contrast sensitivity for medium SF Control: mean = 73.4 ; sd = 39.8 Schizophrenia: mean = 64.4 ; sd = 40.7 -\> p = 0.02
+
+```{r}
+library(esc)
+esc_mean_sd(grp1m = 73.4, grp2m = 64.4,  # group mean
+            grp1sd = 39.8, grp2sd = 40.7, # group sd
+            grp1n = 43, grp2n = 20, 
+            es.type = "g")
+
+```
+
+3)  Threshold contrast sensitivity for high SF Control: mean = 16.4 ; sd = 13.1 Schizophrenia: mean = 16.1 ; sd = 13.4 -\> p = 0.9 (not significant)
+
+```{r}
+library(esc)
+esc_mean_sd(grp1m = 16.4, grp2m = 16.1,  # group mean
+            grp1sd = 13.1, grp2sd = 13.4, # group sd
+            grp1n = 43, grp2n = 20, 
+            es.type = "g")
+
+```

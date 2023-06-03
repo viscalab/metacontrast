@@ -1,0 +1,120 @@
+---
+title: "O' Donell et al., 2006"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+<<<<<<< HEAD
+1)  Schizophrenia n = 40 -\> n = 24 with schizophrenia / schizoaffective disorder (SZ) -\> n = 20 with schizophrenia -\> n = 4 with schizoaffective disorder -\> n = 16 with schizotypical personality disorder (SPD)
+
+2)  Control n = 40
+
+Contrast sensitivity (p5) Visual test performance: Mean (SD) 1) Control (static): 1.74 (.45)
+
+2)  SPD (static): 1.76 (.46)
+
+3)  Medicated SZ (static): 1.31 (.53)
+
+4)  Unmedicated SZ (static): 1.45 (.42)
+
+=\> SZ groups showed lowered contrast sensitivity
+
+Contrast sensitivity ANOVA Group vs stimulus (static + motion) (-\> not sure if these results can be used, since the motion contrast sensitivity is also included) 1) Significant main effects of Group F(2,77) = 6.52 , p = 0.002
+
+2)  Significant main effects of Test F(3,231) = 66.1 , p \< 0.001
+
+Follow-up ANOVAs 3) Control vs SPD F(1,54) = 0.14 , p = 0.71
+
+4)  Control vs SZ F(1,62) = 9.67 , p = 0.003
+
+=======
+1)  Schizophrenia n = 40
+n = 24 with schizophrenia / schizoaffective disorder (SZ) 
+-> n = 20 with schizophrenia
+-> n = 4 with schizoaffective disorder
+n = 16 with schizotypical personality disorder (SPD)
+
+2)  Control n = 40
+
+Contrast sensitivity (p5)
+Visual test performance: 
+1) Control (static): mean = 1.74 , sd = .45 , n=40
+
+2)  SPD (static): mean= 1.76 , sd= .46 , n=16
+
+3)  Medicated SZ (static): mean= 1.31 , sd= .53 , n=14
+
+4)  Unmedicated SZ (static): mean = 1.45 , sd = .42 , n=10
+
+=\> SZ groups showed lowered contrast sensitivity
+
+Contrast sensitivity ANOVA Group vs stimulus (static + motion) (-\> not sure if these results can be used, since the motion contrast sensitivity is also included)
+
+1) Significant main effects of Group (spd + sz + ctrl)
+F(2,77) = 6.52 , p = 0.002
+
+2)  Significant main effects of Test
+F(3,231) = 66.1 , p \< 0.001
+
+Follow-up ANOVAs
+
+3) Control vs SPD F(1,54) = 0.14 , p = 0.71
+
+4)  Control vs SZ F(1,62) = 9.67 , p = 0.003
+
+>>>>>>> a87c135bafb5f0c103d404d484586e713d4a0cec
+5)  SPD vs SZ F(1,38) = 5.58 , p = 0.02
+
+## Calculate effect size:
+?? probably use m and sd, but add up medicated and unmedicated SZ (how?)
+
+<<<<<<< HEAD
+=======
+F-statistic from follow-up anova
+4)  Control vs SZ F(1,62) = 9.67 , p = 0.003
+```{r}
+oDonnell_2006_es_f <- esc_f(f = 9.67,      # F value of the one-way anova
+      grp1n = 40,   # sample size of group 1 
+      grp2n = 24,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+oDonnell_2006_es_f
+```
+
+
+
+## Summarizing table
+
+```{r}
+oDonnell_2006 <- tibble( es = oDonnell_2006_es_f$es, se = oDonnell_2006_es_f$se ) 
+oDonnell_2006
+
+oDonnell_2006$study <- "O'Donnell et al. 2006"
+oDonnell_2006$method <- "staircase spatial modulation" # adaptative, mc, ... (Do they use a special method to display contrast?) 
+oDonnell_2006$medication <- "?" #TRUE #n=14 were on medication, n=10 not on medication
+oDonnell_2006$cpz <- "NA"  #Dose is not mentioned
+oDonnell_2006$task <- "SGD" #SGD means static grating detection 
+oDonnell_2006$SF <- 9.9
+oDonnell_2006$BPRS <- "NA"
+oDonnell_2006$motion <- FALSE #is grating moving?
+oDonnell_2006$duration <- 1.0 #Duration of the stimulus in seconds
+oDonnell_2006$location <- 2.9 #Where the stimulus was presented in degrees of visual angle (fixation = 0)
+oDonnell_2006$lapses <- "?"  #In lapses, we can include whether they control for lapses (TRUE) or not (FALSE).
+oDonnell_2006$calculation_statistic <- "f-statistic"  #"t-test", "m and sd"
+oDonnell_2006$calculation_data <- "reported" #"scrapping", "reported", "raw"
+oDonnell_2006$calculation_certainty <- "very unsure" #scale is "sure", "unsure", "very unsure"
+
+oDonnell_2006
+```
+
+
+>>>>>>> a87c135bafb5f0c103d404d484586e713d4a0cec
+## Side note:
+
+I think we need to ask for the data. I don't know how to compare the results to each other...
+
+For example with the mean and SD, maybe we could compare control vs SPD + medicated SZ + unmedicated SZ, although I'm not sure whether it is allowed to add up the 3 schizophrenia conditions.
+
+Also for the ANOVA: the results contain the factors Stimulus and Group, with Stimulus including static and moving stimuli. Thus, there is not comparison of static alone.

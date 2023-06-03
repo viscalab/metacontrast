@@ -1,0 +1,92 @@
+---
+title: "Cimmer et al., 2006"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+<<<<<<< HEAD
+Participants: 1) Schizophrenia n = 44 -\> n = 32 with non-deficit schizophrenia -\> n = 12 with deficit schizophrenia
+
+2)  Control n = 20
+
+Contrast sensitivity (p3) 1) Significant main effects of Group F(2,61) = 14.62 , p \< 0.0001 -\> Tukey's HSD test p \< 0.001 (schizophrenia vs controls) p = 0.17 (non-deficit vs deficit)
+
+## Calculate effect size:
+
+use the F-statistic (see bookdown.org)
+
+1)  Significant main effects of Group F(2,61) = 14.62 , p \< 0.0001 -\> Tukey's HSD test p \< 0.001 (schizophrenia vs controls) p = 0.17 (non-deficit vs deficit)
+
+```{r}
+library(esc)
+esc_f(f = 14.62,      # F value of the one-way anova
+      grp1n = 44,   # sample size of group 1 
+      grp2n = 12,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+=======
+Participants:
+1) Schizophrenia n = 44
+n = 32 with non-deficit schizophrenia
+n = 12 with deficit schizophrenia
+
+2)  Control n = 20
+
+Contrast sensitivity (p3)
+1) Significant main effects of Group
+F(2,61) = 14.62 , p \< 0.0001
+Tukey's HSD test
+p \< 0.001 (schizophrenia vs controls)
+p = 0.17 (non-deficit vs deficit)
+
+## Calculate effect size:
+>>>>>>> a87c135bafb5f0c103d404d484586e713d4a0cec
+
+use the F-statistic (see bookdown.org)
+
+1)  Significant main effects of Group
+F(2,61) = 14.62 , p \< 0.0001 
+
+```{r}
+cimmer_2006_es <- esc_f(f = 14.62,      # F value of the one-way anova
+      grp1n = 44,   # sample size of group 1 
+      grp2n = 20,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+cimmer_2006_es
+```
+<<<<<<< HEAD
+=======
+
+
+## Summarizing table
+
+```{r}
+cimmer_2006 <- tibble( es = cimmer_2006_es$es, se = cimmer_2006_es$se ) 
+cimmer_2006
+
+cimmer_2006$study <- "Cimmer et al. 2006"
+cimmer_2006$method <- "luminance modulation" # adaptative, mc, ... (Do they use a special method to display contrast?) 
+cimmer_2006$medication <- "TRUE" #all patients were on medication
+cimmer_2006$cpz <- "NA"  #Dose is not mentioned
+cimmer_2006$task <- "2AFC" #2AFC means two alternative forced choice
+cimmer_2006$SF <- 0.5
+cimmer_2006$BPRS <- "NA" #not mentioned
+cimmer_2006$motion <- TRUE #is grating moving?
+cimmer_2006$duration <- 0.5 #Duration of the stimulus in seconds
+cimmer_2006$location <- 0 #Where the stimulus was presented in degrees of visual angle (fixation = 0)
+cimmer_2006$lapses <- "?"  #In lapses, we can include whether they control for lapses (TRUE) or not (FALSE).
+cimmer_2006$calculation_statistic <- "f-statistic"  #"t-test", "m and sd"
+cimmer_2006$calculation_data <- "reported" #"scrapping", "reported", "raw"
+cimmer_2006$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+
+cimmer_2006
+```
+
+## Side note 1
+I think Group in the F-statistic is 3 groups (deficit, non-deficit and healthy controls)
+
+## Side note 2
+Maybe we can retrieve the correct data from figure 2, and add up both scizophrenia groups?
+>>>>>>> a87c135bafb5f0c103d404d484586e713d4a0cec

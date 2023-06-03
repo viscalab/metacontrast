@@ -1,0 +1,24 @@
+---
+title: "Fernandes et al., 2018"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants: 1) Schizophrenia n = 40 -\> n = 20 Chronic tobacco users -\> n = 20 no tobacco userss
+
+2)  Control n = 40
+
+Contrast sensitivity (p6, figure 1) 1) Significant difference between controls and schizophrenia (both subgroups taken together) -\> p \< 0.001
+
+Need to calculate the results from the figure (figure 1)
+
+## Calculate effect size:
+
+(see bookdown.org)
+
+## Side note 1
+
+Need to calculate the results from the figure (figure 1) Not sure how to do this. I'll take a look at it again.

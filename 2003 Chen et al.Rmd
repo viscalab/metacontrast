@@ -1,0 +1,106 @@
+---
+title: "Chen et al., 2003"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants: 1) Schizophrenia n = 45 n = 12 with schizophrenia n = 33 with schizoaffective disorder also classified according to type of antipsychotic medication
+
+2)  Control n = 39
+
+3)  First-degree relatives n = 24
+
+<<<<<<< HEAD
+Contrast sensitivity (p3) 1) Schizophrenia group (as a whole) vs healthy controls (significant) scz: mean = 0.0036 ; SD = 0.0039 ctrl: mean = 0.0025 ; SD = 0.0016 t = 2.04, df = 82, p\<0.05 Effect size of group difference: 0.71 (small)
+=======
+Contrast sensitivity (p3)
+1) Schizophrenia group (as a whole) vs healthy controls (significant)
+scz: mean = 0.0036 ; SD = 0.0039
+ctrl: mean = 0.0025 ; SD = 0.0016 
+t = 2.04, df = 82, p\<0.05
+Effect size of group difference: 0.71 (small) (maybe relatives as a group also included, not stated in paper)
+>>>>>>> a87c135bafb5f0c103d404d484586e713d4a0cec
+
+2)  Classified schizophrenia patients by type of antipsychotic medication (not neccessary for us)
+
+3)  First degree relatives vs healthy controls (not significant)
+rel: mean = 0.0022 ; SD = 0.001
+ctrl: mean = 0.0025 ; SD = 0.0016
+
+## Calculate effect size:
+
+use the means, the standards deviations and sample sizes (see tutorials meta-analysis)
+
+1)  Schizophrenia group (as a whole) vs healthy controls
+scz: mean = 0.0036 ; SD = 0.0039
+ctrl: mean = 0.0025 ; SD = 0.0016
+
+```{r}
+chen_2003_es <- esc_mean_sd(grp1m = 0.0036, grp2m = 0.0025, 
+            grp1sd = 0.0039, grp2sd = 0.0016, 
+            grp1n = 45, grp2n = 39, 
+            es.type = "g")
+chen_2003_es
+
+```
+
+1)  Schizophrenia group (as a whole) vs healthy controls scz:
+t = 2.04, df = 82, p\<0.05
+```{r}
+chen_2003_t_statistic <- esc_t(t = 2.04,
+      grp1n = 45,
+      grp2n = 39,
+      es.type = "g")
+chen_2003_t_statistic
+```
+
+3)  First degree relatives vs healthy controls (not significant)
+rel: mean = 0.0022 ; SD = 0.001
+ctrl: mean = 0.0025 ; SD = 0.0016
+
+```{r}
+chen_2003_es_rel <- esc_mean_sd(grp1m = 0.0022, grp2m = 0.001, 
+            grp1sd = 0.0039, grp2sd = 0.0016, 
+            grp1n = 24, grp2n = 39, 
+            es.type = "g")
+chen_2003_es_rel
+```
+
+## Summarizing table
+
+```{r}
+chen_2003 <- tibble( es = chen_2003_es$es, se = chen_2003_es$se ) 
+chen_2003
+
+chen_2003$study <- "Chen et al. 2003"
+chen_2003$method <- "NA" # adaptative, mc, ... (Do they use a special method to display contrast?) 
+chen_2003$medication <- "?" #TRUE #n=39 were on medication, n=6 not on medication
+chen_2003$cpz <- "NA"  #Dose is not mentioned
+chen_2003$task <- "2AFC" #2AFC means two alternative forced choice
+chen_2003$SF <- 0.5
+chen_2003$BPRS <- 42.4
+chen_2003$motion <- TRUE #is grating moving?
+chen_2003$duration <- 0.3 #Duration of the stimulus in seconds
+chen_2003$location <- 0 #Where the stimulus was presented in degrees of visual angle (fixation = 0)
+chen_2003$lapses <- "?"  #In lapses, we can include whether they control for lapses (TRUE) or not (FALSE).
+chen_2003$calculation_statistic <- "m and sd"  #"t-test", "m and sd"
+chen_2003$calculation_data <- "reported" #"scrapping", "reported", "raw"
+chen_2003$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+
+chen_2003
+```
+
+## Side note 1
+
+The authors reported an effect size, however, my calculations do not match this effect size. Am I doing something wrong?
+
+## Side note 2
+
+The authors mention that the grating is moving with a temporal frequency of 5 Hz. Does this mean the study is about motion and not solely contrast detection?
+
+## Side note 3
+
+The authors also do contrast sensitivity calculations based on the type on antipsychotic medication. I did not calculate these effect sizes, since I don't believe it is relevant.

@@ -1,0 +1,131 @@
+---
+title: "Slaghuis, 1998"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants: 
+1) Schizophrenia
+  n = 30
+    -> n = 15 with positive symptoms
+    -> n = 15 with negative symptoms
+
+2) Control
+  n = 15
+
+
+Contrast sensitivity (p5, experiment 1)
+1) Significant main effects of Group
+  F(2,42) = 21.7 , p < 0.0001
+    -> Post-hoc Tukey HSD
+    p < 0.01
+
+2) Significant main effects of duration
+  F(1,42) = 1209.6 , p < 0.0001
+
+3) Significant main effects of SF (spatial frequency)
+  F(5,210) = 275.5 , p < 0.0001
+
+4) Group x stimulus duration interaction (not significant)
+  F(2,42) = 0.316 , p > 0.05
+  
+5) Significant Group x SF interaction
+  F(10,210) = 3.4 , p < 0.0005
+
+6) Significant SF x stimulus duration interaction
+  F(5,210) = 41.3 , p < 0.001
+
+7) Groups x stimulus duration x SF (not significant)
+  F(10,210) = 0.63 , p > 0.05
+  
+
+Experiment 2 = motion contrast sensitivity
+
+
+## Calculate effect size:
+  use the F-statistic (see bookdown.org)
+  
+1) Significant main effects of Group
+  F(2,42) = 21.7 , p < 0.0001
+    -> Post-hoc Tukey HSD
+    p < 0.01
+```{r}
+library(esc)
+esc_f(f = 21.7,      # F value of the one-way anova
+      grp1n = 30,   # sample size of group 1 
+      grp2n = 15,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+
+2) Significant main effects of duration
+  F(1,42) = 1209.6 , p < 0.0001
+```{r}
+library(esc)
+esc_f(f = 1209.6,      # F value of the one-way anova
+      grp1n = 30,   # sample size of group 1 
+      grp2n = 15,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+3) Significant main effects of SF (spatial frequency)
+  F(5,210) = 275.5 , p < 0.0001
+```{r}
+library(esc)
+esc_f(f = 275.5,      # F value of the one-way anova
+      grp1n = 30,   # sample size of group 1 
+      grp2n = 15,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+4) Group x stimulus duration interaction (not significant)
+  F(2,42) = 0.316 , p > 0.05
+```{r}
+library(esc)
+esc_f(f = 0.316,      # F value of the one-way anova
+      grp1n = 30,   # sample size of group 1 
+      grp2n = 15,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+ 
+```
+
+5) Significant Group x SF interaction
+  F(10,210) = 3.4 , p < 0.0005
+```{r}
+library(esc)
+esc_f(f = 3.4,      # F value of the one-way anova
+      grp1n = 30,   # sample size of group 1 
+      grp2n = 15,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+ 
+```
+
+
+6) Significant SF x stimulus duration interaction
+  F(5,210) = 41.3 , p < 0.001
+```{r}
+library(esc)
+esc_f(f = 41.3,      # F value of the one-way anova
+      grp1n = 30,   # sample size of group 1 
+      grp2n = 15,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+
+7) Groups x stimulus duration x SF (not significant)
+  F(10,210) = 0.63 , p > 0.05
+```{r}
+library(esc)
+esc_f(f = 0.63,      # F value of the one-way anova
+      grp1n = 30,   # sample size of group 1 
+      grp2n = 15,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```

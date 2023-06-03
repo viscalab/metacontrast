@@ -1,0 +1,26 @@
+---
+title: "Shoshina et al., 2013"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants: 1) Schizophrenia n = 45 -\> n = 25 group 1: antipsychotics against dopamine and serotonine -\> n = 20 group 2: antipsychotics against dopamine
+
+2)  Control n = 20
+
+Contrast sensitivity (p3) 1) Threshold contrast sensitivity for low SF Control: mean = 15.2 ; sd = 12.0 Schizophrenia group 1: mean = 9.07 ; sd = 6.6 Schizophrenia group 2: mean = 11.4 ; sd = 9.1 -\> Both groups significantly different than control (p\<0.001)
+
+2)  Threshold contrast sensitivity for medium SF Control: mean = 73.4 ; sd = 39.8 Schizophrenia group 1: mean = 65.5 ; sd = 44.8 Schizophrenia group 2: mean = 63.6 ; sd = 34.1 -\> Group 1 significantly different than control (p\<0.0001) -\> Group 2 significantly different than control (p\<0.001)
+
+3)  Threshold contrast sensitivity for high SF Control: mean = 16.4 ; sd = 13.07 Schizophrenia group 1: mean = 17.5 ; sd = 15.4 Schizophrenia group 2: mean = 14.5 ; sd = 10.7 -\> Both groups not significantly different than control (p=0.3)
+
+## Calculate effect size:
+
+Calculate based on means and SD
+
+## Side note 1
+
+I am not sure how to calculate the effect sizes in this case, since the schizophrenia groups are divided based on antipsychotics use. Thus, how do I compare controls and the schizophrenic group? Do I join group 1 and group 2 together to make the total of the schizophrenic group? I am not sure how to do this.

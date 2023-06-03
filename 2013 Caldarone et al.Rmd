@@ -1,0 +1,70 @@
+---
+title: "Caldarone et al., 2013"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants: 1) Schizophrenia n = 15
+
+2)  Control n = 15
+
+Contrast sensitivity (p4) 1) Significant main effects of Group F(1,56) = 11.769 , p \< 0.005
+
+2)  Significant Group x Condition interaction F(1,56) = 4.632 , p \< 0.05
+
+Contrast sensitivity in fMRI (p5) 3) 0.5c/deg at 32ms:(M +- SD) Controls: 54.69 +- 17.03 Scz: 50.70 +- 19.15
+
+4)  4c/deg at 500 ms: (M +- SD) Controls: 41.43 +- 24.17 Scz: 23.52 +- 21.68
+
+## Calculate effect size:
+
+use the F-statistic (see bookdown.org)
+
+1)  Significant main effects of Group F(1,56) = 11.769 , p \< 0.005
+
+```{r}
+library(esc)
+esc_f(f = 11.769,      # F value of the one-way anova
+      grp1n = 15,   # sample size of group 1 
+      grp2n = 15,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+2)  Significant Group x Condition interaction F(1,56) = 4.632 , p \< 0.05
+
+```{r}
+library(esc)
+esc_f(f = 4.632,    # F value of the one-way anova
+      grp1n = 15,   # sample size of group 1 
+      grp2n = 15,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+3)  0.5c/deg at 32ms:(M +- SD) Controls: 54.69 +- 17.03 Scz: 50.70 +- 19.15
+
+```{r}
+library(esc)
+esc_mean_sd(grp1m = 54.69, grp2m = 50.70,  # group mean
+            grp1sd = 17.03, grp2sd = 19.15, # group sd
+            grp1n = 15, grp2n = 15, 
+            es.type = "g")
+```
+
+4)  4c/deg at 500 ms: (M +- SD) Controls: 41.43 +- 24.17 Scz: 23.52 +- 21.68
+
+```{r}
+library(esc)
+esc_mean_sd(grp1m = 41.43, grp2m = 23.52,  # group mean
+            grp1sd = 24.17 , grp2sd = 21.68, # group sd
+            grp1n = 15, grp2n = 15, 
+            es.type = "g")
+```
+
+## Side note 1
+
+This study also measured contrast sensitivity with fMRI. I am not sure how to interpret these results. Do I also use them to caculate the effect size?

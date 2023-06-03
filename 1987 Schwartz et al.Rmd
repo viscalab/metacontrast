@@ -1,0 +1,53 @@
+---
+title: "Schwartz et al., 1987"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants: 
+1) Schizophrenia
+  n = 19
+    
+2) Control
+  n = 15
+
+
+Contrast sensitivity (p6)
+1) Main effects (not significant for any SF)
+  F(1,32) = 2.51 , p = 0.12
+
+2) Interaction SF x groups (not significant)
+  F(2,64) = 0.94 , p = 1.397
+
+
+## Calculate effect size:
+  use the F-statistic (see bookdown.org)
+  
+1) Main effects (not significant for any SF)
+  F(1,32) = 2.51 , p = 0.12
+```{r}
+library(esc)
+esc_f(f = 2.51,      # F value of the one-way anova
+      grp1n = 19,   # sample size of group 1 
+      grp2n = 15,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+
+2) Interaction SF x groups (not significant)
+  F(2,64) = 0.94 , p = 1.397
+```{r}
+library(esc)
+esc_f(f = 0.94,      # F value of the one-way anova
+      grp1n = 19,   # sample size of group 1 
+      grp2n = 15,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+
+```
+
+## Side note 1
+Is it necessary to calculate the effect size of non-significant results?

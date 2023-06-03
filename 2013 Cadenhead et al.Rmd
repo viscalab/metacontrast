@@ -1,0 +1,71 @@
+---
+title: "Cadenhead et al., 2013"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants: 1) Schizophrenia n = 53 7 excluded for the contrast sensitivity: n = 46
+
+2)  Control n = 53
+
+3)  Schizotypical personality disorder (SPD) n = 22 1 excluded for the contrast sensitivity: n = 21
+
+Contrast sensitivity (p4) 1) Significant main effects of Group F(2,118) = 8.81 , p \< 0.001 post-hoc t-test: Control vs SPD: p \< 0.05 (significant) Control vs Scz: p \< 0.001 (significant) SPD vs Scz: not significant
+
+2)  Group x stimulus condition interaction (not significant) F(2,117) = 0.56 , NS
+
+## Calculate effect size:
+
+use the F-statistic (see bookdown.org)
+
+1)  Significant main effects of Group (3 groups)
+F(2,118) = 8.81 , p \< 0.001
+
+```{r}
+cadenhead_2013_es <- esc_f(f = 8.81,      # F value of the one-way anova
+      grp1n = 46,   # sample size of group 1 
+      grp2n = 21,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+cadenhead_2013_es
+```
+
+
+## Summarizing table
+
+```{r}
+cadenhead_2013 <- tibble( es = cadenhead_2013_es$es, se = cadenhead_2013_es$se ) 
+cadenhead_2013
+
+cadenhead_2013$study <- "Cadenhead et al. 2013"
+cadenhead_2013$method <- "luminance modulation" # adaptative, mc, ... 
+cadenhead_2013$medication <- TRUE #n=48 medicated, n=5 unmedicated
+cadenhead_2013$cpz <- "NA"  #in mg
+cadenhead_2013$task <- "2AFC" 
+cadenhead_2013$SF <- 1.22
+cadenhead_2013$BPRS <- NA
+cadenhead_2013$motion <- TRUE #is grating moving?
+cadenhead_2013$duration <- 0.12 #Duration of the stimulus in seconds
+cadenhead_2013$location <- 0 #Where the stimulus was presented in degrees of visual angle (fixation = 0)
+cadenhead_2013$lapses <- "?"  #In lapses, we can include whether they control for lapses (TRUE) or not (FALSE).
+cadenhead_2013$calculation_statistic <- "f test"  #"t-test", "m and sd"
+cadenhead_2013$calculation_data <- "reported" #"scrapping", "reported", "raw"
+cadenhead_2013$calculation_certainty <- "very unsure" #scale is "sure", "unsure", "very unsure"
+
+cadenhead_2013
+```
+
+## Side note 1
+
+I believe the es is wrong, since the effect of group was measured for the three groups, and not only for ctrl vs scz.
+
+## Side note 2
+
+<<<<<<< HEAD
+I think information could be gotten from the figures. However, I am not sure which figure is the correct one. (I think figure 1)
+=======
+I think information could be gotten from the figures. However, I am not sure which figure is the correct one. (I think figure 1). I don't know if we need to look at luminance of chromatic condition. Not sure how to do this.
+
+>>>>>>> a87c135bafb5f0c103d404d484586e713d4a0cec
