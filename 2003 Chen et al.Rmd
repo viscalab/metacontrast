@@ -7,22 +7,23 @@ output: html_notebook
 
 ## Gathering information:
 
-Participants: 1) Schizophrenia n = 45 n = 12 with schizophrenia n = 33 with schizoaffective disorder also classified according to type of antipsychotic medication
+Participants:
+1) Schizophrenia n = 45
+n = 12 with schizophrenia
+n = 33 with schizoaffective disorder
+also classified according to type of antipsychotic medication
 
 2)  Control n = 39
 
 3)  First-degree relatives n = 24
 
-<<<<<<< HEAD
-Contrast sensitivity (p3) 1) Schizophrenia group (as a whole) vs healthy controls (significant) scz: mean = 0.0036 ; SD = 0.0039 ctrl: mean = 0.0025 ; SD = 0.0016 t = 2.04, df = 82, p\<0.05 Effect size of group difference: 0.71 (small)
-=======
+
 Contrast sensitivity (p3)
 1) Schizophrenia group (as a whole) vs healthy controls (significant)
 scz: mean = 0.0036 ; SD = 0.0039
 ctrl: mean = 0.0025 ; SD = 0.0016 
 t = 2.04, df = 82, p\<0.05
 Effect size of group difference: 0.71 (small) (maybe relatives as a group also included, not stated in paper)
->>>>>>> a87c135bafb5f0c103d404d484586e713d4a0cec
 
 2)  Classified schizophrenia patients by type of antipsychotic medication (not neccessary for us)
 
