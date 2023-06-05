@@ -7,30 +7,7 @@ output: html_notebook
 
 ## Gathering information:
 
-<<<<<<< HEAD
-1)  Schizophrenia n = 40 -\> n = 24 with schizophrenia / schizoaffective disorder (SZ) -\> n = 20 with schizophrenia -\> n = 4 with schizoaffective disorder -\> n = 16 with schizotypical personality disorder (SPD)
-
-2)  Control n = 40
-
-Contrast sensitivity (p5) Visual test performance: Mean (SD) 1) Control (static): 1.74 (.45)
-
-2)  SPD (static): 1.76 (.46)
-
-3)  Medicated SZ (static): 1.31 (.53)
-
-4)  Unmedicated SZ (static): 1.45 (.42)
-
-=\> SZ groups showed lowered contrast sensitivity
-
-Contrast sensitivity ANOVA Group vs stimulus (static + motion) (-\> not sure if these results can be used, since the motion contrast sensitivity is also included) 1) Significant main effects of Group F(2,77) = 6.52 , p = 0.002
-
-2)  Significant main effects of Test F(3,231) = 66.1 , p \< 0.001
-
-Follow-up ANOVAs 3) Control vs SPD F(1,54) = 0.14 , p = 0.71
-
-4)  Control vs SZ F(1,62) = 9.67 , p = 0.003
-
-=======
+Participants
 1)  Schizophrenia n = 40
 n = 24 with schizophrenia / schizoaffective disorder (SZ) 
 -> n = 20 with schizophrenia
@@ -65,14 +42,11 @@ Follow-up ANOVAs
 
 4)  Control vs SZ F(1,62) = 9.67 , p = 0.003
 
->>>>>>> a87c135bafb5f0c103d404d484586e713d4a0cec
 5)  SPD vs SZ F(1,38) = 5.58 , p = 0.02
 
 ## Calculate effect size:
 ?? probably use m and sd, but add up medicated and unmedicated SZ (how?)
 
-<<<<<<< HEAD
-=======
 F-statistic from follow-up anova
 4)  Control vs SZ F(1,62) = 9.67 , p = 0.003
 ```{r}
@@ -82,7 +56,6 @@ oDonnell_2006_es_f <- esc_f(f = 9.67,      # F value of the one-way anova
       es.type = "g") # convert to Hedges' g; use "d" for SMD
 oDonnell_2006_es_f
 ```
-
 
 
 ## Summarizing table
@@ -109,8 +82,6 @@ oDonnell_2006$calculation_certainty <- "very unsure" #scale is "sure", "unsure",
 oDonnell_2006
 ```
 
-
->>>>>>> a87c135bafb5f0c103d404d484586e713d4a0cec
 ## Side note:
 
 I think we need to ask for the data. I don't know how to compare the results to each other...

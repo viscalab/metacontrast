@@ -7,15 +7,25 @@ output: html_notebook
 
 ## Gathering information:
 
-Participants: 1) Schizophrenia n = 53 7 excluded for the contrast sensitivity: n = 46
+Participants:
+1) Schizophrenia n = 53
+7 excluded for the contrast sensitivity: n = 46
 
 2)  Control n = 53
 
-3)  Schizotypical personality disorder (SPD) n = 22 1 excluded for the contrast sensitivity: n = 21
+3)  Schizotypical personality disorder (SPD) n = 22
+1 excluded for the contrast sensitivity: n = 21
 
-Contrast sensitivity (p4) 1) Significant main effects of Group F(2,118) = 8.81 , p \< 0.001 post-hoc t-test: Control vs SPD: p \< 0.05 (significant) Control vs Scz: p \< 0.001 (significant) SPD vs Scz: not significant
+Contrast sensitivity (p4)
+1) Significant main effects of Group
+F(2,118) = 8.81 , p \< 0.001
+post-hoc t-test:
+Control vs SPD: p \< 0.05 (significant)
+Control vs Scz: p \< 0.001 (significant)
+SPD vs Scz: not significant
 
-2)  Group x stimulus condition interaction (not significant) F(2,117) = 0.56 , NS
+2)  Group x stimulus condition interaction (not significant)
+F(2,117) = 0.56 , NS
 
 ## Calculate effect size:
 
@@ -63,9 +73,6 @@ I believe the es is wrong, since the effect of group was measured for the three 
 
 ## Side note 2
 
-<<<<<<< HEAD
 I think information could be gotten from the figures. However, I am not sure which figure is the correct one. (I think figure 1)
-=======
-I think information could be gotten from the figures. However, I am not sure which figure is the correct one. (I think figure 1). I don't know if we need to look at luminance of chromatic condition. Not sure how to do this.
 
->>>>>>> a87c135bafb5f0c103d404d484586e713d4a0cec
+I think information could be gotten from the figures. However, I am not sure which figure is the correct one. (I think figure 1). I don't know if we need to look at luminance of chromatic condition. Not sure how to do this.
