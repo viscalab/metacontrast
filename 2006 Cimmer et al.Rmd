@@ -7,26 +7,6 @@ output: html_notebook
 
 ## Gathering information:
 
-<<<<<<< HEAD
-Participants: 1) Schizophrenia n = 44 -\> n = 32 with non-deficit schizophrenia -\> n = 12 with deficit schizophrenia
-
-2)  Control n = 20
-
-Contrast sensitivity (p3) 1) Significant main effects of Group F(2,61) = 14.62 , p \< 0.0001 -\> Tukey's HSD test p \< 0.001 (schizophrenia vs controls) p = 0.17 (non-deficit vs deficit)
-
-## Calculate effect size:
-
-use the F-statistic (see bookdown.org)
-
-1)  Significant main effects of Group F(2,61) = 14.62 , p \< 0.0001 -\> Tukey's HSD test p \< 0.001 (schizophrenia vs controls) p = 0.17 (non-deficit vs deficit)
-
-```{r}
-library(esc)
-esc_f(f = 14.62,      # F value of the one-way anova
-      grp1n = 44,   # sample size of group 1 
-      grp2n = 12,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
-=======
 Participants:
 1) Schizophrenia n = 44
 n = 32 with non-deficit schizophrenia
@@ -42,7 +22,6 @@ p \< 0.001 (schizophrenia vs controls)
 p = 0.17 (non-deficit vs deficit)
 
 ## Calculate effect size:
->>>>>>> a87c135bafb5f0c103d404d484586e713d4a0cec
 
 use the F-statistic (see bookdown.org)
 
@@ -56,8 +35,6 @@ cimmer_2006_es <- esc_f(f = 14.62,      # F value of the one-way anova
       es.type = "g") # convert to Hedges' g; use "d" for SMD
 cimmer_2006_es
 ```
-<<<<<<< HEAD
-=======
 
 
 ## Summarizing table
@@ -88,5 +65,4 @@ cimmer_2006
 I think Group in the F-statistic is 3 groups (deficit, non-deficit and healthy controls)
 
 ## Side note 2
-Maybe we can retrieve the correct data from figure 2, and add up both scizophrenia groups?
->>>>>>> a87c135bafb5f0c103d404d484586e713d4a0cec
+Maybe we can retrieve the correct data from figure 2, and add up both schizophrenia groups (deficit and non-deficit)?

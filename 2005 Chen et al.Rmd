@@ -3,55 +3,12 @@ title: "Chen et al., 2005"
 output: html_notebook
 ---
 
-## Comments
-
-The relevant task is the contrast detection task. They only provide the F for the four groups, so it is not possible to calculate the g for the schizophrenia and control group. We need to ask for the data.
-
-Asked for the data, authors have died so we do not have access to the data.
-
-## More information
-
-In lapses, we can include whether they control for lapses (TRUE) or not (FALSE).
-
-```{r}
-dat_chen_2005$lapses <- FALSE
-```
-
-Is the grating moving?
-
-```{r}
-dat_chen_2005$motion <- TRUE
-```
-
-Spatial frequency in degrees of visual angle
-
-```{r}
-dat_chen_2005$sf <- 0.5
-```
-
-Duration of the stimulus in seconds
-
-```{r}
-dat_chen_2005$duration <- 0.3
-```
-
-Where the stimulus was presented in degrees of visual angle (fixation = 0)
-
-```{r}
-dat_chen_2005$location <- 0
-```
-
-Do they use a special method to display contrast?
-
-```{r}
-dat_chen_2005$method <- NA
-```
-
 # Effect size
 
 ## Gathering information:
 
-Participants: 1) Schizophrenia/schizoaffective disorder n = 29
+Participants:
+1) Schizophrenia/schizoaffective disorder n = 29
 
 2)  First degree relatives of schizophrenic patients n = 20
 
@@ -59,7 +16,8 @@ Participants: 1) Schizophrenia/schizoaffective disorder n = 29
 
 4)  Control n = 33
 
-Contrast sensitivity (p6-7) 1) Effect of group (not significant) F = 1.21 , p = 0.3123 , df = 3
+Contrast sensitivity (p6-7)
+1) Effect of group (not significant) F = 1.21 , p = 0.3123 , df = 3
 
 ## Calculate effect size:
 
