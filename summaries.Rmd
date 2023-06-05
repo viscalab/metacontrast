@@ -7,20 +7,26 @@ output: html_notebook
 
 ## 2003_chen Summarizing table 
 
+DL, I WOULD REMOVE THIS BECAUSE IT IS ALREADY DONE AND IT IS PRONE TO ERROR, YOU JUST NEED THE CHUNK AFTERWARDS ABOUT chen_2003_summary
+
 ```{r}
 chen_2003_es <- esc_mean_sd(grp1m = 0.0036, grp2m = 0.0025, 
-            grp1sd = 0.0039, grp2sd = 0.0016, 
-            grp1n = 45, grp2n = 39, 
-            es.type = "g")
+                            grp1sd = 0.0039, grp2sd = 0.0016, 
+                            grp1n = 45, grp2n = 39, 
+                            es.type = "g")
 chen_2003_es
 
-chen_2003 <- tibble( es = chen_2003_es$es, se = chen_2003_es$se ) 
+chen_2003 <- tibble(es = chen_2003_es$es, se = chen_2003_es$se ) 
 chen_2003$study <- "Chen et al. 2003"
 chen_2003$calculation_statistic <- "m and sd"  
 chen_2003$calculation_data <- "reported" 
 chen_2003$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
 
-chen_2003
+```
+
+```{r}
+chen_2003_summary <- chen_2003 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
 ```
 
 ## 2005_chen Summarizing table
