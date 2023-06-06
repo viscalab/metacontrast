@@ -1,0 +1,33 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+sfs <- read_excel("data/sfs.xlsx") |> # using library readxl from, see 00_funs
+  pivot_longer(cols = starts_with(".."), 
+               names_to = "names", values_to = "sf") |> 
+  select(-names) |> 
+  drop_na() |> 
+  mutate(study = paste(date, study))
+
+```
+```{r}
+sfs_summary <- sfs |> 
+  group_by(study) |> 
+  summarise(sf = mean(sf))
+
+sfs_summary_all <- sfs_summary |> 
+  summarise(sf = mean(sf))
+
+
+ggplot() +
+  geom_point(data = sfs, aes(x = study, y = sf)) +
+  geom_point(data = sfs_summary, aes(x = study, y = sf), color = "red") + 
+  geom_hline(data = sfs_summary_all, aes(yintercept = sf), color = "red") +
+  geom_hline(data = sfs_summary_all, aes(yintercept = 0.5)) +
+  coord_flip()
+```
+
+
+
