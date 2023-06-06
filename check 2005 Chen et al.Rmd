@@ -38,11 +38,12 @@ chen_2005 <- tibble(es = "No data", se = "No data" )
 chen_2005
 
 chen_2005$study <- "Chen et al. 2005"
-chen_2005$method <- "?spatial luminance moduation?" # adaptative, mc, ... (Do they use a special method to display contrast?)
+chen_2005$method <- "staircase" # adaptative, mc, ... (Do they use a special method to display contrast?)
 chen_2005$medication <- "?" #TRUE #n=28 were on medication, n=1 not on medication
 chen_2005$cpz <- "557"  #in mg
-chen_2005$task <- "2AFC" #2AFC means two alternative forced choice
+chen_2005$task <- "2IFC" #2AFC means two alternative forced choice
 chen_2005$SF <- 0.5
+chen_2005$size <- 10
 chen_2005$BPRS <- 40.0
 chen_2005$motion <- TRUE #is grating moving?
 chen_2005$duration <- 0.3 #Duration of the stimulus in seconds

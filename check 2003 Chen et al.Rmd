@@ -85,6 +85,7 @@ chen_2003$medication <- "medicated and unmedicated" #TRUE #n=39 were on medicati
 chen_2003$cpz <- "NA"  #Dose is not mentioned
 chen_2003$task <- "2IFC" #2AFC means two alternative forced choice
 chen_2003$SF <- 0.5
+chen_2003$size <- 10
 chen_2003$BPRS <- 42.4
 chen_2003$motion <- TRUE #is grating moving?
 chen_2003$duration <- 0.3 #Duration of the stimulus in seconds
