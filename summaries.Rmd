@@ -1,28 +1,11 @@
 ---
-title: "Summary Effect sizes and Forest plot"
+title: "Summary Effect Sizes and Forest Plot"
 output: html_notebook
 ---
 
-# Summary table studies
+# Summaries studies
 
 ## 2003_chen Summarizing table 
-
-DL, I WOULD REMOVE THIS BECAUSE IT IS ALREADY DONE AND IT IS PRONE TO ERROR, YOU JUST NEED THE CHUNK AFTERWARDS ABOUT chen_2003_summary
-
-```{r}
-chen_2003_es <- esc_mean_sd(grp1m = 0.0036, grp2m = 0.0025, 
-                            grp1sd = 0.0039, grp2sd = 0.0016, 
-                            grp1n = 45, grp2n = 39, 
-                            es.type = "g")
-chen_2003_es
-
-chen_2003 <- tibble(es = chen_2003_es$es, se = chen_2003_es$se ) 
-chen_2003$study <- "Chen et al. 2003"
-chen_2003$calculation_statistic <- "m and sd"  
-chen_2003$calculation_data <- "reported" 
-chen_2003$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
-
-```
 
 ```{r}
 chen_2003_summary <- chen_2003 |> 
@@ -32,152 +15,56 @@ chen_2003_summary <- chen_2003 |>
 ## 2005_chen Summarizing table
 
 ```{r}
-#Asked for the data, authors have died so we do not have access to the data.
-
-chen_2005 <- tibble(es = "NA", se = "NA" ) 
-chen_2005$study <- "Chen et al. 2005"
-chen_2005$calculation_statistic <- "NA"  #"t-test", "m and sd"
-chen_2005$calculation_data <- "NA" #"scrapping", "reported", "raw"
-chen_2005$calculation_certainty <- "sure" #scale is "sure", "unsure", "very unsure"
-
-chen_2005$es <- as.numeric(chen_2005$es)
-chen_2005$se <- as.numeric(chen_2005$es)
-
-chen_2005
+chen_2005_summary <- chen_2005 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
 ```
 
 ## 2006_cimmer Summarizing table
 
 ```{r}
-cimmer_2006_es <- esc_f(f = 14.62,      # F value of the one-way anova
-      grp1n = 44,   # sample size of group 1 
-      grp2n = 20,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
-cimmer_2006_es
-
-cimmer_2006 <- tibble(es = cimmer_2006_es$es, se = cimmer_2006_es$se ) 
-cimmer_2006$study <- "Cimmer et al. 2006"
-cimmer_2006$calculation_statistic <- "f-statistic"  #"t-test", "m and sd"
-cimmer_2006$calculation_data <- "reported" #"scrapping", "reported", "raw"
-cimmer_2006$calculation_certainty <- "very unsure" #scale is "sure", "unsure", "very unsure"
-
-cimmer_2006
+cimmer_2006_summary <- cimmer_2006 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
 ```
 
 ## 2006_oDonnell Summarizing table
 
 ```{r}
-oDonnell_2006_es_f <- esc_f(f = 9.67,      # F value of the one-way anova
-      grp1n = 40,   # sample size of group 1 
-      grp2n = 24,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
-oDonnell_2006_es_f
-
-oDonnell_2006 <- tibble( es = oDonnell_2006_es_f$es, se = oDonnell_2006_es_f$se ) 
-oDonnell_2006$study <- "O'Donnell et al. 2006"
-oDonnell_2006$calculation_statistic <- "f-statistic"  #"t-test", "m and sd"
-oDonnell_2006$calculation_data <- "reported" #"scrapping", "reported", "raw"
-oDonnell_2006$calculation_certainty <- "very unsure" #scale is "sure", "unsure", "very unsure"
-
-oDonnell_2006
+oDonnell_2006_summary <- oDonnell_2006 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
 ```
 
 ## 2006_chen Summarizing table
 
 ```{r}
-chen_2006_es <- esc_mean_sd(grp1m = 0.0036, grp2m = 0.0039,  # group mean
-            grp1sd = 0.0020, grp2sd = 0.0027, # group sd
-            grp1n = 25, grp2n = 25, 
-            es.type = "g")
-chen_2006_es
-
-chen_2006 <- tibble( es = chen_2006_es$es, se = chen_2006_es$se ) 
-chen_2006$study <- "Chen et al. 2006"
-chen_2006$calculation_statistic <- "m and sd"  #"t-test", "m and sd"
-chen_2006$calculation_data <- "reported" #"scrapping", "reported", "raw"
-chen_2006$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
-
-chen_2006
+chen_2006_summary <- chen_2006 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
 ```
 
 ## 2013_cadenhead Summarizing table
 
 ```{r}
-cadenhead_2013_es <- esc_f(f = 8.81,      # F value of the one-way anova
-      grp1n = 46,   # sample size of group 1 
-      grp2n = 21,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
-cadenhead_2013_es
-
-cadenhead_2013 <- tibble( es = cadenhead_2013_es$es, se = cadenhead_2013_es$se ) 
-cadenhead_2013$study <- "Cadenhead et al. 2013"
-cadenhead_2013$calculation_statistic <- "f test"  #"t-test", "m and sd"
-cadenhead_2013$calculation_data <- "reported" #"scrapping", "reported", "raw"
-cadenhead_2013$calculation_certainty <- "very unsure" #scale is "sure", "unsure", "very unsure"
-
-cadenhead_2013
+cadenhead_2013_summary <- cadenhead_2013 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
 ```
 
-## Summary table all studies
+# Summary table all studies
 
 Let's combine the data in a single data frame.
 
 ```{r,echo=TRUE}
-studies <- chen_2003 |> 
-  bind_rows(chen_2005) |> 
-  bind_rows(cimmer_2006) |> 
-  bind_rows(oDonnell_2006) |> 
-  bind_rows(chen_2006) |>
-  bind_rows(cadenhead_2013) |>
+studies <- chen_2003_summary |> 
+  bind_rows(chen_2005_summary) |> 
+  bind_rows(cimmer_2006_summary) |> 
+  bind_rows(oDonnell_2006_summary) |> 
+  bind_rows(chen_2006_summary) |>
+  bind_rows(cadenhead_2013_summary) |>
   select(study, es, se, calculation_statistic, calculation_data, calculation_certainty)
 
 studies
 ```
 
 
-```{r,echo=TRUE}
-studies_es <- chen_2003 |> 
-  bind_rows(chen_2005) |>
-  bind_rows(cimmer_2006) |>
-  bind_rows(oDonnell_2006) |>
-  bind_rows(chen_2006) |>
-  bind_rows(cadenhead_2013) |>
-  select(study, es, se)
-
-studies_es
-```
-
-# Fixed-effect meta-analysis using 'meta'
-
-
-```{r,echo=TRUE}
-library(meta)
-
-fixed_meta <- metagen(TE = es, seTE = se, studlab = study, 
-                    fixed = TRUE, 
-                    random = FALSE, 
-                    data = studies_es)
-
-fixed_meta
-```
-
-
-
-```{r,echo=TRUE}
-summary(fixed_meta)
-```
-
-### Forest plot Fixed-effect
-
-```{r,echo=TRUE}
-forest(fixed_meta)
-```
-
-
-
 # Random-effect meta-analysis using `meta`
-
-. . .
 
 ```{r,echo=TRUE}
 random_meta <- metagen(TE = es, seTE = se, studlab = study, 
@@ -187,7 +74,6 @@ random_meta <- metagen(TE = es, seTE = se, studlab = study,
 
 random_meta
 ```
-
 
 
 ```{r,echo=TRUE}
@@ -205,7 +91,7 @@ We can modify the plot
 
 ```{r,echo=TRUE}
 forest(random_meta, layout= "JAMA", hetstat = FALSE, 
-       xlim = c(-0.1, 2.3))
+       xlim = c(-1, 2))
 ```
 
 

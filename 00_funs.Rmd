@@ -6,4 +6,6 @@ output: html_notebook
 ```{r}
 library(tidyverse)
 library(esc)
+library(readxl)
+library(meta)
 ```

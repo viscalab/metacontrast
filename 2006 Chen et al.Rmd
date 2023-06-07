@@ -39,7 +39,6 @@ t-statistic
 ## Calculate effect size:
   use the mean and sd (see bookdown.org)
   use the t-statistic
-  I only calculate for scz vs ctrl
   
 2) Schizophrenia vs control (not significant)
   Schizophrenia: mean = 0.0036 ; sd = 0.0020
@@ -53,15 +52,14 @@ chen_2006_es
 
 ```
 
-
 2) Schizophrenia vs control (not significant)
   -> t(1,44) = 0.49 , p = 0.627
 ```{r}
-chen_2006_es_t_statistic <- esc_t(t = 0.49, # t-statistic
+chen_2006_es_t <- esc_t(t = 0.49, # t-statistic
       grp1n = 25,
       grp2n = 25,
       es.type = "g")
-chen_2006_es_t_statistic
+chen_2006_es_t
 
 ```
 
@@ -73,16 +71,17 @@ chen_2006 <- tibble( es = chen_2006_es$es, se = chen_2006_es$se )
 chen_2006
 
 chen_2006$study <- "Chen et al. 2006"
-chen_2006$method <- "staircase (1- up 3- down)" # adaptative, mc, ... 
-chen_2006$medication <- "?" #TRUE #n=24 medicated, n=1 unmedicated
+chen_2006$method <- "staircase" # adaptative, mc, ... 
+chen_2006$medication <- "medicated and unmedicated" #n=24 medicated, n=1 unmedicated
 chen_2006$cpz <- "388"  #in mg
-chen_2006$task <- "psychophysical" 
+chen_2006$task <- "2AFC" 
 chen_2006$SF <- 0.5
+chen_2006$size <- 19
 chen_2006$BPRS <- 43
 chen_2006$motion <- TRUE #is grating moving?
 chen_2006$duration <- 0.3 #Duration of the stimulus in seconds
 chen_2006$location <- 0 #Where the stimulus was presented in degrees of visual angle (fixation = 0)
-chen_2006$lapses <- "?"  #In lapses, we can include whether they control for lapses (TRUE) or not (FALSE).
+chen_2006$lapses <- FALSE #In lapses, we can include whether they control for lapses (TRUE) or not (FALSE).
 chen_2006$calculation_statistic <- "m and sd"  #"t-test", "m and sd"
 chen_2006$calculation_data <- "reported" #"scrapping", "reported", "raw"
 chen_2006$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
@@ -94,10 +93,4 @@ chen_2006
 
 ## Side note 1
 
-Why is the effect size different when I calculate it with the mean(sd) vs when calculated with the t-statistic?
-
-## Side note 2
-
-Only 2) is important, namely control vs schizophrenia.
-
-
+Why is the effect size different when I calculate it with the m and sd vs when calculated with the t-statistic?
