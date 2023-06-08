@@ -75,7 +75,7 @@ butler_2009_summary <- butler_2009 |>
   select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
 ```
 
-## 2009_butler Summarizing table
+## 2010_kiss Summarizing table
 
 ```{r}
 kiss_2010_summary <- kiss_2010 |> 
