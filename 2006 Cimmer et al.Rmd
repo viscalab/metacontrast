@@ -33,7 +33,7 @@ F(2,61) = 14.62 , p \< 0.0001
 ```
 
 
-Extract data from figure 2? (use plotdigitizer)
+Scrapping data from figure 2 (use plotdigitizer)
 Non-deficit (n=32): mean = 2.2919685074449494, 95%CI = (2.2390551065646807 - 2.3411023518852456)
 Deficit (n=12): mean = 2.200314934201157, 95%CI = (2.11622047383731 - 2.2834645703349024) 
 Controls (n=20): mean = 2.4629921171292537, 95%CI = (2.3996850441722124 - 2.5262992117129253)
@@ -108,9 +108,9 @@ sz_pooled
 Calculate the effect size of control vs sz_pooled
 Controls (n=20): mean = 2.4629921171292537,
 ```{r}
-cimmer_2006_es <- esc_mean_sd(grp1m = 2.4629921171292537, grp2m = 2.266972,  # group mean
-            grp1sd = c_sd, grp2sd = 0.1514185, # group sd
-            grp1n = 20, grp2n = 44, 
+cimmer_2006_es <- esc_mean_sd(grp1m = 2.4629921171292537, grp2m = sz_pooled$Mpooled,  # group mean
+            grp1sd = c_sd, grp2sd = sz_pooled$SDpooled, # group sd
+            grp1n = 20, grp2n = sz_pooled$Npooled, 
             es.type = "g")
 cimmer_2006_es
 ```

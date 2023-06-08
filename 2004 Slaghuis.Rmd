@@ -7,101 +7,112 @@ output: html_notebook
 
 ## Gathering information:
 
-Participants: 1) Schizophrenia n = 28 -\> n = 14 with positive symptoms -\> n = 14 with negative symptoms
+Participants:
+1) Schizophrenia n = 28
+n = 14 with positive symptoms
+n = 14 with negative symptoms
 
 2)  Control n = 14
 
-Contrast sensitivity (p6, experiment 1) 1) Significant main effects of Group F(2,37) = 30.90 , p \< 0.0005
+Contrast sensitivity (p6, experiment 1)
+1) Significant main effects of Group
+F(2,37) = 30.90 , p \< 0.0005
 
-2)  Significant main effects of temporal frequency F(2,70) = 22.57 , p \< 0.0005
+2)  Significant main effects of temporal frequency
+F(2,70) = 22.57 , p \< 0.0005
 
-3)  Significant main effects of SF (spatial frequency) F(3,79) = 38.72 , p \< 0.0005
+3)  Significant main effects of SF (spatial frequency)
+F(3,79) = 38.72 , p \< 0.0005
 
-4)  Group x temporal frequency interaction (not significant) F(4,77) = 0.77 , p \> 0.05
+4)  Group x temporal frequency interaction (not significant)
+F(4,77) = 0.77 , p \> 0.05
 
-5)  Significant Group x SF interaction F(5,79) = 2.30 , p \> 0.05 (the article reports this as significant, I think they made a mistake here)
+5)  Significant Group x SF interaction
+F(5,79) = 2.30 , p \> 0.05 (the article reports this as significant, I think they made a mistake here)
 
-6)  Significant SF x temporal frequency interaction F(6,191) = 5.42 , p \< 0.0005
+6)  Significant SF x temporal frequency interaction
+F(6,191) = 5.42 , p \< 0.0005
 
-7)  Significant Groups x temporal frequency x SF interaction F(11,191) = 1.96 , p \< 0.04
+7)  Significant Groups x temporal frequency x SF interaction
+F(11,191) = 1.96 , p \< 0.04
 
 ## Calculate effect size:
 
-use the F-statistic (see bookdown.org)
+Scrapping data from Figure 2a (plotdigitizer)
+Control n=14
+SF = 0.5                (0.5), mean = 4.783303726407286, sd-interval = (4.694493924834401 - 4.8898756509106)
+SF = 1.9940253648430282 (2.0), mean = 5.449378254553   , sd-interval = (5.387211434105943 - 5.502664216804657)
+SF = 4.025896468837429  (4.0), mean = 5.520426339735086, sd-interval = (5.449378254553 - 5.591474221647357)
+SF = 7.999999999999999  (8.0), mean = 4.623445839652314, sd-interval = (4.5523977544702285 - 4.694493924834401)
 
-1)  Significant main effects of Group F(2,37) = 30.90 , p \< 0.0005
+Positive scz n=14
+SF = 0.5                (0.5), mean = 4.6856126600993715, sd-interval = (4.570159877400657 - 4.783303726407286)
+SF = 1.9940253648430282 (2.0), mean = 5.298401429263243 , sd-interval = (5.200710566225143 - 5.396092292301343)
+SF = 3.9960150861361496 (4.0), mean = 5.227353547350972 , sd-interval = (5.120781622847657 - 5.342806330049686)
+SF = 7.999999999999999  (8.0), mean = 4.294849207946972 , sd-interval = (4.170515160513229 - 4.463587952897344)
 
+Negative scz n=14
+SF = 0.5                (0.5), mean = 3.9307283303807714, sd-interval = (3.8330372640728574 - 4.099467075331143)
+SF = 2.0239040119054987 (2.0), mean = 4.570159877400657 , sd-interval = (4.401421132450286 - 4.792184584602685)
+SF = 4.025896468837429  (4.0), mean = 4.090586217135743 , sd-interval = (3.8685615099337145 - 4.3303730472682)
+SF = 7.999999999999999  (8.0), mean = 2.971581009850943 , sd-interval = (2.722913321523086 - 3.2468916793046287)
+
+Pool positive and negative scz groups
 ```{r}
-library(esc)
-esc_f(f = 30.90,      # F value of the one-way anova
-      grp1n = 28,   # sample size of group 1 
-      grp2n = 14,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
+# Calculate sd per group
+# Approximate SD = (upper limit - lower limit) / 2
+sd_sf0.5_ctrl = (4.8898756509106 - 4.694493924834401) / 2
+sd_sf0.5_pscz = (4.783303726407286 - 4.570159877400657) / 2
+sd_sf0.5_nscz = (4.099467075331143 - 3.8330372640728574) / 2
+
+# Pooling means and sd of positive scz and negative scz
+
+scz_pooled <- pool.groups(n1 = 14,   # sample size group 1
+            n2 = 14,   # sample size group 2
+            m1 = 4.6856126600993715,  # mean group 1
+            m2 = 3.9307283303807714,    # mean group 2
+            sd1 = sd_sf0.5_pscz,   # sd group 1
+            sd2 = sd_sf0.5_nscz) # sd group2 
+scz_pooled
 
 ```
 
-2)  Significant main effects of temporal frequency F(2,70) = 22.57 , p \< 0.0005
-
+Calculate the es of control vs pooled scz
 ```{r}
-library(esc)
-esc_f(f = 22.57,      # F value of the one-way anova
-      grp1n = 28,   # sample size of group 1 
-      grp2n = 14,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
-
+# calculate es
+slaghuis_2004_es <- esc_mean_sd(grp1m = 4.783303726407286 , grp2m = scz_pooled$Mpooled,  # group mean
+            grp1sd = sd_sf0.5_ctrl, grp2sd = scz_pooled$SDpooled, # group sd
+            grp1n = 14, grp2n = scz_pooled$Npooled , 
+            es.type = "g")
+slaghuis_2004_es 
 ```
 
-3)  Significant main effects of SF (spatial frequency) F(3,79) = 38.72 , p \< 0.0005
+
+## Summarizing table
 
 ```{r}
-library(esc)
-esc_f(f = 38.72,      # F value of the one-way anova
-      grp1n = 28,   # sample size of group 1 
-      grp2n = 14,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
+slaghuis_2004 <- tibble( es = slaghuis_2004_es$es, se = slaghuis_2004_es$se ) 
 
+slaghuis_2004$study <- "Slaghuis. 2004"
+slaghuis_2004$method <- "staircase"  
+slaghuis_2004$medication <- "medicated" #n=28 medicated
+slaghuis_2004$cpz <- 215.65  #Dose is combined mean of group Positive (183.9) and Negative (247.4)
+slaghuis_2004$task <- "2AFC" #2AFC mentioned in the article
+slaghuis_2004$SF <- "0.5, 2.0, 4.0, 8.0"
+slaghuis_2004$size <- "7.12 x 5.71" 
+slaghuis_2004$BPRS <- NA
+slaghuis_2004$motion <- FALSE 
+slaghuis_2004$duration <- 0.5 
+slaghuis_2004$location <- 0 
+slaghuis_2004$lapses <- FALSE 
+slaghuis_2004$calculation_statistic <- "m and sd"  
+slaghuis_2004$calculation_data <- "scrapping" 
+slaghuis_2004$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+
+slaghuis_2004
 ```
 
-4)  Group x temporal frequency interaction (not significant) F(4,77) = 0.77 , p \> 0.05
+## Side note 1
+F-statistic includes 3 groups - not applicable.Thus, scrapping data from Figure 2a. Unsure whether this was the correct procedure.
 
-```{r}
-library(esc)
-esc_f(f = 0.77,      # F value of the one-way anova
-      grp1n = 28,   # sample size of group 1 
-      grp2n = 14,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
- 
-```
 
-5)  Significant Group x SF interaction F(5,79) = 2.30 , p \> 0.05 (the article reports this as significant, I think they made a mistake here)
-
-```{r}
-library(esc)
-esc_f(f = 2.30,      # F value of the one-way anova
-      grp1n = 28,   # sample size of group 1 
-      grp2n = 14,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
- 
-```
-
-6)  Significant SF x temporal frequency interaction F(6,191) = 5.42 , p \< 0.0005
-
-```{r}
-library(esc)
-esc_f(f = 5.42,      # F value of the one-way anova
-      grp1n = 28,   # sample size of group 1 
-      grp2n = 14,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
-
-```
-
-7)  Significant Groups x temporal frequency x SF interaction F(11,191) = 1.96 , p \< 0.04
-
-```{r}
-library(esc)
-esc_f(f = 1.96,      # F value of the one-way anova
-      grp1n = 28,   # sample size of group 1 
-      grp2n = 14,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
-
-```

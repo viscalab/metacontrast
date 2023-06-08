@@ -78,9 +78,9 @@ SZ_pooled
 Now calculate the effect size Control (group1) vs pooled SZ (group2)
 Control (static): mean = 1.74 , sd = 0.45 , n=40
 ```{r}
-oDonnell_2006_es <- esc_mean_sd(grp1m = 1.74, grp2m = 1.368333,  # group mean
-            grp1sd = 0.45, grp2sd = 0.4929297, # group sd
-            grp1n = 40, grp2n = 24, 
+oDonnell_2006_es <- esc_mean_sd(grp1m = 1.74, grp2m = SZ_pooled$Mpooled,  # group mean
+            grp1sd = 0.45, grp2sd = SZ_pooled$SDpooled, # group sd
+            grp1n = 40, grp2n = SZ_pooled$Npooled, 
             es.type = "g")
 oDonnell_2006_es
 ```
