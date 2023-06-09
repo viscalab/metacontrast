@@ -24,48 +24,72 @@ F(2,34) = 515.5 , p \< 0.001
 
 3)  Significant Group x SF interaction
 F(2,34) = 4.1 , p = 0.03
+
 Post-hoc analysis of the interaction
-3A) Significant 0.5 cycle/degree
+3A) SF = 0.5 (Significant)
 t = 3.0 , df = 35 , p = 0.005
-3B) 7 cycle/degree (not significant)
+
+3B) SF = 7 (not significant)
 t = 0.6 , df = 35 , p = 0.6
-3C) 21 cycle/degree (not significant)
+
+3C) SF= 21 (not significant)
 t = 1.0 , df = 35 , p = 0.3
 
 ## Calculate effect size:
 
 use the F-statistic (see bookdown.org)
 
-1)  Significant main effects of Group (2 groups)
+### Significant main effects of Group (2 groups)
 F(1,35) = 7.0 , p = 0.01
 ```{r}
-butler_2009_es <- esc_f(f = 7.0,      # F value of the one-way anova
+butler_2009_es_f <- esc_f(f = 7.0,      # F value of the one-way anova
       grp1n = 20,   # sample size of group 1 
       grp2n = 17,   # sample size of group 2
       es.type = "g") # convert to Hedges' g; use "d" for SMD
-butler_2009_es
+butler_2009_es_f
 ```
 
-Post-hoc analysis of the Group X SF interaction
-3A) Significant 0.5 cycle/degree
+### Post-hoc analysis of the Group X SF interaction
+### SF = 0.5
 t = 3.0 , df = 35 , p = 0.005
 ```{r}
-butler_2009_es_t <- esc_t(t = 3.0, # t-statistic
+butler_2009_es_t_0.5 <- esc_t(t = 3.0, # t-statistic
       grp1n = 20,
       grp2n = 17,
       es.type = "g")
-butler_2009_es_t
+butler_2009_es_t_0.5
 ```
 
 
-Scrapping data from Figure 2 (plotdigitizer)
+### SF = 7
+t = 0.6 , df = 35 , p = 0.6
+```{r}
+butler_2009_es_t_7 <- esc_t(t = 0.6, # t-statistic
+      grp1n = 20,
+      grp2n = 17,
+      es.type = "g")
+butler_2009_es_t_7
+```
+
+### SF = 21
+t = 1.0 , df = 35 , p = 0.3
+```{r}
+butler_2009_es_t_21 <- esc_t(t = 1.0, # t-statistic
+      grp1n = 20,
+      grp2n = 17,
+      es.type = "g")
+butler_2009_es_t_21
+```
+
+
+### Scrapping data from Figure 2 (plotdigitizer)
 Only mean is possible to get, error bars are not defined.
 
 
 ## Summarizing table
 
 ```{r}
-butler_2009 <- tibble( es = butler_2009_es_t$es, se = butler_2009_es_t$se ) 
+butler_2009 <- tibble( es = butler_2009_es_t_0.5$es, se = butler_2009_es_t_0.5$se ) 
 
 butler_2009$study <- "Butler et al. 2009"
 butler_2009$method <- "up-and-down transformed response"  

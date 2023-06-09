@@ -20,19 +20,18 @@ Contrast sensitivity (p6-7)
 1) Effect of group (not significant) F = 1.21 , p = 0.3123 , df = 3
 
 ## Calculate effect size:
-
 use the F-statistic (see bookdown.org)
 
-1)  Effect of group (not significant) F = 1.21 , p = 0.3123 , df = 3
-
+### Effect of group (not significant)
+F = 1.21 , p = 0.3123 , df = 3
 ```{r}
 #The relevant task is the contrast detection task. They only provide the F for the four groups, so it is not possible to calculate the g for the schizophrenia and control group. We need to ask for the data.
 
 #Asked for the data, authors have died so we do not have access to the data.
 ```
 
-## Summarizing table
 
+## Summarizing table
 ```{r}
 chen_2005 <- tibble(es = "No data", se = "No data" ) 
 chen_2005

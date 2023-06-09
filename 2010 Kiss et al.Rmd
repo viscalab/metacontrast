@@ -54,7 +54,7 @@ p \> 0.1
 
 use the F-statistic (see bookdown.org)
 
-1)  Significant main effects of Group (2 groups)
+### Significant main effects of Group (2 groups)
 F(1,38) = 6.12 , p \< 0.05 eta-squared = 0.14 ; power = 0.67
 ```{r}
 kiss_2010_es <- esc_f(f = 6.12,      # F value of the one-way anova
@@ -64,7 +64,10 @@ kiss_2010_es <- esc_f(f = 6.12,      # F value of the one-way anova
 kiss_2010_es
 ```
 
-Scrapping from Figure 2 - see similar procedure in 2006 Cimmer et al
+### Scrapping from Figure 2
+- see similar procedure in 2006 Cimmer et al
+- see side note 2
+
 Control n=20
 SF =  (0.25), mean = , 95%CI = ( - )
 SF =   (0.5), mean = , 95%CI = ( - )

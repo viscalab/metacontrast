@@ -21,13 +21,11 @@ F(1,49) = 81.6 , p\<0.001
 2)  Significant group x spatial frequency interaction
 F(6,44) = 13.1 , p\<0.001
 
-## Calculate effect size:
-
+## Calculate effect size
 use the F-statistic (see bookdown.org)
 
-1)  Significant between-group effect (2 groups)
+### Significant between-group effect (2 groups)
 F(1,49) = 81.6 , p\<0.001
-
 ```{r}
 butler_2005_es <- esc_f(f = 81.6,      # F value of the one-way anova
       grp1n = 33,   # sample size of group 1 
@@ -36,11 +34,10 @@ butler_2005_es <- esc_f(f = 81.6,      # F value of the one-way anova
 butler_2005_es
 ```
 
-Scrapping data from Figure 4 (plotdigitizer)
+### Scrapping data from Figure 4 (plotdigitizer)
 No error bars to be seen, only able to get mean. => no calculation of es possible through scrapping
 
 ## Summarizing table
-
 ```{r}
 butler_2005 <- tibble( es = butler_2005_es$es, se = butler_2005_es$se ) 
 

@@ -36,9 +36,9 @@ F(6,191) = 5.42 , p \< 0.0005
 7)  Significant Groups x temporal frequency x SF interaction
 F(11,191) = 1.96 , p \< 0.04
 
-## Calculate effect size:
 
-Scrapping data from Figure 2a (plotdigitizer)
+## Calculate effect size:
+### Scrapping data from Figure 2a (plotdigitizer)
 Control n=14
 SF = 0.5                (0.5), mean = 4.783303726407286, sd-interval = (4.694493924834401 - 4.8898756509106)
 SF = 1.9940253648430282 (2.0), mean = 5.449378254553   , sd-interval = (5.387211434105943 - 5.502664216804657)
@@ -57,6 +57,7 @@ SF = 2.0239040119054987 (2.0), mean = 4.570159877400657 , sd-interval = (4.40142
 SF = 4.025896468837429  (4.0), mean = 4.090586217135743 , sd-interval = (3.8685615099337145 - 4.3303730472682)
 SF = 7.999999999999999  (8.0), mean = 2.971581009850943 , sd-interval = (2.722913321523086 - 3.2468916793046287)
 
+### SF = 0.5
 Pool positive and negative scz groups
 ```{r}
 # Calculate sd per group
@@ -89,7 +90,6 @@ slaghuis_2004_es
 
 
 ## Summarizing table
-
 ```{r}
 slaghuis_2004 <- tibble( es = slaghuis_2004_es$es, se = slaghuis_2004_es$se ) 
 
@@ -114,5 +114,4 @@ slaghuis_2004
 
 ## Side note 1
 F-statistic includes 3 groups - not applicable.Thus, scrapping data from Figure 2a. Unsure whether this was the correct procedure.
-
 

@@ -42,17 +42,15 @@ Contrast sensitivity (p5, experiment 1)
   F(10,210) = 0.63 , p > 0.05
   
 
-Experiment 2 = motion contrast sensitivity
-
 
 ## Calculate effect size:
   use the F-statistic (see bookdown.org)
   
-1) Significant main effects of Group (3 groups)
+### Significant main effects of Group (3 groups)
   F(2,42) = 21.7 , p < 0.0001
+- 3 groups so NA
 
-
-Calculate es by scrapping from Figure 2
+### Calculate es by scrapping from Figure 2
 
 Control
 SF = 0.4979987983530493 (0.5), mean = 2.0968000196874987
@@ -110,8 +108,8 @@ slaghuis_1998$motion <- FALSE
 slaghuis_1998$duration <- "0.4 or 0.04" #Article says: 40ms or 400ms
 slaghuis_1998$location <- 0 
 slaghuis_1998$lapses <- TRUE  #If observer noticed a drift in attention, the trial was repeated.
-slaghuis_1998$calculation_statistic <- ""  #"t-test", "m and sd"
-slaghuis_1998$calculation_data <- "" #"scrapping", "reported", "raw"
+slaghuis_1998$calculation_statistic <- "ask for data"  #"t-test", "m and sd"
+slaghuis_1998$calculation_data <- "ask for data" #"scrapping", "reported", "raw"
 slaghuis_1998$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
 
 slaghuis_1998

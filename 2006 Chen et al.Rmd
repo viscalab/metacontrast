@@ -39,7 +39,8 @@ t-statistic
 ## Calculate effect size:
   use the mean and sd (see bookdown.org)
   use the t-statistic
-  
+
+### M and sd 
 2) Schizophrenia vs control (not significant)
   Schizophrenia: mean = 0.0036 ; sd = 0.0020
   Control: mean = 0.0039 ; sd = 0.0027
@@ -52,6 +53,7 @@ chen_2006_es
 
 ```
 
+### T-statistic
 2) Schizophrenia vs control (not significant)
   -> t(1,44) = 0.49 , p = 0.627
 ```{r}
@@ -90,7 +92,5 @@ chen_2006
 ```
 
 
-
 ## Side note 1
-
 Why is the effect size different when I calculate it with the m and sd vs when calculated with the t-statistic?

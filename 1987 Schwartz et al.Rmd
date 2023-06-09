@@ -16,38 +16,64 @@ Participants:
 
 
 Contrast sensitivity (p6)
-1) Main effects (not significant for any SF)
+1) Main effect of groups for Pattern detection (0Hz)
+F(1,32) = 1.77 , p = 0.2
+
+2) Main effects of SF (not significant for any SF)
   F(1,32) = 2.51 , p = 0.12
 
-2) Interaction SF x groups (not significant)
+3) Interaction SF x groups (not significant)
   F(2,64) = 0.94 , p = 1.397
-
+  
 
 ## Calculate effect size:
   use the F-statistic (see bookdown.org)
-  
-1) Main effects (not significant for any SF)
+
+### Main effects of group (2 groups)
+ F(1,32) = 1.77 , p = 0.2
+```{r}
+schwartz_1987_es <- esc_f(f = 1.77,      # F value of the one-way anova
+      grp1n = 19,   # sample size of group 1 
+      grp2n = 15,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+schwartz_1987_es
+```  
+
+### Main effects of SF (not significant for any SF) (2 groups)
   F(1,32) = 2.51 , p = 0.12
 ```{r}
-library(esc)
-esc_f(f = 2.51,      # F value of the one-way anova
+schwartz_1987_es_sf <- esc_f(f = 2.51,      # F value of the one-way anova
       grp1n = 19,   # sample size of group 1 
       grp2n = 15,   # sample size of group 2
       es.type = "g") # convert to Hedges' g; use "d" for SMD
-
+schwartz_1987_es_sf
 ```
 
 
-2) Interaction SF x groups (not significant)
-  F(2,64) = 0.94 , p = 1.397
+## Summarizing table
 ```{r}
-library(esc)
-esc_f(f = 0.94,      # F value of the one-way anova
-      grp1n = 19,   # sample size of group 1 
-      grp2n = 15,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
+schwartz_1987 <- tibble(es = schwartz_1987_es$es, se = schwartz_1987_es$se ) 
 
+schwartz_1987$study <- "Schwartz et al. 1987"
+schwartz_1987$method <- "staircase"
+schwartz_1987$medication <- "medicated" #n=19 medicated
+schwartz_1987$cpz <- NA
+schwartz_1987$task <- "flicker/pattern detection"
+schwartz_1987$SF <- "0.9, 3.8, 15"
+schwartz_1987$size <- NA
+schwartz_1987$BPRS <- NA
+schwartz_1987$motion <- FALSE 
+schwartz_1987$duration <- NA
+schwartz_1987$location <- 0
+schwartz_1987$lapses <- FALSE 
+schwartz_1987$calculation_statistic <- "f-statistic"  
+schwartz_1987$calculation_data <- "reported" 
+schwartz_1987$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+
+schwartz_1987
 ```
+
 
 ## Side note 1
-Is it necessary to calculate the effect size of non-significant results?
+Not sure which data to use. Maybe even need to retrieve data from Figure 1.
+

@@ -5,6 +5,13 @@ output: html_notebook
 
 # Summaries studies
 
+## 1987_schwartz Summarizing table 
+
+```{r}
+schwartz_1987_summary <- schwartz_1987 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
 ## 1998_slaghuis Summarizing table 
 
 ```{r}
@@ -82,10 +89,52 @@ kiss_2010_summary <- kiss_2010 |>
   select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
 ```
 
+## 2011_dias Summarizing table
+
+```{r}
+dias_2011_summary <- dias_2011 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2013_caldarone Summarizing table
+
+```{r}
+caldarone_2013_summary <- caldarone_2013 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
 ## 2013_cadenhead Summarizing table
 
 ```{r}
 cadenhead_2013_summary <- cadenhead_2013 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2013_shoshina_and_shelepin Summarizing table
+
+```{r}
+shoshina_and_shelepin_2013_summary <- shoshina_and_shelepin_2013 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2013_shoshina Summarizing table
+
+```{r}
+shoshina_2013_summary <- shoshina_2013 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2018_fernandes Summarizing table
+
+```{r}
+fernandes_2018_summary <- fernandes_2018 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2019_fernandes Summarizing table
+
+```{r}
+fernandes_2019_summary <- fernandes_2019 |> 
   select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
 ```
 
@@ -94,7 +143,8 @@ cadenhead_2013_summary <- cadenhead_2013 |>
 Let's combine the data in a single data frame.
 
 ```{r,echo=TRUE}
-studies <- slaghuis_1998_summary |>
+studies <- schwartz_1987_summary |>
+  bind_rows(slaghuis_1998_summary) |>
   bind_rows(kéri_2002_summary) |>
   bind_rows(chen_2003_summary) |>
   bind_rows(slaghuis_2004_summary) |>
@@ -105,7 +155,13 @@ studies <- slaghuis_1998_summary |>
   bind_rows(chen_2006_summary) |>
   bind_rows(butler_2009_summary) |>
   bind_rows(kiss_2010_summary) |>
+  bind_rows(dias_2011_summary) |>
+  bind_rows(caldarone_2013_summary) |>
   bind_rows(cadenhead_2013_summary) |>
+  bind_rows(shoshina_and_shelepin_2013_summary) |>
+  bind_rows(shoshina_2013_summary) |>
+  bind_rows(fernandes_2018_summary) |>
+  bind_rows(fernandes_2019_summary) |>
   select(study, es, se, calculation_statistic, calculation_data, calculation_certainty)
 
 studies
@@ -139,7 +195,7 @@ We can modify the plot
 
 ```{r,echo=TRUE}
 forest(random_meta, layout= "JAMA", hetstat = FALSE, 
-       xlim = c(-1, 2))
+       xlim = c(-1, 4))
 ```
 
 

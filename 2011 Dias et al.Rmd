@@ -7,75 +7,80 @@ output: html_notebook
 
 ## Gathering information:
 
-Participants: 1) Schizophrenia n = 27 -\> n = 20 Subgroup (same characteristics) for contrast sensitivity
+Participants:
+1) Schizophrenia n = 27
+n = 20 Subgroup (same characteristics) for contrast sensitivity
 
-2)  Control n = 15 -\> n = 9 Subgroup (same characteristics) for contrast sensitivity
+2)  Control n = 15
+n = 9 Subgroup (same characteristics) for contrast sensitivity
 
-Contrast sensitivity (p6) 1) Significant main effects of Group F(1,27) = 11.3 , p = 0.002
 
-2)  Significant Group x SF interaction F(2,26) = 5.49 , p = 0.01
+Contrast sensitivity (p6)
+1) Significant main effects of Group
+F(1,27) = 11.3 , p = 0.002
 
-3)  Low SF (0.5c/deg) vs controls (significantly reduced contrast) F(1,27) = 10.7 , p = 0.003
+2)  Significant Group x SF interaction
+F(2,26) = 5.49 , p = 0.01
 
-4)  Medium SF (7c/deg) vs controls (not significantly reduced contrast) F(1,27) = 2.28 , p = 0.14
+3)  SF = 0.5: scz vs controls (significantly reduced contrast)
+F(1,27) = 10.7 , p = 0.003
 
-5)  High SF (21c/deg) vs controls (not significantly reduced contrast) F(1,27) = 2.08 , p = 0.16
+4)  SF = 7: scz vs controls (not significantly reduced contrast)
+F(1,27) = 2.28 , p = 0.14
+
+5)  SF = 21: scz vs controls (not significantly reduced contrast)
+F(1,27) = 2.08 , p = 0.16
 
 ## Calculate effect size:
 
 use the F-statistic (see bookdown.org)
 
-1)  Significant main effects of Group F(1,27) = 11.3 , p = 0.002
-
+### Significant main effects of Group (2 groups)
+F(1,27) = 11.3 , p = 0.002
 ```{r}
-library(esc)
-esc_f(f = 11.3,      # F value of the one-way anova
+dias_2011_es_f <- esc_f(f = 11.3,      # F value of the one-way anova
       grp1n = 20,   # sample size of group 1 
       grp2n = 9,   # sample size of group 2
       es.type = "g") # convert to Hedges' g; use "d" for SMD
-
+dias_2011_es_f
 ```
 
-2)  Significant Group x SF interaction F(2,26) = 5.49 , p = 0.01
-
+### SF = 0.5
+scz vs controls (significantly reduced contrast)
+F(1,27) = 10.7 , p = 0.003
 ```{r}
-library(esc)
-esc_f(f = 5.49,      # F value of the one-way anova
+dias_2011_es_sf0.5 <- esc_f(f = 10.7,      # F value of the one-way anova
       grp1n = 20,   # sample size of group 1 
       grp2n = 9,   # sample size of group 2
       es.type = "g") # convert to Hedges' g; use "d" for SMD
-
+dias_2011_es_sf0.5
 ```
 
-3)  Low SF (0.5c/deg) vs controls (significantly reduced contrast) F(1,27) = 10.7 , p = 0.003
+
+## Summarizing table
 
 ```{r}
-library(esc)
-esc_f(f = 10.7,      # F value of the one-way anova
-      grp1n = 20,   # sample size of group 1 
-      grp2n = 9,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
+dias_2011 <- tibble(es = dias_2011_es_sf0.5$es, se = dias_2011_es_sf0.5$se ) 
 
+dias_2011$study <- "Dias et al. 2011"
+dias_2011$method <- "up-down transform rule"  
+dias_2011$medication <- "medicated" #n=20 medicated
+dias_2011$cpz <- 1241.3
+dias_2011$task <- "2AFC" #2AFC mentioned in the article
+dias_2011$SF <- "0.5, 7, 21"
+dias_2011$size <- "5.7 x 5.7" 
+dias_2011$BPRS <- 40.0
+dias_2011$motion <- FALSE 
+dias_2011$duration <- 0.032 
+dias_2011$location <- NA
+dias_2011$lapses <- FALSE 
+dias_2011$calculation_statistic <- "f-statistic"  
+dias_2011$calculation_data <- "reported" 
+dias_2011$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+
+dias_2011
 ```
 
-4)  Medium SF (7c/deg) vs controls (not significantly reduced contrast) F(1,27) = 2.28 , p = 0.14
+## Side note 1
+Pretty sure about the ES, but still a bit unsure whether to use f-statistic of group, or f-statistic of group specifically at SF = 0.5.
 
-```{r}
-library(esc)
-esc_f(f = 2.28,      # F value of the one-way anova
-      grp1n = 20,   # sample size of group 1 
-      grp2n = 9,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
- 
-```
-
-5)  High SF (21c/deg) vs controls (not significantly reduced contrast) F(1,27) = 2.08 , p = 0.16
-
-```{r}
-library(esc)
-esc_f(f = 2.08,      # F value of the one-way anova
-      grp1n = 20,   # sample size of group 1 
-      grp2n = 9,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
- 
-```

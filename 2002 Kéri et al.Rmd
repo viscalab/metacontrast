@@ -29,13 +29,10 @@ Contrast sensitivity (p4)
   Table 2 (P-values and correlation coefficients)
   
 
-Dynamic contrast sensitivity (Is this motion sensitivity?)
-
-
 ## Calculate effect size:
   use the F-statistic (see bookdown.org)
   
-1) Significant main effects of Group (2 groups)
+### Significant main effects of Group (2 groups)
   F(1,33) = 13.93 , p < 0.001
 ```{r}
 kéri_2002_es <- esc_f(f = 13.93,      # F value of the one-way anova
@@ -45,8 +42,7 @@ kéri_2002_es <- esc_f(f = 13.93,      # F value of the one-way anova
 kéri_2002_es
 ```
 
-Extra
-Scrapping data from Figure 3.
+### Extra - Scrapping data from Figure 3.
 Control (n=15)
 SF = 0.5 , mean = 1.8750000457763618 , sd-interval = (1.7250000640869063 - 2.025000027465817)
 SF = 1.2 , mean = 2.2550001519775207 , sd-interval = (2.0300001794433378 - 2.510000120849595)
@@ -70,7 +66,7 @@ SF = 7.2 , mean = 1.9350000384521437 , sd-interval = (1.8050002069091544 - 2.070
 SF = 14.4, mean = 1.3149999615478563 , sd-interval = (1.0449999945068367 - 1.585000157470684)
 
 
-Calculate es from SF = 0.5
+### Calculate es from SF = 0.5
 ```{r}
 #Calculate sd
 #Approximate SD = (upper limit - lower limit) / 2

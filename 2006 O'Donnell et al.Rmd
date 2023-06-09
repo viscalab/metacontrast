@@ -16,6 +16,7 @@ n = 16 with schizotypical personality disorder (SPD)
 
 2)  Control n = 40
 
+
 Contrast sensitivity (p5)
 1) Control (static): mean = 1.74 , sd = 0.45 , n=40
 
@@ -27,16 +28,16 @@ Contrast sensitivity (p5)
 
 =\> SZ groups showed lowered contrast sensitivity
 
-Contrast sensitivity ANOVA Group vs stimulus (static + motion) (-\> not sure if these results can be used, since the motion contrast sensitivity is also included)
 
+Contrast sensitivity ANOVA Group vs stimulus (static + motion) (-\> not sure if these results can be used, since the motion contrast sensitivity is also included)
 1) Significant main effects of Group (spd + sz + ctrl)
 F(2,77) = 6.52 , p = 0.002
 
 2)  Significant main effects of Test
 F(3,231) = 66.1 , p \< 0.001
 
-Follow-up ANOVAs of group effect
 
+Follow-up ANOVAs of group effect
 3) Control vs SPD F(1,54) = 0.14 , p = 0.71
 
 4)  Control vs SZ F(1,62) = 9.67 , p = 0.003
@@ -44,9 +45,9 @@ Follow-up ANOVAs of group effect
 5)  SPD vs SZ F(1,38) = 5.58 , p = 0.02
 
 ## Calculate effect size:
-?? probably use m and sd, but add up medicated and unmedicated SZ (how?)
+use m and sd, but pool medicated and unmedicated SZ
 
-F-statistic from follow-up anova
+### F-statistic from follow-up anova
 4)  Control vs SZ F(1,62) = 9.67 , p = 0.003
 ```{r}
 oDonnell_2006_es_f <- esc_f(f = 9.67,      # F value of the one-way anova
@@ -57,7 +58,7 @@ oDonnell_2006_es_f
 ```
 
 
-M and sd
+### M and sd
 
 1) Control (static): mean = 1.74 , sd = 0.45 , n=40
 2)  SPD (static): mean= 1.76 , sd= 0.46 , n=16
@@ -117,7 +118,7 @@ I believe the f-statistic is not entirely correct.It compares ctrl vs scz, but n
 Calculation of the es through m and sd needed pooling of 2 groups (see side note 2).
 
 ## Side note 2
-function dmetar() doesn't want to install, to get the function pool.groups() working, copy code below in console and run it.
+Function dmetar() doesn't want to install, to get the function pool.groups() working, copy code below in console and run it.
 
 #' Pool the results of two treatment arms
 #'
