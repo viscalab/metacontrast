@@ -7,16 +7,47 @@ output: html_notebook
 
 ## Gathering information:
 
-Participants: 1) Schizophrenia n = 50 -\> n = 25 taking atypical medication -\> n = 25 taking typical medication
+Participants:
+1) Schizophrenia n = 50
+n = 25 taking atypical medication
+n = 25 taking typical medication
 
 2)  Control n = 50
 
-Contrast sensitivity (p4, experiment 1) 1) Significant differences in the CSF between groups for all sF (including subgroups of scz) F(14),182) = 9.230 , p \< 0.001
+Contrast sensitivity (p4, experiment 1)
+1) Significant differences in the CSF between groups for all SF (including subgroups of scz)
+F(14),182) = 9.230 , p \< 0.001
 
 ## Calculate effect size:
+F-statistic not good (more than 2 groups).
+Scrapping for data will not work.
+Need to ask for data.
 
-use the F-statistic (see bookdown.org)
+
+## Summarizing table
+```{r}
+#fernandes_2019 <- tibble(es = $es, se = $se ) 
+fernandes_2019 <- tibble(es = NA, se = NA )
+
+fernandes_2019$study <- "Fernandes et al. 2019"
+fernandes_2019$method <- "staircase"
+fernandes_2019$medication <- "medicated" #n=50 medicated
+fernandes_2019$cpz <- 546.5 #combined mean of typical meds scz (615) and atypical meds scz (478)
+fernandes_2019$task <- "2AFC"
+fernandes_2019$SF <- "0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0"
+fernandes_2019$size <- 5
+fernandes_2019$BPRS <- 41.36 #combined mean of typical meds scz (40.42) and atypical meds scz (42.30)
+fernandes_2019$motion <- FALSE 
+fernandes_2019$duration <- 0.6
+fernandes_2019$location <- 2.5
+fernandes_2019$lapses <- TRUE 
+fernandes_2019$calculation_statistic <- "ask for data"  
+fernandes_2019$calculation_data <- "ask for data" 
+fernandes_2019$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+
+fernandes_2019
+```
+
 
 ## Side note 1
-
-Need to ask data from the authors - I mailed tham a while ago, but still no answer
+Need to ask data from the authors - I mailed them a while ago, but still no answer

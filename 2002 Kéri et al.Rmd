@@ -16,10 +16,10 @@ Participants:
 
 
 Contrast sensitivity (p4)
-1) Significant main effects of Group
+1) Significant main effects of Group (2 groups)
   F(1,33) = 13.93 , p < 0.001
 
-2) Significant main effects of SF (spatial frequency)
+2) Significant main effects of SF
   F(8,264) = 131.78 , p < 0.0001
 
 3) Significant Group x SF interaction
@@ -29,48 +29,86 @@ Contrast sensitivity (p4)
   Table 2 (P-values and correlation coefficients)
   
 
-Dynamic contrast sensitivity (Is this motion sensitivity?)
-
-
 ## Calculate effect size:
   use the F-statistic (see bookdown.org)
   
-1) Significant main effects of Group
+### Significant main effects of Group (2 groups)
   F(1,33) = 13.93 , p < 0.001
 ```{r}
-library(esc)
-esc_f(f = 13.93,      # F value of the one-way anova
+kéri_2002_es <- esc_f(f = 13.93,      # F value of the one-way anova
       grp1n = 20,   # sample size of group 1 
       grp2n = 15,   # sample size of group 2
       es.type = "g") # convert to Hedges' g; use "d" for SMD
-
+kéri_2002_es
 ```
 
-2) Significant main effects of SF (spatial frequency)
-  F(8,264) = 131.78 , p < 0.0001
+### Extra - Scrapping data from Figure 3.
+Control (n=15)
+SF = 0.5 , mean = 1.8750000457763618 , sd-interval = (1.7250000640869063 - 2.025000027465817)
+SF = 1.2 , mean = 2.2550001519775207 , sd-interval = (2.0300001794433378 - 2.510000120849595)
+SF = 1.9 , mean = 2.600000109863268  , sd-interval = (2.3399999890136733 - 2.8600000018310547)
+SF = 2.9 , mean = 2.680000023803708  , sd-interval = (2.3450001409911936 - 3.0099999835205)
+SF = 3.6 , mean = 2.630000106201159  , sd-interval = (2.3300001428222483 - 2.9399999157714944)
+SF = 4.8 , mean = 2.504999968872074  , sd-interval = (2.2550001519775207 - 2.7700000128173814)
+SF = 5.7 , mean = 2.3800000604247975 , sd-interval = (2.1350001666259564 - 2.6150001080322136)
+SF = 7.2 , mean = 2.2250001556396297 , sd-interval = (2.0000001831054464 - 2.4599999743652377)
+SF = 14.4, mean = 1.6350000750732332 , sd-interval = (1.4550000970458865 - 1.8200002050781001)
+
+Schizophrenia (n=20)
+SF = 0.5 , mean = 1.7850000567626885 , sd-interval = (1.6500000732421785 - 1.9150001171874858)
+SF = 1.2 , mean = 2.1850000842285056 , sd-interval = (1.9900001080322134 - 2.4100000567626885)
+SF = 1.9 , mean = 2.4650001263427583 , sd-interval = (2.1350001666259564 - 2.8000000091552724)
+SF = 2.9 , mean = 2.414999979858401  , sd-interval = (2.0600001757812283 - 2.7599999377441486)
+SF = 3.6 , mean = 2.375000137329085  , sd-interval = (2.180000161132793 - 2.5750000366210894)
+SF = 4.8 , mean = 2.210000157470684  , sd-interval = (1.975000109863268 - 2.470000049438471)
+SF = 5.7 , mean = 2.140000089721669  , sd-interval = (1.9350000384521437 - 2.3200000677490156)
+SF = 7.2 , mean = 1.9350000384521437 , sd-interval = (1.8050002069091544 - 2.0700000219726533)
+SF = 14.4, mean = 1.3149999615478563 , sd-interval = (1.0449999945068367 - 1.585000157470684)
+
+
+### Calculate es from SF = 0.5
 ```{r}
-library(esc)
-esc_f(f = 131.78,      # F value of the one-way anova
-      grp1n = 20,   # sample size of group 1 
-      grp2n = 15,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
+#Calculate sd
+#Approximate SD = (upper limit - lower limit) / 2
+sd_0.5_c = (2.025000027465817 - 1.7250000640869063) / 2
+
+sd_0.5_s = (1.9150001171874858 - 1.6500000732421785) / 2
+
+# calculate es
+kéri_2002_es_scrap <- esc_mean_sd(grp1m = 1.8750000457763618 , grp2m = 1.7850000567626885,  # group mean
+            grp1sd = sd_0.5_c, grp2sd = sd_0.5_s, # group sd
+            grp1n = 15, grp2n = 20, 
+            es.type = "g")
+kéri_2002_es_scrap 
 
 ```
 
-3) Significant Group x SF interaction
-  F(8,264) = 2.28 , p < 0.05
+
+## Summarizing table
+
 ```{r}
-library(esc)
-esc_f(f = 2.28,      # F value of the one-way anova
-      grp1n = 20,   # sample size of group 1 
-      grp2n = 15,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
+kéri_2002 <- tibble( es = kéri_2002_es_scrap$es, se = kéri_2002_es_scrap$se ) 
 
+kéri_2002$study <- "Kéri et al. 2002"
+kéri_2002$method <- "staircase"  
+kéri_2002$medication <- "medicated" #n=20 medicated
+kéri_2002$cpz <- 448.5  
+kéri_2002$task <- "2IFC" #2IFC means two interval forced choice
+kéri_2002$SF <- "0.5, 1.2, 1.9, 2.9, 3.6, 4.8, 5.7, 7.2 and 14.4"
+kéri_2002$size <- 13 # 13x13
+kéri_2002$BPRS <- 32.8
+kéri_2002$motion <- FALSE 
+kéri_2002$duration <- 0.5 
+kéri_2002$location <- 0 
+kéri_2002$lapses <- TRUE
+kéri_2002$calculation_statistic <- "m and sd" 
+kéri_2002$calculation_data <- "scrapping" 
+kéri_2002$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+
+kéri_2002
 ```
 
-## Side note 1
-The authors also look at dynamic contrast sensitivity. I think this is motion sensitivity, therefore I did not calculate the effect size.
+## side note 1
+Unsure whether calculation of the es is more accurate with f-statistic or with m and sd, after scrapping from Figure 3.
 
-## Side note 2
-I did not calculate the effect size for the post-hoc analysis, since it is a figure and I am not sure how to retrieve information from this. It also has a table with p-values, I'm not sure if the formula for extracting effect size from p-values is allowed in this case. 
 

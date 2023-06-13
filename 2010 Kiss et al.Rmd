@@ -1,0 +1,119 @@
+---
+title: "Kiss et al., 2010"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants:
+1) Schizophrenia n = 20
+
+2) Control n = 20
+
+Contrast sensitivity (p6, experiment 1)
+1) Significant main effects of Group
+F(1,38) = 6.12 , p \< 0.05
+eta-squared = 0.14 ; power = 0.67 Eta-squared is a measure of effect size for use in ANOVA (source: <https://en.wikiversity.org/wiki/Eta-squared>) (can we use this as the effect size?)
+
+2)  Significant main effects of contrast sensitivity type (steady vs pulsed pedestal for M vs P pathways, respectively)
+F(1,38) = 96.79 , p \< 0.0001
+eta-squared = 0.72 ; power = 1.0
+
+3)  Significant main effects of SF (spatial frequency)
+F(4,152) = 25.15 , p \< 0.0001
+eta-squared = 0.40 ; power = 1.0
+
+4)  Significant group x contrast sensitivity type interaction
+F(1,38) = 17.74 , p \< 0.001
+eta-squared = 0.32 ; power = 0.98
+
+5)  Significant Group x SF interaction
+F(4,152) = 2.65 , p \< 0.05
+eta-squared = 0.07 ; power = 0.73
+
+6)  Significant SF x Contrast sensitivity type interaction
+F(4,152) = 65.57 , p \< 0.0001
+eta-squared = 0.63 ; power = 1.0
+
+7)  Significant Groups x contrast sensitivity type x SF interaction
+F(4,152) = 4.08 , p \< 0.05
+eta-squared = 1.0 ; power = 0.91
+
+8)  Significant scz vs control in steady pedestal for M-pathways
+F(1,38) = 14.27 , p \< 0.001 
+Tukey's HSD
+at 0.25 c/d: p \< 0.001
+at 0.5 c/d: p \< 0.01
+
+9)  Scz vs control in pulsed pedestal for P-pathways (not significant)
+p \> 0.1
+
+## Calculate effect size:
+
+use the F-statistic (see bookdown.org)
+
+### Significant main effects of Group (2 groups)
+F(1,38) = 6.12 , p \< 0.05 eta-squared = 0.14 ; power = 0.67
+```{r}
+kiss_2010_es <- esc_f(f = 6.12,      # F value of the one-way anova
+      grp1n = 20,   # sample size of group 1 
+      grp2n = 20,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+kiss_2010_es
+```
+
+### Scrapping from Figure 2
+- see similar procedure in 2006 Cimmer et al
+- see side note 2
+
+Control n=20
+SF =  (0.25), mean = , 95%CI = ( - )
+SF =   (0.5), mean = , 95%CI = ( - )
+SF =   (1.0), mean = , 95%CI = ( - )
+SF =   (2.0), mean = , 95%CI = ( - )
+SF =   (4.0), mean = , 95%CI = ( - )
+
+Schizophrenia n=20
+SF =  (0.25), mean = , 95%CI = ( - )
+SF =   (0.5), mean = , 95%CI = ( - )
+SF =   (1.0), mean = , 95%CI = ( - )
+SF =   (2.0), mean = , 95%CI = ( - )
+SF =   (4.0), mean = , 95%CI = ( - )
+
+
+## Summarizing table
+
+```{r}
+kiss_2010 <- tibble( es = kiss_2010_es$es, se = kiss_2010_es$se ) 
+
+kiss_2010$study <- "Kiss et al. 2010"
+kiss_2010$method <- "staircase"  
+kiss_2010$medication <- "unmedicated" #n=20 unmedicated
+kiss_2010$cpz <- NA
+kiss_2010$task <- "2AFC" #2AFC mentioned in the article
+kiss_2010$SF <- "0.25, 0.5, 1.0, 2.0, 4.0"
+kiss_2010$size <- "2.5 x 2.5" 
+kiss_2010$BPRS <- NA
+kiss_2010$motion <- FALSE 
+kiss_2010$duration <- 0.045 
+kiss_2010$location <- 0
+kiss_2010$lapses <- TRUE # answers after 2000ms were not taken into account
+kiss_2010$calculation_statistic <- "f-statistic"  
+kiss_2010$calculation_data <- "reported" 
+kiss_2010$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+
+kiss_2010
+```
+
+## Side note 1
+
+Effect size calculated from F statistic and eta-squared are not alike? Is this due to a different way of calculation, or a mistake from me?
+
+## Side note 2
+We can look at the f-statistic.
+Or we can look at Figure 2 which shows the mean and 95% CI for each SF. Figure 2 has 2 panels, one for the steady pedestal (M pathways) and one for the pulsated pedestal (P pathways). Do we look at these separately, or do we pool the groups (control M + control P and scz M + scz P)? Is it necessary to scrap the data out of the figure?
+
+This is what the authors write about the steady and pulsated pedestal: “Two testing paradigms were used. In the steady pedestal paradigm, the pedestal was presented continuously. During the test period, the target Gabor patch was presented in the center of the pedestal for 45ms. In the pulsed-pedestal paradigm, the pedestal was presented only during the test period, together with the target Gabor patch, for 45ms. A 30s adaptation period preceded the test period in each paradigm.”
+

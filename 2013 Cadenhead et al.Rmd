@@ -27,52 +27,76 @@ SPD vs Scz: not significant
 2)  Group x stimulus condition interaction (not significant)
 F(2,117) = 0.56 , NS
 
-## Calculate effect size:
-
-use the F-statistic (see bookdown.org)
-
-1)  Significant main effects of Group (3 groups)
-F(2,118) = 8.81 , p \< 0.001
-
+## Calculate effect size
+### Scrapping data from Figure 1 - Luminance (light/dark) contrast sensitivity
+Control (n=53): mean = 1.8917784577666974 , SEM = (1.8582215422333028 - 1.9211409988770967)
+Scz (n=46): mean = 1.7617449780411711 , SEM = (1.723993304054895 - 1.7911073271366271)
 ```{r}
-cadenhead_2013_es <- esc_f(f = 8.81,      # F value of the one-way anova
-      grp1n = 46,   # sample size of group 1 
-      grp2n = 21,   # sample size of group 2
-      es.type = "g") # convert to Hedges' g; use "d" for SMD
-cadenhead_2013_es
+#SEM = (upper limit - lower limit) / (2 * 1.96)
+SEM_L_c = (1.9211409988770967 - 1.8582215422333028) / (2 * 1.96)
+SEM_L_sz = (1.7911073271366271 - 1.723993304054895) / (2 * 1.96)
+
+#SD = SEM * sqrt(n)
+sd_L_c = SEM_L_c * sqrt(53)
+sd_L_sz = SEM_L_sz * sqrt(46) 
+
+# calculate es
+cadenhead_2013_es_L <- esc_mean_sd(grp1m = 1.8917784577666974, grp2m = 1.7617449780411711,  # group mean
+            grp1sd = sd_L_c, grp2sd = sd_L_sz, # group sd
+            grp1n = 53, grp2n = 46, 
+            es.type = "g")
+cadenhead_2013_es_L
+
 ```
 
+
+### Scrapping data from Figure 2 - Chromatic (red/green) contrast sensitivity
+Control (n=53): mean = 0.9179755405605776  , SEM = (0.8883071420080375 - 0.9458987650446867)
+Scz (n=46): mean = 0.647469405728485 , SEM = (0.6073298429319373 - 0.6858638743455497)
+```{r}
+#SEM = (upper limit - lower limit) / (2 * 1.96)
+SEM_C_c = (0.9458987650446867 - 0.8883071420080375) / (2 * 1.96)
+SEM_C_sz = (0.6858638743455497 - 0.6073298429319373) / (2 * 1.96)
+
+#SD = SEM * sqrt(n)
+sd_C_c = SEM_C_c * sqrt(53)
+sd_C_sz = SEM_C_sz * sqrt(46) 
+
+# calculate es
+cadenhead_2013_es_C <- esc_mean_sd(grp1m =0.9179755405605776 , grp2m = 0.647469405728485,  # group mean
+            grp1sd = sd_C_c, grp2sd = sd_C_sz, # group sd
+            grp1n = 53, grp2n = 46, 
+            es.type = "g")
+cadenhead_2013_es_C
+
+```
 
 ## Summarizing table
 
 ```{r}
-cadenhead_2013 <- tibble( es = cadenhead_2013_es$es, se = cadenhead_2013_es$se ) 
+cadenhead_2013 <- tibble( es = cadenhead_2013_es_L$es, se = cadenhead_2013_es_L$se ) 
 cadenhead_2013
 
 cadenhead_2013$study <- "Cadenhead et al. 2013"
-cadenhead_2013$method <- "luminance modulation" # adaptative, mc, ... 
-cadenhead_2013$medication <- TRUE #n=48 medicated, n=5 unmedicated
-cadenhead_2013$cpz <- "NA"  #in mg
+cadenhead_2013$method <- "constant stimuli paradigm"  
+cadenhead_2013$medication <- "medicated and unmedicated" #n=48 medicated, n=5 unmedicated
+cadenhead_2013$cpz <- NA  
 cadenhead_2013$task <- "2AFC" 
 cadenhead_2013$SF <- 1.22
+cadenhead_2013$size <- 1.64
 cadenhead_2013$BPRS <- NA
-cadenhead_2013$motion <- TRUE #is grating moving?
-cadenhead_2013$duration <- 0.12 #Duration of the stimulus in seconds
-cadenhead_2013$location <- 0 #Where the stimulus was presented in degrees of visual angle (fixation = 0)
-cadenhead_2013$lapses <- "?"  #In lapses, we can include whether they control for lapses (TRUE) or not (FALSE).
-cadenhead_2013$calculation_statistic <- "f test"  #"t-test", "m and sd"
-cadenhead_2013$calculation_data <- "reported" #"scrapping", "reported", "raw"
-cadenhead_2013$calculation_certainty <- "very unsure" #scale is "sure", "unsure", "very unsure"
+cadenhead_2013$motion <- TRUE 
+cadenhead_2013$duration <- 0.12 
+cadenhead_2013$location <- 2.28 # 2.28° left or right from fixation cross 
+cadenhead_2013$lapses <- FALSE  
+cadenhead_2013$calculation_statistic <- "m and sd"  
+cadenhead_2013$calculation_data <- "scrapping, calculate sd" 
+cadenhead_2013$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
 
 cadenhead_2013
 ```
 
 ## Side note 1
+F-statistic cannot be used, it includes 3 groups.
 
-I believe the es is wrong, since the effect of group was measured for the three groups, and not only for ctrl vs scz.
-
-## Side note 2
-
-I think information could be gotten from the figures. However, I am not sure which figure is the correct one. (I think figure 1)
-
-I think information could be gotten from the figures. However, I am not sure which figure is the correct one. (I think figure 1). I don't know if we need to look at luminance of chromatic condition. Not sure how to do this.
+Mean and SEM-interval retrieved from Figure 1 (luminance) and 2 (chromatic). Calculation of the SEM and sd. Calculation of effect size with m and sd.

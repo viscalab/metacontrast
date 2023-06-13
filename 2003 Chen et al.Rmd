@@ -32,13 +32,12 @@ rel: mean = 0.0022 ; SD = 0.001
 ctrl: mean = 0.0025 ; SD = 0.0016
 
 ## Calculate effect size:
-
 use the means, the standards deviations and sample sizes (see tutorials meta-analysis)
 
-1)  Schizophrenia group (as a whole) vs healthy controls
+### M and sd
+Schizophrenia group (as a whole) vs healthy controls
 scz: mean = 0.0036 ; SD = 0.0039
 ctrl: mean = 0.0025 ; SD = 0.0016
-
 ```{r}
 chen_2003_es <- esc_mean_sd(grp1m = 0.0036, grp2m = 0.0025, 
             grp1sd = 0.0039, grp2sd = 0.0016, 
@@ -47,7 +46,8 @@ chen_2003_es <- esc_mean_sd(grp1m = 0.0036, grp2m = 0.0025,
 chen_2003_es
 ```
 
-1)  Schizophrenia group (as a whole) vs healthy controls scz:
+### T-statistic
+Schizophrenia group (as a whole) vs healthy controls
 t = 2.04, df = 82, p\<0.05
 ```{r}
 chen_2003_t_statistic <- esc_t(t = 2.04,
@@ -56,36 +56,22 @@ chen_2003_t_statistic <- esc_t(t = 2.04,
       es.type = "g")
 chen_2003_t_statistic
 ```
-DL: IT DOES NOT MUCH THE PREVIOUS CALCULATION, SO I THINK THEY MADE SOMETHING WRONG
-
-3)  First degree relatives vs healthy controls (not significant)
-rel: mean = 0.0022 ; SD = 0.001
-ctrl: mean = 0.0025 ; SD = 0.0016
-
-```{r}
-chen_2003_es_rel <- esc_mean_sd(grp1m = 0.0022, grp2m = 0.001, 
-            grp1sd = 0.0039, grp2sd = 0.0016, 
-            grp1n = 24, grp2n = 39, 
-            es.type = "g")
-chen_2003_es_rel
-```
+DL: IT DOES NOT MUCH THE PREVIOUS CALCULATION, SO I THINK THEY DID SOMETHING WRONG
 
 ## Summarizing table
-
 DL: BECAUSE THEY PRESENT ONE STIMULUS AFTER THE OTHER THIS IS TYPICALLY CALLED 2IFC (TWO INTERVAL FORCED CHOICE)
 
 staircase is an adaptive method
-
 ```{r}
 chen_2003 <- tibble( es = chen_2003_es$es, se = chen_2003_es$se ) 
 
 chen_2003$study <- "Chen et al. 2003"
 chen_2003$method <- "staircase" # adaptative, mc, ... (Do they use a special method to display contrast?) 
-chen_2003$medication <- "medicated and unmedicated" #TRUE #n=39 were on medication, n=6 not on medication
+chen_2003$medication <- "medicated and unmedicated" #"medicated", "unmedicated", "medicated and unmedicated" #n=39 medicated, n=6 unmedicated
 chen_2003$cpz <- "NA"  #Dose is not mentioned
-chen_2003$task <- "2IFC" #2AFC means two alternative forced choice
+chen_2003$task <- "2IFC" #2IFC means two interval forced choice
 chen_2003$SF <- 0.5
-chen_2003$size <- 10
+chen_2003$size <- 10 #size of the stimulus presented
 chen_2003$BPRS <- 42.4
 chen_2003$motion <- TRUE #is grating moving?
 chen_2003$duration <- 0.3 #Duration of the stimulus in seconds
@@ -99,19 +85,16 @@ chen_2003
 ```
 
 ## Side note 1
-
-The authors reported an effect size, however, my calculations do not match this effect size. Am I doing something wrong?
-
-DL: I THINK YOUR CALCULATIONS ARE FINE.
-
-## Side note 2
-
 The authors mention that the grating is moving with a temporal frequency of 5 Hz. Does this mean the study is about motion and not solely contrast detection?
 
 DL: IT IS ABOUT DETECTION, IT IS JUST THAT PARTICIPANTS NEED TO DETECT A MOVING GRATING. TWO CIRCLES ARE PRESENTED ONE AFTER THE OTHER AND IN ONE OF THE CIRCLE THE GRATING IS PRESENTED. THE TASK OF THE PARTICIPANT IS TO SAY FIRST OR SECOND (CIRCLE).
 
-## Side note 3
-
+## Side note 2
 The authors also do contrast sensitivity calculations based on the type on antipsychotic medication. I did not calculate these effect sizes, since I don't believe it is relevant.
 
 DL, YES FOR NOW LESS FOCUS ON POOLING EVERYTHING, THE IDEA OF THE STUDY OF SEPARATING BY MEDICATION IS GREAT, THE PROBLEM WITH THE STUDY IS THAT FOR THE GROUP NO MEDICATION AND TYPICAL ANTIPSYCHOTICS, THEY HAVE VERY FEW PARTICIPANTS. PAPER RELEVANT FOR THE DISCUSSION SECTION IN THE PART ABOUT "COULD IT BE MEDICATION?"
+
+## Side note 3
+Authors possibly made a mistake when calculating the effect size - hence why my effect size is different than theirs. 
+Secondly, do not use t-statistic. Use m and sd, it is more correct.
+

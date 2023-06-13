@@ -7,18 +7,50 @@ output: html_notebook
 
 ## Gathering information:
 
-Participants: 1) Schizophrenia n = 40 -\> n = 20 Chronic tobacco users -\> n = 20 no tobacco userss
+Participants:
+1) Schizophrenia n = 40
+n = 20 Chronic tobacco users
+n = 20 no tobacco userss
 
 2)  Control n = 40
 
-Contrast sensitivity (p6, figure 1) 1) Significant difference between controls and schizophrenia (both subgroups taken together) -\> p \< 0.001
+
+Contrast sensitivity (p6, figure 1)
+1) Significant difference between controls and schizophrenia (both subgroups taken together)
+p \< 0.001
 
 Need to calculate the results from the figure (figure 1)
 
 ## Calculate effect size:
+Scrapping data from Figure 1 - When using plotdigitizer, the datapoints and the SF do not add up correctly (e.g. the first datapoint from control group: SF = 0.17455628235338627, mean =	2.2181303116147313). Thus I believe we have to ask for data. 
 
-(see bookdown.org)
+
+## Summarizing table
+```{r}
+#fernandes_2018 <- tibble(es = $es, se = $se ) 
+fernandes_2018 <- tibble(es = NA, se = NA )
+
+fernandes_2018$study <- "Fernandes et al. 2018"
+fernandes_2018$method <- "staircase"
+fernandes_2018$medication <- "medicated" #n=40 medicated
+fernandes_2018$cpz <- 387.515 #combined mean of non-smoker scz (364.22) and smoker scz (415.81)
+fernandes_2018$task <- "2AFC"
+fernandes_2018$SF <- "0.2, 0.6, 1.0, 2.0, 5.0, 10.0, 20.0"
+fernandes_2018$size <- 5
+fernandes_2018$BPRS <- 42.95 #combined mean of non-smoker scz (41.8) and smoker scz (44.1)
+fernandes_2018$motion <- FALSE 
+fernandes_2018$duration <- 0.6
+fernandes_2018$location <- 2.5
+fernandes_2018$lapses <- TRUE 
+fernandes_2018$calculation_statistic <- "ask for data"  
+fernandes_2018$calculation_data <- "ask for data" 
+fernandes_2018$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+
+fernandes_2018
+```
+
 
 ## Side note 1
 
-Need to calculate the results from the figure (figure 1) Not sure how to do this. I'll take a look at it again.
+Scrapping data from Figure 1 - When using plotdigitizer, the datapoints and the SF do not add up correctly (e.g. the first datapoint from control group: SF = 0.17455628235338627, mean =	2.2181303116147313). Thus I believe we have to ask for data. 
+
