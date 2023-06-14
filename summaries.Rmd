@@ -199,3 +199,9 @@ forest(random_meta, layout= "JAMA", hetstat = FALSE,
 ```
 
 
+```{r}
+funnel.meta(random_meta,
+            xlim = c(-0.5, 1.5),
+            studlab = FALSE)
+```
+
