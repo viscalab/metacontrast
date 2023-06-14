@@ -1,0 +1,236 @@
+---
+title: "O' Donnell et al., 2006"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants
+1)  Schizophrenia n = 40
+n = 24 with schizophrenia / schizoaffective disorder (SZ) 
+-> n = 20 with schizophrenia
+-> n = 4 with schizoaffective disorder
+n = 16 with schizotypical personality disorder (SPD)
+
+2)  Control n = 40
+
+
+Contrast sensitivity (p5)
+1) Control (static): mean = 1.74 , sd = 0.45 , n=40
+
+2)  SPD (static): mean= 1.76 , sd= 0.46 , n=16
+
+3)  Medicated SZ (static): mean= 1.31 , sd= 0.53 , n=14
+
+4)  Unmedicated SZ (static): mean = 1.45 , sd = 0.42 , n=10
+
+=\> SZ groups showed lowered contrast sensitivity
+
+
+Contrast sensitivity ANOVA Group vs stimulus (static + motion) (-\> not sure if these results can be used, since the motion contrast sensitivity is also included)
+1) Significant main effects of Group (spd + sz + ctrl)
+F(2,77) = 6.52 , p = 0.002
+
+2)  Significant main effects of Test
+F(3,231) = 66.1 , p \< 0.001
+
+
+Follow-up ANOVAs of group effect
+3) Control vs SPD F(1,54) = 0.14 , p = 0.71
+
+4)  Control vs SZ F(1,62) = 9.67 , p = 0.003
+
+5)  SPD vs SZ F(1,38) = 5.58 , p = 0.02
+
+## Calculate effect size:
+use m and sd, but pool medicated and unmedicated SZ
+
+### F-statistic from follow-up anova
+4)  Control vs SZ F(1,62) = 9.67 , p = 0.003
+```{r}
+oDonnell_2006_es_f <- esc_f(f = 9.67,      # F value of the one-way anova
+      grp1n = 40,   # sample size of group 1 
+      grp2n = 24,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+oDonnell_2006_es_f
+```
+
+### M and sd
+
+1) Control (static): mean = 1.74 , sd = 0.45 , n=40
+2)  SPD (static): mean= 1.76 , sd= 0.46 , n=16
+3)  Medicated SZ (static): mean= 1.31 , sd= 0.53 , n=14
+4)  Unmedicated SZ (static): mean = 1.45 , sd = 0.42 , n=10
+
+First calculate the pooled mean and sd of both SZ groups (medicated and unmedicated) - see side note 2
+```{r}
+SZ_pooled <- pool.groups(n1 = 14,   # sample size group 1
+            n2 = 10,   # sample size group 2
+            m1 = 1.31,  # mean group 1
+            m2 = 1.45,    # mean group 2
+            sd1 = 0.53,   # sd group 1
+            sd2 = 0.45) # sd group2 
+SZ_pooled
+```
+
+Now calculate the effect size Control (group1) vs pooled SZ (group2)
+Control (static): mean = 1.74 , sd = 0.45 , n=40
+```{r}
+oDonnell_2006_es <- esc_mean_sd(grp1m = 1.74, grp2m = SZ_pooled$Mpooled,  # group mean
+            grp1sd = 0.45, grp2sd = SZ_pooled$SDpooled, # group sd
+            grp1n = 40, grp2n = SZ_pooled$Npooled, 
+            es.type = "g")
+oDonnell_2006_es
+```
+
+
+## Summarizing table
+
+DL DO NOT USE " " FOR NUMBERS  
+
+```{r}
+oDonnell_2006 <- tibble( es = oDonnell_2006_es$es, se = oDonnell_2006_es$se ) 
+oDonnell_2006
+
+oDonnell_2006$study <- "O'Donnell et al. 2006"
+oDonnell_2006$method <- "staircase" # adaptative, mc, ... (Do they use a special method to display contrast?) 
+oDonnell_2006$medication <- "medicated and unmedicated" #n=14 medicated, n=10 unmedicated
+oDonnell_2006$cpz <- "NA"  #Dose is not mentioned
+oDonnell_2006$task <- "2IFC" # 2 interval forced choice 
+oDonnell_2006$SF <- 9.9
+oDonnell_2006$size <- 8.37
+oDonnell_2006$BPRS <- "NA"
+oDonnell_2006$motion <- FALSE #is grating moving?
+oDonnell_2006$duration <- 1.0 #Duration of the stimulus in seconds
+oDonnell_2006$location <- 2.9 #Where the stimulus was presented in degrees of visual angle (fixation = 0)
+oDonnell_2006$lapses <- "FALSE"  #In lapses, we can include whether they control for lapses (TRUE) or not (FALSE).
+oDonnell_2006$calculation_statistic <- "m and sd"  #"t-test", "m and sd"
+oDonnell_2006$calculation_data <- "reported, pooling sd" #"scrapping", "reported", "raw"
+oDonnell_2006$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+
+oDonnell_2006
+```
+
+## Side note 1
+
+I believe the f-statistic is not entirely correct.It compares ctrl vs scz, but not sure if this is only for static, or also for motion.
+Calculation of the es through m and sd needed pooling of 2 groups (see side note 2).
+
+## Side note 2
+Function dmetar() doesn't want to install, to get the function pool.groups() working, copy code below in console and run it.
+
+#' Pool the results of two treatment arms
+#'
+#' This function allows to pool the mean, standard deviation and sample size of two experimental groups
+#' of a study. Results of two treatment arms may be pooled to mitigate the risk of a unit-of-analysis error
+#' and to avoid "double-counting" in meta-analyses in which studies with more than two experimental groups
+#' are included.
+#'
+#' @usage pool.groups(n1, n2, m1, m2, sd1, sd2)
+#'
+#' @param n1 Numeric vector or single number. The number of participants in arm 1.
+#' @param n2 Numeric vector or single number. The number of participants in arm 2.
+#' @param m1 Numeric vector or single number. The mean in arm 1.
+#' @param m2 Numeric vector or single number. The mean in arm 2.
+#' @param sd1 Numeric vector or single number. The standard deviation (\eqn{SD}) in arm 1.
+#' @param sd2 Numeric vector or single number. The standard deviation (\eqn{SD}) in arm 2.
+#'
+#' @details Many randomized-controlled trials do not only include a single intervention
+#' and control group, but compare the effect of two or more interventions to a control
+#' group. It might be tempting in such a scenario to simply include all the comparisons
+#' between the intervention groups and control within a study into one meta-analysis.
+#' Yet, researchers should abstain from this practice, as this would mean that the
+#' control group is used twice for the meta-analysis, thus “double-counting” the
+#' participants in the control group. This results in a \strong{unit-of-analysis error}, as
+#' the effect sizes are correlated, and thus not independent, but are treated as if they
+#' would stem from independent samples.
+#'
+#' One way to deal with this is to synthesize the results of the intervention arms to
+#' obtain one single comparison to the control group. Despite its practical limitations
+#' (sometimes, this would mean synthesizing the results from extremely different types
+#' of interventions), this procedure does avoid the unit-of-analysis error problem.
+#'
+#' To synthesize the pooled effect size data (pooled mean, standard deviation and \eqn{N}), the
+#' following formulae are used:
+#'
+#'\deqn{N_{pooled}=N_1+N_2}
+#'\deqn{M_{pooled}=\frac{N_1M_1+N_2M_2}{N_1+N_2}}
+#'\deqn{SD_{pooled} = \sqrt{\frac{(N_1-1)SD^{2}_{1}+ (N_2-1)SD^{2}_{2}+\frac{N_1N_2}{N_1+N_2}(M^{2}_1+M^{2}_2-2M_1M_2)} {N_1+N_2-1}}}
+#'
+#' \strong{What should I do when a study has more than two intervention groups?}
+#'
+#' If a study has more than two intervention groups you want to synthesize
+#' (e.g. four arms, with three distinct intervention arms), you can pool the effect
+#' size data for the first two interventions, and then synthesize the pooled data you
+#' calculated with the data from the third group.
+#'
+#' @references Harrer, M., Cuijpers, P., Furukawa, T.A, & Ebert, D. D. (2019).
+#' \emph{Doing Meta-Analysis in R: A Hands-on Guide}. DOI: 10.5281/zenodo.2551803. \href{https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/i.html}{Chapter 13.9}
+#'
+#' @author Mathias Harrer & David Daniel Ebert
+#'
+#' @return Returns a \code{data.frame} containing the following columns:
+#' \itemize{
+#' \item \code{Mpooled}: The pooled mean of both groups
+#' \item \code{SDpooled}: The pooled standard deviation of both groups
+#' \item \code{Npooled}: The pooled number of participants of both groups
+#' }
+#'
+#' @export
+#'
+#' @seealso \code{\link{se.from.p}}
+#'
+#' @examples
+#' pool.groups(n1 = 50, n2 = 56,
+#'     m1 = 7.83, m2 = 8.32,
+#'     sd1 = 3.52, sd2 = 2.25)
+
+
+
+pool.groups = function(n1, n2, m1, m2, sd1, sd2) {
+
+    n1 = n1
+    n2 = n2
+    m1 = m1
+    m2 = m2
+    sd1 = sd1
+    sd2 = sd2
+
+    if (is.numeric(n1) == FALSE) {
+        stop("'n1' must by of type numeric().")
+    }
+
+    if (is.numeric(n2) == FALSE) {
+        stop("'n2' must by of type numeric().")
+    }
+
+    if (n1 < 1 | n2 < 1) {
+        stop("'n1' and 'n2' must both the greater than 0.")
+    }
+
+    if (is.numeric(m1) == FALSE) {
+        stop("'m1' must by of type numeric().")
+    }
+
+    if (is.numeric(m2) == FALSE) {
+        stop("'m2' must by of type numeric().")
+    }
+
+    if (is.numeric(sd1) == FALSE) {
+        stop("'sd1' must by of type numeric().")
+    }
+
+    if (is.numeric(sd2) == FALSE) {
+        stop("'sd2' must by of type numeric().")
+    }
+
+    Npooled = n1 + n2
+    Mpooled = (n1 * m1 + n2 * m2)/(n1 + n2)
+    SDpooled = sqrt(((n1 - 1) * sd1^2 + (n2 - 1) * sd2^2 + (((n1 * n2)/(n1 + n2)) * (m1^2 + m2^2 - 2 * m1 *
+        m2)))/(n1 + n2 - 1))
+
+    return(data.frame(Mpooled, SDpooled, Npooled))
+}
+ 
