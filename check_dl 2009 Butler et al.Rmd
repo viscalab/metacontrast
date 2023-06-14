@@ -1,0 +1,115 @@
+---
+title: "Butler et al., 2009"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants:
+1) Schizophrenia n = 20 
+n = 17 with schizophrenia
+n = 3 with schizoaffective disorder
+
+2)  Control n = 17
+
+
+Contrast sensitivity (p4-5, experiment 1)
+1) Significant main effects of Group
+F(1,35) = 7.0 , p = 0.01
+
+2)  Significant main effects of SF
+F(2,34) = 515.5 , p \< 0.001
+
+3)  Significant Group x SF interaction
+F(2,34) = 4.1 , p = 0.03
+
+Post-hoc analysis of the interaction
+3A) SF = 0.5 (Significant)
+t = 3.0 , df = 35 , p = 0.005
+
+3B) SF = 7 (not significant)
+t = 0.6 , df = 35 , p = 0.6
+
+3C) SF= 21 (not significant)
+t = 1.0 , df = 35 , p = 0.3
+
+## Calculate effect size:
+
+use the F-statistic (see bookdown.org)
+
+### Significant main effects of Group (2 groups)
+F(1,35) = 7.0 , p = 0.01
+```{r}
+butler_2009_es_f <- esc_f(f = 7.0,      # F value of the one-way anova
+      grp1n = 20,   # sample size of group 1 
+      grp2n = 17,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+butler_2009_es_f
+```
+
+### Post-hoc analysis of the Group X SF interaction
+### SF = 0.5
+t = 3.0 , df = 35 , p = 0.005
+```{r}
+butler_2009_es_t_0.5 <- esc_t(t = 3.0, # t-statistic
+      grp1n = 20,
+      grp2n = 17,
+      es.type = "g")
+butler_2009_es_t_0.5
+```
+
+
+### SF = 7
+t = 0.6 , df = 35 , p = 0.6
+```{r}
+butler_2009_es_t_7 <- esc_t(t = 0.6, # t-statistic
+      grp1n = 20,
+      grp2n = 17,
+      es.type = "g")
+butler_2009_es_t_7
+```
+
+### SF = 21
+t = 1.0 , df = 35 , p = 0.3
+```{r}
+butler_2009_es_t_21 <- esc_t(t = 1.0, # t-statistic
+      grp1n = 20,
+      grp2n = 17,
+      es.type = "g")
+butler_2009_es_t_21
+```
+
+
+### Scrapping data from Figure 2 (plotdigitizer)
+Only mean is possible to get, error bars are not defined.
+
+
+## Summarizing table
+
+```{r}
+butler_2009 <- tibble( es = butler_2009_es_t_0.5$es, se = butler_2009_es_t_0.5$se ) 
+
+butler_2009$study <- "Butler et al. 2009"
+butler_2009$method <- "up-and-down transformed response"  
+butler_2009$medication <- "medicated" #n=20 medicated
+butler_2009$cpz <- 1195.3 
+butler_2009$task <- "2AFC" #2AFC mentioned in the article
+butler_2009$SF <- "0.5, 7.0, 21.0"
+butler_2009$size <- "5.7 x 5.7" 
+butler_2009$BPRS <- 45.5
+butler_2009$motion <- FALSE 
+butler_2009$duration <- 0.032 
+butler_2009$location <- 0
+butler_2009$lapses <- FALSE
+butler_2009$calculation_statistic <- "t-statistic"  
+butler_2009$calculation_data <- "reported" 
+butler_2009$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+
+butler_2009
+```
+
+## Side note 1
+Not sure whether I should use the f-statistic or the t-statistic. The t-statistic is specifically looking at SF = 0.5, whereas the f-statistic looks at the groups over all SF.
+
