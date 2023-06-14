@@ -29,5 +29,20 @@ ggplot() +
   coord_flip()
 ```
 
+```{r}
+p_sfs <- ggplot() +
+  geom_hline(data = sfs_summary_all, aes(yintercept = 0.5)) +
+  geom_point(data = sfs, aes(x = study, y = sf)) +
+
+  labs(y = "Spatial frequency (cycles / deg)") +
+  coord_flip() +
+  theme_minimal() +
+  theme(axis.title.y = element_blank()) 
+
+p_sfs
+
+ggsave("figures/sfs.pdf", p_sfs, 
+       width = 5, height = 4)
+```
 
 
