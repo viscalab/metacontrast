@@ -102,7 +102,7 @@ kéri_2002$BPRS <- 32.8
 kéri_2002$motion <- FALSE 
 kéri_2002$duration <- 0.5 
 kéri_2002$location <- 0 
-kéri_2002$lapses <- FALSE # because it is an adaptive method
+kéri_2002$lapses <- FALSE # because they use an adaptive method
 kéri_2002$calculation_statistic <- "m and sd" 
 kéri_2002$calculation_data <- "scrapping" 
 kéri_2002$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
