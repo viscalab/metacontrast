@@ -35,8 +35,8 @@ t = 0.6 , df = 35 , p = 0.6
 3C) SF= 21 (not significant)
 t = 1.0 , df = 35 , p = 0.3
 
-## Calculate effect size:
 
+## Calculate effect size:
 use the F-statistic (see bookdown.org)
 
 ### Significant main effects of Group (2 groups)
@@ -83,7 +83,7 @@ butler_2009_es_t_21
 
 
 ### Scrapping data from Figure 2 (plotdigitizer)
-Only mean is possible to get, error bars are not defined.
+Only mean is possible to get, error bars are not defined, and very difficult to see.
 
 
 ## Summarizing table
@@ -93,10 +93,11 @@ butler_2009 <- tibble( es = butler_2009_es_t_0.5$es, se = butler_2009_es_t_0.5$s
 
 butler_2009$study <- "Butler et al. 2009"
 butler_2009$method <- "up-and-down transformed response"  
-butler_2009$medication <- "medicated" #n=20 medicated
+butler_2009$medication <- "medicated" #all medicated
 butler_2009$cpz <- 1195.3 
 butler_2009$task <- "2AFC" #2AFC mentioned in the article
-butler_2009$SF <- "0.5, 7.0, 21.0"
+butler_2009$all_SF <- "0.5, 7.0, 21.0"
+butler_2009$SF <- 0.5
 butler_2009$size <- "5.7 x 5.7" 
 butler_2009$BPRS <- 45.5
 butler_2009$motion <- FALSE 
@@ -105,11 +106,11 @@ butler_2009$location <- 0
 butler_2009$lapses <- FALSE
 butler_2009$calculation_statistic <- "t-statistic"  
 butler_2009$calculation_data <- "reported" 
-butler_2009$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+butler_2009$calculation_certainty <- "sure" #scale is "sure", "unsure", "very unsure"
 
 butler_2009
 ```
 
 ## Side note 1
-Not sure whether I should use the f-statistic or the t-statistic. The t-statistic is specifically looking at SF = 0.5, whereas the f-statistic looks at the groups over all SF.
+Not sure whether I should use the f-statistic or the t-statistic. The t-statistic is specifically looking at SF = 0.5, whereas the f-statistic looks at the groups over all SF. Thus, choose t-statistic.
 

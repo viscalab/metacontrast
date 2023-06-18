@@ -40,52 +40,57 @@ F(11,191) = 1.96 , p \< 0.04
 ## Calculate effect size:
 ### Scrapping data from Figure 2a (plotdigitizer)
 Control n=14
-SF = 0.5                (0.5), mean = 4.783303726407286, sd-interval = (4.694493924834401 - 4.8898756509106)
-SF = 1.9940253648430282 (2.0), mean = 5.449378254553   , sd-interval = (5.387211434105943 - 5.502664216804657)
-SF = 4.025896468837429  (4.0), mean = 5.520426339735086, sd-interval = (5.449378254553 - 5.591474221647357)
-SF = 7.999999999999999  (8.0), mean = 4.623445839652314, sd-interval = (4.5523977544702285 - 4.694493924834401)
+SF = 0.5                (0.5), mean = 4.783303726407286, se-interval = (4.694493924834401 - 4.8898756509106)
+SF = 1.9940253648430282 (2.0), mean = 5.449378254553   , se-interval = (5.387211434105943 - 5.502664216804657)
+SF = 4.025896468837429  (4.0), mean = 5.520426339735086, se-interval = (5.449378254553 - 5.591474221647357)
+SF = 7.999999999999999  (8.0), mean = 4.623445839652314, se-interval = (4.5523977544702285 - 4.694493924834401)
 
 Positive scz n=14
-SF = 0.5                (0.5), mean = 4.6856126600993715, sd-interval = (4.570159877400657 - 4.783303726407286)
-SF = 1.9940253648430282 (2.0), mean = 5.298401429263243 , sd-interval = (5.200710566225143 - 5.396092292301343)
-SF = 3.9960150861361496 (4.0), mean = 5.227353547350972 , sd-interval = (5.120781622847657 - 5.342806330049686)
-SF = 7.999999999999999  (8.0), mean = 4.294849207946972 , sd-interval = (4.170515160513229 - 4.463587952897344)
+SF = 0.5                (0.5), mean = 4.6856126600993715, se-interval = (4.570159877400657 - 4.783303726407286)
+SF = 1.9940253648430282 (2.0), mean = 5.298401429263243 , se-interval = (5.200710566225143 - 5.396092292301343)
+SF = 3.9960150861361496 (4.0), mean = 5.227353547350972 , se-interval = (5.120781622847657 - 5.342806330049686)
+SF = 7.999999999999999  (8.0), mean = 4.294849207946972 , se-interval = (4.170515160513229 - 4.463587952897344)
 
 Negative scz n=14
-SF = 0.5                (0.5), mean = 3.9307283303807714, sd-interval = (3.8330372640728574 - 4.099467075331143)
-SF = 2.0239040119054987 (2.0), mean = 4.570159877400657 , sd-interval = (4.401421132450286 - 4.792184584602685)
-SF = 4.025896468837429  (4.0), mean = 4.090586217135743 , sd-interval = (3.8685615099337145 - 4.3303730472682)
-SF = 7.999999999999999  (8.0), mean = 2.971581009850943 , sd-interval = (2.722913321523086 - 3.2468916793046287)
+SF = 0.5                (0.5), mean = 3.9307283303807714, se-interval = (3.8330372640728574 - 4.099467075331143)
+SF = 2.0239040119054987 (2.0), mean = 4.570159877400657 , se-interval = (4.401421132450286 - 4.792184584602685)
+SF = 4.025896468837429  (4.0), mean = 4.090586217135743 , se-interval = (3.8685615099337145 - 4.3303730472682)
+SF = 7.999999999999999  (8.0), mean = 2.971581009850943 , se-interval = (2.722913321523086 - 3.2468916793046287)
+
 
 ### SF = 0.5
-Pool positive and negative scz groups
+Control n=14
+SF = 0.5 (0.5), mean = 4.783303726407286, se-interval = (4.694493924834401 - 4.8898756509106)
+Positive scz n=14
+SF = 0.5 (0.5), mean = 4.6856126600993715, se-interval = (4.570159877400657 - 4.783303726407286)
+Negative scz n=14
+SF = 0.5 (0.5), mean = 3.9307283303807714, se-interval = (3.8330372640728574 - 4.099467075331143)
 ```{r}
-# Calculate sd per group
-# Approximate SD = (upper limit - lower limit) / 2
-sd_sf0.5_ctrl = (4.8898756509106 - 4.694493924834401) / 2
-sd_sf0.5_pscz = (4.783303726407286 - 4.570159877400657) / 2
-sd_sf0.5_nscz = (4.099467075331143 - 3.8330372640728574) / 2
+# Calculate se per group
+# SE = (upper limit - lower limit) / 2
+se_c_slaghuis2004 = (4.8898756509106 - 4.694493924834401) / 2
+se_sz_pos_slaghuis2004 = (4.783303726407286 - 4.570159877400657) / 2
+se_sz_neg_slaghuis2004 = (4.099467075331143 - 3.8330372640728574) / 2
 
-# Pooling means and sd of positive scz and negative scz
+# calculate sd of each group (need it for pooling)
+# SD = SE * sqrt(n)
+sd_c_slaghuis2004 = se_c_slaghuis2004 * sqrt(14)
+sd_sz_pos_slaghuis2004 = se_sz_pos_slaghuis2004 * sqrt(14)
+sd_sz_neg_slaghuis2004 = se_sz_neg_slaghuis2004 * sqrt(14)
 
-scz_pooled <- pool.groups(n1 = 14,   # sample size group 1
-            n2 = 14,   # sample size group 2
-            m1 = 4.6856126600993715,  # mean group 1
-            m2 = 3.9307283303807714,    # mean group 2
-            sd1 = sd_sf0.5_pscz,   # sd group 1
-            sd2 = sd_sf0.5_nscz) # sd group2 
-scz_pooled
+# pool sz (pos and neg)
+SZ_pooled_slaghuis2004 <- pool.groups(n1 = 14, n2 = 14,   
+            m1 = 4.6856126600993715, m2 = 3.9307283303807714,    
+            sd1 = sd_sz_pos_slaghuis2004, sd2 = sd_sz_neg_slaghuis2004)  
+SZ_pooled_slaghuis2004
 
-```
-
-Calculate the es of control vs pooled scz
-```{r}
-# calculate es
-slaghuis_2004_es <- esc_mean_sd(grp1m = 4.783303726407286 , grp2m = scz_pooled$Mpooled,  # group mean
-            grp1sd = sd_sf0.5_ctrl, grp2sd = scz_pooled$SDpooled, # group sd
-            grp1n = 14, grp2n = scz_pooled$Npooled , 
+# calculate es (ctrl and pooled sz)
+slaghuis_2004_es <- esc_mean_sd(grp1m = 4.783303726407286, grp2m = SZ_pooled_slaghuis2004$Mpooled, 
+            grp1sd = sd_c_slaghuis2004, grp2sd = SZ_pooled_slaghuis2004$SDpooled, 
+            grp1n = 14, grp2n = SZ_pooled_slaghuis2004$Npooled, 
             es.type = "g")
-slaghuis_2004_es 
+slaghuis_2004_es
+
 ```
 
 
@@ -95,10 +100,11 @@ slaghuis_2004 <- tibble( es = slaghuis_2004_es$es, se = slaghuis_2004_es$se )
 
 slaghuis_2004$study <- "Slaghuis. 2004"
 slaghuis_2004$method <- "staircase"  
-slaghuis_2004$medication <- "medicated" #n=28 medicated
+slaghuis_2004$medication <- "medicated" #all medicated
 slaghuis_2004$cpz <- 215.65  #Dose is combined mean of group Positive (183.9) and Negative (247.4)
 slaghuis_2004$task <- "2AFC" #2AFC mentioned in the article
-slaghuis_2004$SF <- "0.5, 2.0, 4.0, 8.0"
+slaghuis_2004$all_SF <- "0.5, 2.0, 4.0, 8.0"
+slaghuis_2004$SF <- 0.5
 slaghuis_2004$size <- "7.12 x 5.71" 
 slaghuis_2004$BPRS <- NA
 slaghuis_2004$motion <- FALSE 
@@ -106,12 +112,12 @@ slaghuis_2004$duration <- 0.5
 slaghuis_2004$location <- 0 
 slaghuis_2004$lapses <- FALSE 
 slaghuis_2004$calculation_statistic <- "m and sd"  
-slaghuis_2004$calculation_data <- "scrapping" 
-slaghuis_2004$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+slaghuis_2004$calculation_data <- "scrapping, calculate se, calculate sd, pooling" 
+slaghuis_2004$calculation_certainty <- "sure" #scale is "sure", "unsure", "very unsure"
 
 slaghuis_2004
 ```
 
 ## Side note 1
-F-statistic includes 3 groups - not applicable.Thus, scrapping data from Figure 2a. Unsure whether this was the correct procedure.
+F-statistic includes 3 groups - not applicable. Thus, scrapping data from Figure 2a.
 

@@ -7,8 +7,10 @@ output: html_notebook
 library(tidyverse)
 library(readxl)
 library(esc)
-library(readxl)
 library(meta)
+library(dmetar)
+
+list.files("studies", full.names = TRUE) |>   walk(source)
 ```
 
 

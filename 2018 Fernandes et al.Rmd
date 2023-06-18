@@ -22,28 +22,65 @@ p \< 0.001
 Need to calculate the results from the figure (figure 1)
 
 ## Calculate effect size:
-Scrapping data from Figure 1 - When using plotdigitizer, the datapoints and the SF do not add up correctly (e.g. the first datapoint from control group: SF = 0.17455628235338627, mean =	2.2181303116147313). Thus I believe we have to ask for data. 
+### Scrapping data from Figure 1
+Control (n=40)
+SF = 0.2 , mean = 2.2247190057682076, sd-interval = (2.297752881950083 - 2.140449346458806)
+SF = 0.6 , mean = 2.6629213627623924, sd-interval = (2.7247190700608557 - 2.6011236554639297)
+SF = 1.0 , mean = 2.8764044568177787, sd-interval = (2.9606741161271803 - 2.7584269337846163)
+SF = 2.0 , mean = 2.9943819798509415, sd-interval = (no error bars)
+SF = 5.0 , mean = 2.915730340690598 , sd-interval = (no error bars)
+SF = 10.0, mean = 2.45505616027077  , sd-interval = (no error bars)
+SF = 20.0, mean = 1.4775281122817088, sd-interval = (no error bars)
 
+Schizophrenia (n=40)
+SF = 0.2 , mean = 1.7584270623699119 , sd-interval = (1.8876403685306005 - 1.6067416756129886) 
+SF = 0.6 , mean = 2.2752808013538486 , sd-interval = (2.365168609397605 - 2.191011142044447)
+SF = 1.0 , mean = 2.4606741804198284 , sd-interval = (2.54494383972923 - 2.365168609397605)
+SF = 2.0 , mean = 2.6348315191876908 , sd-interval = (no error bars)
+SF = 5.0 , mean = 2.376404392525131  , sd-interval = (no error bars)
+SF = 10.0, mean = 1.8820224769668374 , sd-interval = (no error bars)
+SF = 20.0, mean = 0.42696644528136324, sd-interval = (0.5056179558564109 - 0.3370786372376072)
+
+### Calculate es with scrapped data
+Control (n=40)
+SF = 0.6 , mean = 2.6629213627623924, sd-interval = (2.7247190700608557 - 2.6011236554639297)
+Schizophrenia (n=40)
+SF = 0.6 , mean = 2.2752808013538486 , sd-interval = (2.365168609397605 - 2.191011142044447)
+```{r}
+#schizophrenia group: is the full group, no pooling needed
+
+# calculate SD
+# SD = (upper limit - lower limit) / 2
+sd_c_fernandes2018 = (2.7247190700608557 - 2.6011236554639297) / 2
+sd_sz_fernandes2018 = (2.365168609397605 - 2.191011142044447) / 2
+
+
+fernandes_2018_es <- esc_mean_sd(grp1m = 2.6629213627623924, grp2m = 2.2752808013538486,  
+            grp1sd = sd_c_fernandes2018, grp2sd = sd_sz_fernandes2018, 
+            grp1n = 40, grp2n = 40, 
+            es.type = "g")
+fernandes_2018_es
+```
 
 ## Summarizing table
 ```{r}
-#fernandes_2018 <- tibble(es = $es, se = $se ) 
-fernandes_2018 <- tibble(es = NA, se = NA )
+fernandes_2018 <- tibble(es = fernandes_2018_es$es, se = fernandes_2018_es$se ) 
 
 fernandes_2018$study <- "Fernandes et al. 2018"
 fernandes_2018$method <- "staircase"
-fernandes_2018$medication <- "medicated" #n=40 medicated
+fernandes_2018$medication <- "medicated" #all medicated
 fernandes_2018$cpz <- 387.515 #combined mean of non-smoker scz (364.22) and smoker scz (415.81)
 fernandes_2018$task <- "2AFC"
-fernandes_2018$SF <- "0.2, 0.6, 1.0, 2.0, 5.0, 10.0, 20.0"
+fernandes_2018$all_SF <- "0.2, 0.6, 1.0, 2.0, 5.0, 10.0, 20.0"
+fernandes_2018$SF <- 0.6
 fernandes_2018$size <- 5
 fernandes_2018$BPRS <- 42.95 #combined mean of non-smoker scz (41.8) and smoker scz (44.1)
 fernandes_2018$motion <- FALSE 
 fernandes_2018$duration <- 0.6
 fernandes_2018$location <- 2.5
 fernandes_2018$lapses <- TRUE 
-fernandes_2018$calculation_statistic <- "ask for data"  
-fernandes_2018$calculation_data <- "ask for data" 
+fernandes_2018$calculation_statistic <- "m and sd"  
+fernandes_2018$calculation_data <- "scrapping" 
 fernandes_2018$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
 
 fernandes_2018
@@ -51,6 +88,5 @@ fernandes_2018
 
 
 ## Side note 1
-
-Scrapping data from Figure 1 - When using plotdigitizer, the datapoints and the SF do not add up correctly (e.g. the first datapoint from control group: SF = 0.17455628235338627, mean =	2.2181303116147313). Thus I believe we have to ask for data. 
+A es of 5 seems extremely high. Something is wrong, I don't know what.
 

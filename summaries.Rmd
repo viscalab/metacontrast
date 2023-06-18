@@ -19,7 +19,7 @@ slaghuis_1998_summary <- slaghuis_1998 |>
   select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
 ```
 
-## 2002-kéri Summarizing table 
+## 2002_kéri Summarizing table 
 
 ```{r}
 kéri_2002_summary <- kéri_2002 |> 
@@ -96,10 +96,10 @@ dias_2011_summary <- dias_2011 |>
   select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
 ```
 
-## 2013_caldarone Summarizing table
+## 2013_calderone Summarizing table
 
 ```{r}
-caldarone_2013_summary <- caldarone_2013 |> 
+calderone_2013_summary <- calderone_2013 |> 
   select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
 ```
 
@@ -110,17 +110,17 @@ cadenhead_2013_summary <- cadenhead_2013 |>
   select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
 ```
 
-## 2013_shoshina_and_shelepin Summarizing table
-
-```{r}
-shoshina_and_shelepin_2013_summary <- shoshina_and_shelepin_2013 |> 
-  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
-```
-
 ## 2013_shoshina Summarizing table
 
 ```{r}
 shoshina_2013_summary <- shoshina_2013 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2015_shoshina_and_shelepin Summarizing table
+
+```{r}
+shoshina_and_shelepin_2015_summary <- shoshina_and_shelepin_2015 |> 
   select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
 ```
 
@@ -156,10 +156,10 @@ studies <- schwartz_1987_summary |>
   bind_rows(butler_2009_summary) |>
   bind_rows(kiss_2010_summary) |>
   bind_rows(dias_2011_summary) |>
-  bind_rows(caldarone_2013_summary) |>
+  bind_rows(calderone_2013_summary) |>
   bind_rows(cadenhead_2013_summary) |>
-  bind_rows(shoshina_and_shelepin_2013_summary) |>
   bind_rows(shoshina_2013_summary) |>
+  bind_rows(shoshina_and_shelepin_2015_summary) |>
   bind_rows(fernandes_2018_summary) |>
   bind_rows(fernandes_2019_summary) |>
   select(study, es, se, calculation_statistic, calculation_data, calculation_certainty)
@@ -195,13 +195,13 @@ We can modify the plot
 
 ```{r,echo=TRUE}
 forest(random_meta, layout= "JAMA", hetstat = FALSE, 
-       xlim = c(-1, 4))
+       xlim = c(-2, 6))
 ```
 
 
 ```{r}
 funnel.meta(random_meta,
-            xlim = c(-0.5, 1.5),
+            xlim = c(-0.5, 6),
             studlab = FALSE)
 ```
 

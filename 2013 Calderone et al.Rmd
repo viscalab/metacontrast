@@ -1,0 +1,111 @@
+---
+title: "Calderone et al., 2013"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants:
+1) Schizophrenia n = 15
+
+2)  Control n = 15
+
+
+Contrast sensitivity (p4)
+1) Significant main effects of Group
+F(1,56) = 11.769 , p \< 0.005
+
+2)  Significant Group x Condition(SF) interaction
+F(1,56) = 4.632 , p \< 0.05
+
+
+Contrast sensitivity in fMRI (p5)
+3) SF = 0.5 at 32ms:
+Controls: mean = 54.69 , sd = 17.03
+Scz: mean = 50.70 , sd = 19.15
+
+4) SF = 4 at 500 ms:
+Controls: mean = 41.43 , sd = 24.17
+Scz: mean = 23.52 , sd = 21.68
+
+
+## Calculate effect size:
+use the F-statistic (see bookdown.org)
+
+###  Significant main effects of Group (2 groups)
+F(1,56) = 11.769 , p \< 0.005
+```{r}
+calderone_2013_es_f <- esc_f(f = 11.769,      # F value of the one-way anova
+      grp1n = 15,   # sample size of group 1 
+      grp2n = 15,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+calderone_2013_es_f
+```
+
+### Scrapping data from Figure 3
+See Figure 3 for mean contrast sensitivity - problem: scale of y-axis is weird, plotdigitizer cannot compute data correctly.
+If I put the y-axis scale y1=0, y2=1000 and choose log10 - plotdigitizer does not give me any values for y.
+If I put the y-axis scale y1=0, y2=1000 and choose linear - I get values for y, but they are all wrong.
+If I put the y-axis scale y1=100, y2=1000 and choose log10 - I get values for y, but I think they are incorrect as well, because then the intercept of y-axis with x-axis is considered 10 instead of 0.
+Thus, I think it is not possible to retrieve correct data from the figure. 
+
+
+### FMRI results
+5 controls were outliers - removed from data n=10
+1 patient was outlier - removed from data n=14
+
+3) SF = 0.5 at 32ms:
+Controls: mean = 54.69 , sd = 17.03
+Scz: mean = 50.70 , sd = 19.15
+```{r}
+calderone_2013_es_fmri_sf0.5 <- esc_mean_sd(grp1m = 54.69, grp2m = 50.70,  # group mean
+            grp1sd = 17.03, grp2sd = 19.15, # group sd
+            grp1n = 10, grp2n = 14, 
+            es.type = "g")
+calderone_2013_es_fmri_sf0.5
+```
+
+
+## Summarizing table
+
+```{r}
+calderone_2013 <- tibble(es = calderone_2013_es_f$es, se = calderone_2013_es_f$se ) 
+
+calderone_2013$study <- "Caldarone et al. 2013"
+calderone_2013$method <- "up-down transform rule" #UDTR
+calderone_2013$medication <- "medicated" #all medicated
+calderone_2013$cpz <- 783.33
+calderone_2013$task <- "2AFC" #2AFC mentioned in the article
+calderone_2013$all_SF <- "0.5, 4"
+calderone_2013$SF <- 0.5
+calderone_2013$size <- "6 x 6" 
+calderone_2013$BPRS <- NA
+calderone_2013$motion <- FALSE 
+calderone_2013$duration <- "0.032 for SF=0.5, 0.5 for SF=4" 
+calderone_2013$location <- NA
+calderone_2013$lapses <- FALSE 
+calderone_2013$calculation_statistic <- "f-statistic"  
+calderone_2013$calculation_data <- "reported" 
+calderone_2013$calculation_certainty <- "very unsure" #scale is "sure", "unsure", "very unsure"
+
+calderone_2013
+```
+
+
+## Side note 1
+This study also measures contrast sensitivity with fMRI and get m and sd.
+I am not sure how to interpret these results, or if we can use them instead of the f-statistic.
+
+## Side note 2
+The f-statistic has weird df, not sure if we can use this.
+
+## Side note 3
+I tried scrapping data from figure 3.
+See Figure 3 for mean contrast sensitivity - problem: scale of y-axis is weird, plotdigitizer cannot compute data correctly.
+If I put the y-axis scale y1=0, y2=1000 and choose log10 - plotdigitizer does not give me any values for y.
+If I put the y-axis scale y1=0, y2=1000 and choose linear - I get values for y, but they are all wrong.
+If I put the y-axis scale y1=100, y2=1000 and choose log10 - I get values for y, but I think they are incorrect as well, because then the intercept of y-axis with x-axis is considered 10 instead of 0.
+Thus, I think it is not possible to retrieve correct data from the figure. 
+Can you take a look at this please?

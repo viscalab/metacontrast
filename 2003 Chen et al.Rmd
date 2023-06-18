@@ -67,9 +67,10 @@ chen_2003 <- tibble( es = chen_2003_es$es, se = chen_2003_es$se )
 
 chen_2003$study <- "Chen et al. 2003"
 chen_2003$method <- "staircase" # adaptative, mc, ... (Do they use a special method to display contrast?) 
-chen_2003$medication <- "medicated and unmedicated" #"medicated", "unmedicated", "medicated and unmedicated" #n=39 medicated, n=6 unmedicated
+chen_2003$medication <- "medicated and unmedicated" #n=39 medicated, n=6 unmedicated
 chen_2003$cpz <- "NA"  #Dose is not mentioned
 chen_2003$task <- "2IFC" #2IFC means two interval forced choice
+chen_2003$all_SF <- 0.5
 chen_2003$SF <- 0.5
 chen_2003$size <- 10 #size of the stimulus presented
 chen_2003$BPRS <- 42.4

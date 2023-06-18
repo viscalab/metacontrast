@@ -96,21 +96,21 @@ print(c_cimmer2006_sd)
 Non-deficit (n=32): mean = 2.2919685074449494, 95%CI = (2.2390551065646807 - 2.3411023518852456)
 Deficit (n=12): mean = 2.200314934201157, 95%CI = (2.11622047383731 - 2.2834645703349024)
 ```{r}
-sz_pooled <- pool.groups(n1 =32 ,   # sample size group 1
+sz_pooled_cimmer2006 <- pool.groups(n1 =32 ,   # sample size group 1
             n2 = 12,   # sample size group 2
             m1 = 2.2919685074449494,  # mean group 1
             m2 = 2.200314934201157,    # mean group 2
             sd1 = nd_cimmer2006_sd,   # sd group 1
             sd2 = d_cimmer2006_sd) # sd group2 
-sz_pooled
+sz_pooled_cimmer2006
 ```
 
 ### Calculate the effect size of control vs sz_pooled
 Controls (n=20): mean = 2.4629921171292537,
 ```{r}
-cimmer_2006_es <- esc_mean_sd(grp1m = 2.4629921171292537, grp2m = sz_pooled$Mpooled,  # group mean
-            grp1sd = c_cimmer2006_sd, grp2sd = sz_pooled$SDpooled, # group sd
-            grp1n = 20, grp2n = sz_pooled$Npooled, 
+cimmer_2006_es <- esc_mean_sd(grp1m = 2.4629921171292537, grp2m = sz_pooled_cimmer2006$Mpooled,  
+            grp1sd = c_cimmer2006_sd, grp2sd = sz_pooled_cimmer2006$SDpooled,
+            grp1n = 20, grp2n = sz_pooled_cimmer2006$Npooled, 
             es.type = "g")
 cimmer_2006_es
 ```
@@ -124,9 +124,10 @@ cimmer_2006
 
 cimmer_2006$study <- "Cimmer et al. 2006"
 cimmer_2006$method <- "adaptive" 
-cimmer_2006$medication <- "medicated" #all patients were on medication
+cimmer_2006$medication <- "medicated" #all medicated
 cimmer_2006$cpz <- "NA"  #Dose is not mentioned
 cimmer_2006$task <- "2IFC" 
+cimmer_2006$all_SF <- 0.5
 cimmer_2006$SF <- 0.5
 cimmer_2006$size <- 13
 cimmer_2006$BPRS <- "NA" #not mentioned
@@ -146,3 +147,12 @@ The F-statistic is 3 groups (deficit, non-deficit and healthy controls), thus no
 
 Scrapping data from Figure 2, calculate sd from 95%CI, then pooling deficit and non-deficit groups. Then calculate es from m and sd.
 
+
+## Side note 2
+DL. IT IS BETTER NOT TO USE VARIABLE NAMES SUCH "mean" BECAUSE IT IS EASY TO MAKE ERRORS IF THIS VARIABLE APPEARS IN DIFFERENT LOCATIONS WITH DIFFERENT VALUES IN THE CODE. IT IS BETTER mean_non_deficit_cimmer_2006 EVEN IF IT IS VERY LARGE. ANOTHER SOLUTION IS TO USE THIS LONG NAME ONLY FOR nd_sd. FOR EXAMPLE nd_sd_cimmer_2006 and then do something like 
+
+calculate_sd(mean = 2.2919685074449494, 
+  n = 32, 
+  ci_lower = 2.2390551065646807 ....
+  
+SO YOU DONT NEED TO NAME  n, ci_lower....

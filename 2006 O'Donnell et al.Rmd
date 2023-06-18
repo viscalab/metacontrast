@@ -67,21 +67,21 @@ oDonnell_2006_es_f
 
 First calculate the pooled mean and sd of both SZ groups (medicated and unmedicated) - see side note 2
 ```{r}
-SZ_pooled <- pool.groups(n1 = 14,   # sample size group 1
+SZ_pooled_oDonnell2006 <- pool.groups(n1 = 14,   # sample size group 1
             n2 = 10,   # sample size group 2
             m1 = 1.31,  # mean group 1
             m2 = 1.45,    # mean group 2
             sd1 = 0.53,   # sd group 1
             sd2 = 0.45) # sd group2 
-SZ_pooled
+SZ_pooled_oDonnell2006
 ```
 
 Now calculate the effect size Control (group1) vs pooled SZ (group2)
 Control (static): mean = 1.74 , sd = 0.45 , n=40
 ```{r}
-oDonnell_2006_es <- esc_mean_sd(grp1m = 1.74, grp2m = SZ_pooled$Mpooled,  # group mean
-            grp1sd = 0.45, grp2sd = SZ_pooled$SDpooled, # group sd
-            grp1n = 40, grp2n = SZ_pooled$Npooled, 
+oDonnell_2006_es <- esc_mean_sd(grp1m = 1.74, grp2m = SZ_pooled_oDonnell2006$Mpooled,  # group mean
+            grp1sd = 0.45, grp2sd = SZ_pooled_oDonnell2006$SDpooled, # group sd
+            grp1n = 40, grp2n = SZ_pooled_oDonnell2006$Npooled, 
             es.type = "g")
 oDonnell_2006_es
 ```
@@ -94,31 +94,35 @@ oDonnell_2006 <- tibble( es = oDonnell_2006_es$es, se = oDonnell_2006_es$se )
 oDonnell_2006
 
 oDonnell_2006$study <- "O'Donnell et al. 2006"
-oDonnell_2006$method <- "staircase" # adaptative, mc, ... (Do they use a special method to display contrast?) 
+oDonnell_2006$method <- "staircase" 
 oDonnell_2006$medication <- "medicated and unmedicated" #n=14 medicated, n=10 unmedicated
-oDonnell_2006$cpz <- "NA"  #Dose is not mentioned
+oDonnell_2006$cpz <- NA  #Dose is not mentioned
 oDonnell_2006$task <- "2IFC" # 2 interval forced choice 
+oDonnell_2006$all_SF <- 9.9
 oDonnell_2006$SF <- 9.9
-oDonnell_2006$size <- "8.37"
-oDonnell_2006$BPRS <- "NA"
-oDonnell_2006$motion <- FALSE #is grating moving?
-oDonnell_2006$duration <- 1.0 #Duration of the stimulus in seconds
-oDonnell_2006$location <- 2.9 #Where the stimulus was presented in degrees of visual angle (fixation = 0)
-oDonnell_2006$lapses <- "FALSE"  #In lapses, we can include whether they control for lapses (TRUE) or not (FALSE).
-oDonnell_2006$calculation_statistic <- "m and sd"  #"t-test", "m and sd"
-oDonnell_2006$calculation_data <- "reported, pooling sd" #"scrapping", "reported", "raw"
-oDonnell_2006$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+oDonnell_2006$size <- 8.37
+oDonnell_2006$BPRS <- NA
+oDonnell_2006$motion <- FALSE 
+oDonnell_2006$duration <- 1.0 
+oDonnell_2006$location <- 2.9 
+oDonnell_2006$lapses <- FALSE  
+oDonnell_2006$calculation_statistic <- "m and sd"  
+oDonnell_2006$calculation_data <- "reported, pooling sd" 
+oDonnell_2006$calculation_certainty <- "sure" #scale is "sure", "unsure", "very unsure"
 
 oDonnell_2006
 ```
 
 ## Side note 1
 
-I believe the f-statistic is not entirely correct.It compares ctrl vs scz, but not sure if this is only for static, or also for motion.
+I believe the f-statistic is not entirely correct. It compares ctrl vs scz, but not sure if this is only for static, or also for motion. - It's a very complex anova, use m and sd.
+
 Calculation of the es through m and sd needed pooling of 2 groups (see side note 2).
 
 ## Side note 2
 Function dmetar() doesn't want to install, to get the function pool.groups() working, copy code below in console and run it.
+
+Now dmetar() works, but I'll keep it here, just in case.
 
 #' Pool the results of two treatment arms
 #'
