@@ -9,8 +9,11 @@ library(readxl)
 library(esc)
 library(meta)
 library(dmetar)
+library(knitr)
 
-list.files("studies", full.names = TRUE) |>   walk(source)
+list.files("studies", full.names = TRUE) |>  
+  walk(.f =  \(x) source(purl(x, quiet=TRUE)))
+
 ```
 
 
