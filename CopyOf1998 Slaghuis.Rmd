@@ -1,0 +1,152 @@
+---
+title: "Slaghuis, 1998"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants: 
+1) Schizophrenia
+  n = 30
+    -> n = 15 with positive symptoms
+    -> n = 15 with negative symptoms
+
+2) Control
+  n = 15
+
+
+Contrast sensitivity (p5, experiment 1)
+1) Significant main effects of Group (3 groups)
+  F(2,42) = 21.7 , p < 0.0001
+    -> Post-hoc Tukey HSD
+    p < 0.01
+
+2) Significant main effects of duration
+  F(1,42) = 1209.6 , p < 0.0001
+
+3) Significant main effects of SF (spatial frequency)
+  F(5,210) = 275.5 , p < 0.0001
+
+4) Group x stimulus duration interaction (not significant)
+  F(2,42) = 0.316 , p > 0.05
+  
+5) Significant Group x SF interaction
+  F(10,210) = 3.4 , p < 0.0005
+
+6) Significant SF x stimulus duration interaction
+  F(5,210) = 41.3 , p < 0.001
+
+7) Groups x stimulus duration x SF (not significant)
+  F(10,210) = 0.63 , p > 0.05
+  
+
+
+## Calculate effect size:
+  use the F-statistic (see bookdown.org)
+  
+### Significant main effects of Group (3 groups)
+  F(2,42) = 21.7 , p < 0.0001
+- 3 groups so NA
+
+### Scrapping from Figure 2
+Control
+SF = 0.4979987983530493 (0.5), mean = 2.0968000196874987, error bar = (2.119565248940074 - 2.0783515326166953)
+SF = 1.0098677939570224 (1)  , mean = 2.1479999683593762
+SF = 2.017920100044738  (2)  , mean = 2.215199965078127
+SF = 4.032212488140669  (4)  , mean = 2.1767999669531264
+SF = 8.057186938815855  (8)  , mean = 1.888799981015626
+SF = 11.991991663525779 (12) , mean = 1.5208000478124977
+
+Positive
+SF = 0.4907174609675067 (0.5), mean = 2.0200000234374986, error bar = (2.0593297950636993 - 1.9800724585099876)
+SF = 1.0098677939570224 (1)  , mean = 2.0647999235937537
+SF = 2.017920100044738  (2)  , mean = 2.0999999707031263
+SF = 4.032212488140669  (4)  , mean = 1.9783999278125035
+SF = 8.057186938815855  (8)  , mean = 1.607200043593748
+SF = 11.991991663525779 (12) , mean = 1.2199999648437516
+
+Negative
+SF = 0.5053874957955264 (0.5), mean = 1.7927999857031256, error bar = (1.859601550757238 - 1.739130497880148)
+SF = 1.0098677939570224 (1)  , mean = 1.9432000271874987
+SF = 2.017920100044738  (2)  , mean = 1.984799976328126
+SF = 4.032212488140669  (4)  , mean = 1.8311999838281259
+SF = 8.057186938815855  (8)  , mean = 1.4344000520312474
+SF = 11.991991663525779 (12) , mean = 1.072800020859374
+
+
+It is not mentioned in the study what the error bars represent (SD, SEM or CI)
+But seeing the nature of the study and the limited information provided, we can assume either SEM or SD. SEM is more likely since the figure represents a comparison between the means of different groups, in which SEM is commonly used to represent the variability.
+(https://www.graphpad.com/guides/prism/latest/statistics/statwhentoplotsdvssem.htm)
+(https://blogs.sas.com/content/iml/2019/10/09/statistic-error-bars-mean.html)
+DL: They didn’t reported it, but the error bars should be the standard error (rather than CI) because for the frequencies 0.5, 1 and 2 c/deg there are not significant differences between the positive group and the control (if they were CIs then they should overlap a lot). 
+
+
+### Calculate es
+Control (n=15)
+SF = 0.4979987983530493 (0.5), mean = 2.0968000196874987, error bar = (2.119565248940074 - 2.0783515326166953)
+
+Positive (n=15)
+SF = 0.4907174609675067 (0.5), mean = 2.0200000234374986, error bar = (2.0593297950636993 - 1.9800724585099876)
+
+Negative (n=15)
+SF = 0.5053874957955264 (0.5), mean = 1.7927999857031256, error bar = (1.859601550757238 - 1.739130497880148)
+```{r}
+# SEM = (upper limit - lower limit) / 2
+SEM_c_slaghuis1998 = (2.119565248940074 - 2.0783515326166953) / 2
+SEM_sz_pos_slaghuis1998 = (2.0593297950636993 - 1.9800724585099876) / 2
+SEM_sz_neg_slaghuis1998 = (1.859601550757238 - 1.739130497880148) / 2
+
+# calculate sd of each group (need it for pooling)
+# SD = SEM * sqrt(n)
+sd_c_slaghuis1998 = SEM_c_slaghuis1998 * sqrt(15)
+sd_sz_pos_slaghuis1998 = SEM_sz_pos_slaghuis1998 * sqrt(15)
+sd_sz_neg_slaghuis1998 = SEM_sz_neg_slaghuis1998 * sqrt(15)
+
+# pool sz (pos and neg)
+SZ_pooled_slaghuis1998 <- pool.groups(n1 = 15, n2 = 15,   
+            m1 = 2.0200000234374986, m2 = 1.7927999857031256,    
+            sd1 = sd_sz_pos_slaghuis1998, sd2 = sd_sz_neg_slaghuis1998)  
+SZ_pooled_slaghuis1998
+
+# calculate es (ctrl and pooled sz)
+slaghuis_1998_es <- esc_mean_sd(grp1m = 2.0968000196874987, grp2m = SZ_pooled_slaghuis1998$Mpooled, 
+            grp1sd = sd_c_slaghuis1998, grp2sd = SZ_pooled_slaghuis1998$SDpooled, 
+            grp1n = 15, grp2n = SZ_pooled_slaghuis1998$Npooled, 
+            es.type = "g")
+slaghuis_1998_es
+```
+
+
+## Summarizing table
+
+```{r}
+slaghuis_1998 <- tibble( es = slaghuis_1998_es$es, se = slaghuis_1998_es$se ) 
+
+slaghuis_1998$study <- "Slaghuis. 1998"
+slaghuis_1998$method <- "staircase"  
+slaghuis_1998$medication <- "medicated" #all medicated
+slaghuis_1998$cpz <- 221.65  #Dose is combined mean of group Positive (201.1) and Negative (242.2)
+slaghuis_1998$task <- "2AFC" #2AFC mentioned in the article
+slaghuis_1998$all_SF <- "0.5, 1, 2, 4, 8 and 12"
+slaghuis_1998$SF <- 0.5 
+slaghuis_1998$size <- "4.03 x 3.36" #size of the stimulus presented
+slaghuis_1998$BPRS <- NA
+slaghuis_1998$motion <- FALSE 
+slaghuis_1998$duration <- "0.4 or 0.04" #Article says: 40ms or 400ms
+slaghuis_1998$location <- 0 
+slaghuis_1998$lapses <- TRUE  #If observer noticed a drift in attention, the trial was repeated.
+slaghuis_1998$calculation_statistic <- "m and sd"  
+slaghuis_1998$calculation_data <- "scrapping, calculate SEM, calculate sd, pooling"
+slaghuis_1998$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+
+slaghuis_1998
+```
+
+## Side note 1
+F-statistic contains 3 groups - not applicable.
+
+## Side note 2
+Figure 2 - data scrapping - get mean and most likely SEM-interval. Calculate SEM, calculate sd (since I don't know how to pool with se), pool groups positive and negative, calculate es.
+

@@ -1,0 +1,158 @@
+---
+title: "Cimmer et al., 2006"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants:
+1) Schizophrenia n = 44
+n = 32 with non-deficit schizophrenia
+n = 12 with deficit schizophrenia
+
+2)  Control n = 20
+
+Contrast sensitivity (p3)
+1) Significant main effects of Group (deficit + non-deficit + controls)
+F(2,61) = 14.62 , p \< 0.0001
+
+Tukey's HSD test
+p \< 0.001 (schizophrenia vs controls)
+p = 0.17 (non-deficit vs deficit)
+
+## Calculate effect size:
+use the F-statistic (see bookdown.org)
+
+### Significant main effects of Group (3 groups)
+F(2,61) = 14.62 , p \< 0.0001 
+```{r}
+# F-statistic: 3 groups, thus not applicable
+```
+
+
+### Scrapping data from figure 2 (use plotdigitizer)
+Non-deficit (n=32): mean = 2.2919685074449494, 95%CI = (2.2390551065646807 - 2.3411023518852456)
+Deficit (n=12): mean = 2.200314934201157, 95%CI = (2.11622047383731 - 2.2834645703349024) 
+Controls (n=20): mean = 2.4629921171292537, 95%CI = (2.3996850441722124 - 2.5262992117129253)
+
+DL. WE DON'T KNOW IF THEY USE Z OR T TO CALCULATE CI, BUT GIVEN THAT T IS MORE CORRECT, LET'S ASSUME THEY USED THIS ONE. USING Z OR T DOES NOT MAKE A BIG CHANGE
+```{r}
+# Function to calculate SD from mean, n, and CI
+calculate_sd <- function(mean, n, ci_lower, ci_upper) {
+  # Calculate the z-score for the desired confidence level (e.g., 95%)
+  z <- qnorm(1 - (1 - 0.95) / 2)
+
+  # Calculate the standard deviation
+  sd <- (ci_upper - ci_lower) / (2 * z / sqrt(n))
+  
+  return(sd)
+}
+```
+
+### Calculate sd per group
+Non-deficit (n=32): mean = 2.2919685074449494, 95%CI = (2.2390551065646807 - 2.3411023518852456)
+```{r}
+# Non-deficit 
+
+nd_cimmer2006_mean <- 2.2919685074449494
+nd_cimmer2006_n <- 32
+nd_cimmer2006_ci_lower <- 2.2390551065646807
+nd_cimmer2006_ci_upper <- 2.3411023518852456
+
+nd_cimmer2006_sd <- calculate_sd(nd_cimmer2006_mean, nd_cimmer2006_n, nd_cimmer2006_ci_lower, nd_cimmer2006_ci_upper)
+print(nd_cimmer2006_sd)
+
+```
+
+Deficit (n=12): mean = 2.200314934201157, 95%CI = (2.11622047383731 - 2.2834645703349024)
+```{r}
+# Deficit 
+
+d_cimmer2006_mean <- 2.200314934201157
+d_cimmer2006_n <- 12
+d_cimmer2006_ci_lower <- 2.11622047383731
+d_cimmer2006_ci_upper <- 2.2834645703349024
+
+d_cimmer2006_sd <- calculate_sd(d_cimmer2006_mean, d_cimmer2006_n, d_cimmer2006_ci_lower, d_cimmer2006_ci_upper)
+print(d_cimmer2006_sd)
+```
+
+Controls (n=20): mean = 2.4629921171292537, 95%CI = (2.3996850441722124 - 2.5262992117129253)
+```{r}
+# Control 
+
+c_cimmer2006_mean <- 2.4629921171292537
+c_cimmer2006_n <- 20
+c_cimmer2006_ci_lower <- 2.3996850441722124
+c_cimmer2006_ci_upper <- 2.5262992117129253
+
+c_cimmer2006_sd <- calculate_sd(c_cimmer2006_mean, c_cimmer2006_n, c_cimmer2006_ci_lower, c_cimmer2006_ci_upper)
+print(c_cimmer2006_sd)
+```
+
+### Pool mean and sd of deficit and non-deficit group
+Non-deficit (n=32): mean = 2.2919685074449494, 95%CI = (2.2390551065646807 - 2.3411023518852456)
+Deficit (n=12): mean = 2.200314934201157, 95%CI = (2.11622047383731 - 2.2834645703349024)
+```{r}
+sz_pooled_cimmer2006 <- pool.groups(n1 =32 ,   # sample size group 1
+            n2 = 12,   # sample size group 2
+            m1 = 2.2919685074449494,  # mean group 1
+            m2 = 2.200314934201157,    # mean group 2
+            sd1 = nd_cimmer2006_sd,   # sd group 1
+            sd2 = d_cimmer2006_sd) # sd group2 
+sz_pooled_cimmer2006
+```
+
+### Calculate the effect size of control vs sz_pooled
+Controls (n=20): mean = 2.4629921171292537,
+```{r}
+cimmer_2006_es <- esc_mean_sd(grp1m = 2.4629921171292537, grp2m = sz_pooled_cimmer2006$Mpooled,  
+            grp1sd = c_cimmer2006_sd, grp2sd = sz_pooled_cimmer2006$SDpooled,
+            grp1n = 20, grp2n = sz_pooled_cimmer2006$Npooled, 
+            es.type = "g")
+cimmer_2006_es
+```
+
+
+## Summarizing table
+
+```{r}
+cimmer_2006 <- tibble( es = cimmer_2006_es$es, se = cimmer_2006_es$se ) 
+cimmer_2006
+
+cimmer_2006$study <- "Cimmer et al. 2006"
+cimmer_2006$method <- "adaptive" 
+cimmer_2006$medication <- "medicated" #all medicated
+cimmer_2006$cpz <- "NA"  #Dose is not mentioned
+cimmer_2006$task <- "2IFC" 
+cimmer_2006$all_SF <- 0.5
+cimmer_2006$SF <- 0.5
+cimmer_2006$size <- 13
+cimmer_2006$BPRS <- "NA" #not mentioned
+cimmer_2006$motion <- TRUE 
+cimmer_2006$duration <- 0.5 
+cimmer_2006$location <- 0
+cimmer_2006$lapses <- FALSE  
+cimmer_2006$calculation_statistic <- "m and sd"  
+cimmer_2006$calculation_data <- "scrapping, calculate sd, pooling" 
+cimmer_2006$calculation_certainty <- "sure" #scale is "sure", "unsure", "very unsure"
+
+cimmer_2006
+```
+
+## Side note 1
+The F-statistic is 3 groups (deficit, non-deficit and healthy controls), thus not applicable. 
+
+Scrapping data from Figure 2, calculate sd from 95%CI, then pooling deficit and non-deficit groups. Then calculate es from m and sd.
+
+
+## Side note 2
+DL. IT IS BETTER NOT TO USE VARIABLE NAMES SUCH "mean" BECAUSE IT IS EASY TO MAKE ERRORS IF THIS VARIABLE APPEARS IN DIFFERENT LOCATIONS WITH DIFFERENT VALUES IN THE CODE. IT IS BETTER mean_non_deficit_cimmer_2006 EVEN IF IT IS VERY LARGE. ANOTHER SOLUTION IS TO USE THIS LONG NAME ONLY FOR nd_sd. FOR EXAMPLE nd_sd_cimmer_2006 and then do something like 
+
+calculate_sd(mean = 2.2919685074449494, 
+  n = 32, 
+  ci_lower = 2.2390551065646807 ....
+  
+SO YOU DONT NEED TO NAME  n, ci_lower....

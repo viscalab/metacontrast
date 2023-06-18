@@ -1,0 +1,165 @@
+---
+title: "Kiss et al., 2010"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants:
+1) Schizophrenia n = 20
+
+2) Control n = 20
+
+Contrast sensitivity (p6, experiment 1)
+1) Significant main effects of Group
+F(1,38) = 6.12 , p \< 0.05
+eta-squared = 0.14 ; power = 0.67 Eta-squared is a measure of effect size for use in ANOVA (source: <https://en.wikiversity.org/wiki/Eta-squared>) (can we use this as the effect size?)
+
+2)  Significant main effects of contrast sensitivity type (steady vs pulsed pedestal for M vs P pathways, respectively)
+F(1,38) = 96.79 , p \< 0.0001
+eta-squared = 0.72 ; power = 1.0
+
+3)  Significant main effects of SF (spatial frequency)
+F(4,152) = 25.15 , p \< 0.0001
+eta-squared = 0.40 ; power = 1.0
+
+4)  Significant group x contrast sensitivity type interaction
+F(1,38) = 17.74 , p \< 0.001
+eta-squared = 0.32 ; power = 0.98
+
+5)  Significant Group x SF interaction
+F(4,152) = 2.65 , p \< 0.05
+eta-squared = 0.07 ; power = 0.73
+
+6)  Significant SF x Contrast sensitivity type interaction
+F(4,152) = 65.57 , p \< 0.0001
+eta-squared = 0.63 ; power = 1.0
+
+7)  Significant Groups x contrast sensitivity type x SF interaction
+F(4,152) = 4.08 , p \< 0.05
+eta-squared = 1.0 ; power = 0.91
+
+8)  Significant scz vs control in steady pedestal for M-pathways
+F(1,38) = 14.27 , p \< 0.001 
+Tukey's HSD
+at 0.25 c/d: p \< 0.001
+at 0.5 c/d: p \< 0.01
+
+9)  Scz vs control in pulsed pedestal for P-pathways (not significant)
+p \> 0.1
+
+
+## Calculate effect size:
+use the F-statistic (see bookdown.org)
+
+### Significant main effects of Group (2 groups)
+F(1,38) = 6.12 , p \< 0.05 eta-squared = 0.14 ; power = 0.67
+```{r}
+kiss_2010_es_f <- esc_f(f = 6.12,      # F value of the one-way anova
+      grp1n = 20,   # sample size of group 1 
+      grp2n = 20,   # sample size of group 2
+      es.type = "g") # convert to Hedges' g; use "d" for SMD
+kiss_2010_es_f
+```
+
+### Scrapping from Figure 2 (steady pedestal)
+Control n=20
+SF = 0.25, mean = 1.4876441715057072, 95%CI = (1.7446459471685716 - 1.2306426220851645)
+SF =  0.5, mean = 1.4283361042361726, 95%CI = (1.6457990929719066 - 1.205930851975418)
+SF =  1.0, mean = 1.359143509916597,  95%CI = (1.5568369920676048 - 1.1663922912906095)
+SF =  2.0, mean = 1.1416805211808627, 95%CI = (1.3542010201492543 - 0.9489293025548753)
+SF =  4.0, mean = 0.8352554315408267, 95%CI = (0.9835255997146631 - 0.7018122801843739)
+
+Schizophrenia n=20
+SF = 0.25, mean = 2.2487645189596157, 95%CI = (2.4909390515627745 - 1.9868204797717306)
+SF =  0.5, mean = 1.991762743296751,  95%CI = (2.2042834685074646 - 1.7545304742186127)
+SF =  1.0, mean = 1.7792422443283595, 95%CI = (1.9769357264793674 - 1.576606272410009)
+SF =  2.0, mean = 1.4283361042361726, 95%CI = (1.630972076154523  - 1.225700358560144)
+SF =  4.0, mean = 1.1219112408384586, 95%CI = (1.2652389192449525 - 0.9785833361896427)
+
+
+### Calculate es
+Control n=20
+SF =  0.5, mean = 1.4283361042361726, 95%CI = (1.6457990929719066 - 1.205930851975418)
+Schizophrenia n=20
+SF =  0.5, mean = 1.991762743296751,  95%CI = (2.2042834685074646 - 1.7545304742186127)
+```{r}
+# Function to calculate SD from mean, n, and 95%CI
+calculate_sd <- function(mean, n, ci_lower, ci_upper) {
+  # Calculate the z-score for the desired confidence level (e.g., 95%)
+  z <- qnorm(1 - (1 - 0.95) / 2)
+
+  # Calculate the standard deviation
+  sd <- (ci_upper - ci_lower) / (2 * z / sqrt(n))
+  
+  return(sd)
+}
+```
+
+### Calculate sd per group
+Control n=20
+SF =  0.5, mean = 1.4283361042361726, 95%CI = (1.6457990929719066 - 1.205930851975418)
+```{r}
+# Control 
+
+mean_c_kiss2010 <- 1.4283361042361726
+n_c_kiss2010 <- 20
+ci_upper_c_kiss2010 <- 1.6457990929719066
+ci_lower_c_kiss2010 <- 1.205930851975418
+
+sd_c_kiss2010 <- calculate_sd(mean_c_kiss2010, n_c_kiss2010, ci_lower_c_kiss2010, ci_upper_c_kiss2010)
+print(sd_c_kiss2010)
+```
+
+Schizophrenia n=20
+SF =  0.5, mean = 1.991762743296751,  95%CI = (2.2042834685074646 - 1.7545304742186127)
+```{r}
+# Schizophrenia 
+
+mean_sz_kiss2010 <- 1.991762743296751
+n_sz_kiss2010 <- 20
+ci_upper_sz_kiss2010 <- 2.2042834685074646
+ci_lower_sz_kiss2010 <- 1.7545304742186127
+
+sd_sz_kiss2010 <- calculate_sd(mean_sz_kiss2010, n_sz_kiss2010, ci_lower_sz_kiss2010, ci_upper_sz_kiss2010)
+print(sd_sz_kiss2010)
+```
+
+### Calculate the effect size of control vs sz
+```{r}
+kiss_2010_es <- esc_mean_sd(grp1m = mean_c_kiss2010, grp2m = mean_sz_kiss2010,  
+            grp1sd = sd_c_kiss2010, grp2sd = sd_sz_kiss2010,
+            grp1n = 20, grp2n = 20, 
+            es.type = "g")
+kiss_2010_es
+```
+
+## Summarizing table
+
+```{r}
+kiss_2010 <- tibble( es = kiss_2010_es$es, se = kiss_2010_es$se ) 
+
+kiss_2010$study <- "Kiss et al. 2010"
+kiss_2010$method <- "staircase"  
+kiss_2010$medication <- "unmedicated" #all unmedicated
+kiss_2010$cpz <- NA
+kiss_2010$task <- "2AFC" #2AFC mentioned in the article
+kiss_2010$all_SF <- "0.25, 0.5, 1.0, 2.0, 4.0"
+kiss_2010$SF <- 0.5
+kiss_2010$size <- "2.5 x 2.5" 
+kiss_2010$BPRS <- NA
+kiss_2010$motion <- FALSE 
+kiss_2010$duration <- 0.045 
+kiss_2010$location <- 0
+kiss_2010$lapses <- TRUE # answers after 2000ms were not taken into account
+kiss_2010$calculation_statistic <- "m and sd"  
+kiss_2010$calculation_data <- "scrapping, calculate sd" 
+kiss_2010$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+
+kiss_2010
+```
+## Side note 1
+Es is negative. I think this is correct, since in the figure the means of schizophrenia are greater than of controls.
+Specifically for steady pedestals, schizophrenia has higher contrast sensitivity.

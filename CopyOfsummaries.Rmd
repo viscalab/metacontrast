@@ -1,0 +1,207 @@
+---
+title: "Summary Effect Sizes and Forest Plot"
+output: html_notebook
+---
+
+# Summaries studies
+
+## 1987_schwartz Summarizing table 
+
+```{r}
+schwartz_1987_summary <- schwartz_1987 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 1998_slaghuis Summarizing table 
+
+```{r}
+slaghuis_1998_summary <- slaghuis_1998 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2002_kéri Summarizing table 
+
+```{r}
+kéri_2002_summary <- kéri_2002 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2003_chen Summarizing table 
+
+```{r}
+chen_2003_summary <- chen_2003 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2004_slaghuis Summarizing table 
+
+```{r}
+slaghuis_2004_summary <- slaghuis_2004 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2005_chen Summarizing table
+
+```{r}
+chen_2005_summary <- chen_2005 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2005_butler Summarizing table
+
+```{r}
+butler_2005_summary <- butler_2005 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2006_cimmer Summarizing table
+
+```{r}
+cimmer_2006_summary <- cimmer_2006 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2006_oDonnell Summarizing table
+
+```{r}
+oDonnell_2006_summary <- oDonnell_2006 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2006_chen Summarizing table
+
+```{r}
+chen_2006_summary <- chen_2006 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2009_butler Summarizing table
+
+```{r}
+butler_2009_summary <- butler_2009 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2010_kiss Summarizing table
+
+```{r}
+kiss_2010_summary <- kiss_2010 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2011_dias Summarizing table
+
+```{r}
+dias_2011_summary <- dias_2011 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2013_calderone Summarizing table
+
+```{r}
+calderone_2013_summary <- calderone_2013 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2013_cadenhead Summarizing table
+
+```{r}
+cadenhead_2013_summary <- cadenhead_2013 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2013_shoshina Summarizing table
+
+```{r}
+shoshina_2013_summary <- shoshina_2013 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2015_shoshina_and_shelepin Summarizing table
+
+```{r}
+shoshina_and_shelepin_2015_summary <- shoshina_and_shelepin_2015 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2018_fernandes Summarizing table
+
+```{r}
+fernandes_2018_summary <- fernandes_2018 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+## 2019_fernandes Summarizing table
+
+```{r}
+fernandes_2019_summary <- fernandes_2019 |> 
+  select(es, se, study, calculation_statistic, calculation_data, calculation_certainty)
+```
+
+# Summary table all studies
+
+Let's combine the data in a single data frame.
+
+```{r,echo=TRUE}
+studies <- schwartz_1987_summary |>
+  bind_rows(slaghuis_1998_summary) |>
+  bind_rows(kéri_2002_summary) |>
+  bind_rows(chen_2003_summary) |>
+  bind_rows(slaghuis_2004_summary) |>
+  bind_rows(chen_2005_summary) |> 
+  bind_rows(butler_2005_summary) |>
+  bind_rows(cimmer_2006_summary) |> 
+  bind_rows(oDonnell_2006_summary) |> 
+  bind_rows(chen_2006_summary) |>
+  bind_rows(butler_2009_summary) |>
+  bind_rows(kiss_2010_summary) |>
+  bind_rows(dias_2011_summary) |>
+  bind_rows(calderone_2013_summary) |>
+  bind_rows(cadenhead_2013_summary) |>
+  bind_rows(shoshina_2013_summary) |>
+  bind_rows(shoshina_and_shelepin_2015_summary) |>
+  bind_rows(fernandes_2018_summary) |>
+  bind_rows(fernandes_2019_summary) |>
+  select(study, es, se, calculation_statistic, calculation_data, calculation_certainty)
+
+studies
+```
+
+
+# Random-effect meta-analysis using `meta`
+
+```{r,echo=TRUE}
+random_meta <- metagen(TE = es, seTE = se, studlab = study, 
+                    fixed = FALSE, 
+                    random = TRUE, 
+                    data = studies)
+
+random_meta
+```
+
+
+```{r,echo=TRUE}
+summary(random_meta)
+```
+
+### Forest plot Random effect
+
+```{r,echo=TRUE}
+forest(random_meta)
+```
+
+
+We can modify the plot
+
+```{r,echo=TRUE}
+forest(random_meta, layout= "JAMA", hetstat = FALSE, 
+       xlim = c(-2, 6))
+```
+
+
+```{r}
+funnel.meta(random_meta,
+            xlim = c(-0.5, 6),
+            studlab = FALSE)
+```
+

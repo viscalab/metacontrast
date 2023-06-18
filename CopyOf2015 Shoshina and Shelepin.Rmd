@@ -1,0 +1,100 @@
+---
+title: "2013 Shoshina & Shelepin"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants:
+1) Schizophrenia n = 43
+n = 23 group 1: duration schizophrenia < 10 years
+n = 20 group 2: duration schizophrenia > 10 years
+
+2)  Control n = 20
+
+
+Contrast sensitivity (p2-3)
+1) SF = 0.4
+Control: mean = 15.2 ; sd = 12.0
+Schizophrenia: mean = 10.1 ; sd = 8.1
+p = 0.001
+
+2) SF = 3.6
+Control: mean = 73.4 ; sd = 39.8
+Schizophrenia: mean = 64.4 ; sd = 40.7
+p = 0.02
+
+3) SF = 17.9
+Control: mean = 16.4 ; sd = 13.1
+Schizophrenia: mean = 16.1 ; sd = 13.4 
+p = 0.9 (not significant)
+
+The contrast sensitivities for group 1 and group 2 of schizophrenia based on disease duration is also given in the article. Not applicable.
+
+
+## Calculate effect size:
+use the mean and sd (see bookdown.org)
+
+###  SF = 0.4
+Control: mean = 15.2 ; sd = 12.0
+Schizophrenia: mean = 10.1 ; sd = 8.1
+```{r}
+#schizophrenia group: is the full group, no pooling needed
+
+shoshina_and_shelepin_2015_es_sf0.4 <- esc_mean_sd(grp1m = 15.2, grp2m = 10.1,  
+            grp1sd = 12.0, grp2sd = 8.1, 
+            grp1n = 43, grp2n = 20, 
+            es.type = "g")
+shoshina_and_shelepin_2015_es_sf0.4
+```
+
+###  SF = 3.6
+Control: mean = 73.4 ; sd = 39.8
+Schizophrenia: mean = 64.4 ; sd = 40.7
+```{r}
+shoshina_and_shelepin_2015_es_sf3.6 <- esc_mean_sd(grp1m = 73.4, grp2m = 64.4,  # group mean
+            grp1sd = 39.8, grp2sd = 40.7, # group sd
+            grp1n = 43, grp2n = 20, 
+            es.type = "g")
+shoshina_and_shelepin_2015_es_sf3.6
+```
+
+### SF = 17.9
+Control: mean = 16.4 ; sd = 13.1
+Schizophrenia: mean = 16.1 ; sd = 13.4
+```{r}
+shoshina_and_shelepin_2015_es_sf17.9 <- esc_mean_sd(grp1m = 16.4, grp2m = 16.1,  # group mean
+            grp1sd = 13.1, grp2sd = 13.4, # group sd
+            grp1n = 43, grp2n = 20, 
+            es.type = "g")
+shoshina_and_shelepin_2015_es_sf17.9
+```
+
+Also possible to calculate the m and sd from Figure 1, but this is prone to error, thus not necessary, when data is reported.
+
+## Summarizing table
+```{r}
+shoshina_and_shelepin_2015 <- tibble(es = shoshina_and_shelepin_2015_es_sf0.4$es, se = shoshina_and_shelepin_2015_es_sf0.4$se ) 
+
+shoshina_and_shelepin_2015$study <- "Shoshina and Shelepin. 2013"
+shoshina_and_shelepin_2015$method <- "staircase"
+shoshina_and_shelepin_2015$medication <- "medicated" #all medicated
+shoshina_and_shelepin_2015$cpz <- NA
+shoshina_and_shelepin_2015$task <- "2IFC"
+shoshina_and_shelepin_2015$all_SF <- "0.4, 3.6, 17.9"
+shoshina_and_shelepin_2015$SF <- 0.4
+shoshina_and_shelepin_2015$size <- NA
+shoshina_and_shelepin_2015$BPRS <- NA
+shoshina_and_shelepin_2015$motion <- FALSE 
+shoshina_and_shelepin_2015$duration <- NA 
+shoshina_and_shelepin_2015$location <- NA
+shoshina_and_shelepin_2015$lapses <- FALSE 
+shoshina_and_shelepin_2015$calculation_statistic <- "m and sd"  
+shoshina_and_shelepin_2015$calculation_data <- "reported" 
+shoshina_and_shelepin_2015$calculation_certainty <- "sure" #scale is "sure", "unsure", "very unsure"
+
+shoshina_and_shelepin_2015
+```
+
