@@ -1,10 +1,10 @@
-## ----------------------------------------------------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------------------------------------
 #The relevant task is the contrast detection task. They only provide the F for the four groups, so it is not possible to calculate the g for the schizophrenia and control group. We need to ask for the data.
 
 #Asked for the data, authors have died so we do not have access to the data.
 
 
-## ----------------------------------------------------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------------------------------------
 chen_2005 <- tibble(es = "No data", se = "No data" ) 
 chen_2005
 

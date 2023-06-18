@@ -205,3 +205,7 @@ funnel.meta(random_meta,
             studlab = FALSE)
 ```
 
+```{r}
+random_meta |>  eggers.test()
+```
+
