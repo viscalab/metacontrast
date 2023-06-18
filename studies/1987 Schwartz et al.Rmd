@@ -1,46 +1,47 @@
 ---
 title: "Schwartz et al., 1987"
 output: html_notebook
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 # Effect size
 
 ## Gathering information:
 
-Participants: 
-1) Schizophrenia
-  n = 19
-    
-2) Control
-  n = 15
+Participants: 1) Schizophrenia n = 19
 
+2)  Control n = 15
 
-Contrast sensitivity (p6)
-1) Main effect of groups for Pattern detection (0Hz)
-F(1,32) = 1.77 , p = 0.2
+Contrast sensitivity (p6) 1) Main effect of groups for Pattern detection
+(0Hz) F(1,32) = 1.77 , p = 0.2
 
-2) Main effects of SF (not significant for any SF)
-  F(1,32) = 2.51 , p = 0.12
+2)  Main effects of SF (not significant for any SF) F(1,32) = 2.51 , p =
+    0.12
 
-3) Interaction SF x groups (not significant)
-  F(2,64) = 0.94 , p = 1.397
-  
+3)  Interaction SF x groups (not significant) F(2,64) = 0.94 , p = 1.397
 
 ## Calculate effect size:
-  use the F-statistic (see bookdown.org)
+
+use the F-statistic (see bookdown.org)
 
 ### Main effects of group (2 groups)
- F(1,32) = 1.77 , p = 0.2
+
+F(1,32) = 1.77 , p = 0.2
+
 ```{r}
 schwartz_1987_es_f <- esc_f(f = 1.77,      # F value of the one-way anova
       grp1n = 19,   # sample size of group 1 
       grp2n = 15,   # sample size of group 2
       es.type = "g") # convert to Hedges' g; use "d" for SMD
 schwartz_1987_es_f
-```  
+```
 
 ### Main effects of SF (not significant for any SF) (2 groups)
-  F(1,32) = 2.51 , p = 0.12
+
+F(1,32) = 2.51 , p = 0.12
+
 ```{r}
 schwartz_1987_es_f_sf <- esc_f(f = 2.51,      # F value of the one-way anova
       grp1n = 19,   # sample size of group 1 
@@ -49,25 +50,25 @@ schwartz_1987_es_f_sf <- esc_f(f = 2.51,      # F value of the one-way anova
 schwartz_1987_es_f_sf
 ```
 
-
 ## Scrapping data from Figure 2
+
 ### Scrapping 0.8 Hz - other Hz is not important for us.
-Control (n=15)
-SF = 0.9, mean = 76.40378395835765, SEM-interval = 71.98737669712817 (lower limit)
-SF = 3.8, Not in graph 
-SF = 15 , mean = 67.35015261075841, SEM-interval = 63.1545722830155 (lower limit)
 
-Schizophrenia (n=19)
-SF = 0.9, mean = 80.15773063582003, SEM-interval = 85.67823213109716 (upper limit)
-SF = 3.8, Not in graph 
-SF = 15 , mean = 49.24290002390624, SEM-interval = 53.659307285135725 - 45.709780279930435
+Control (n=15) SF = 0.9, mean = 76.40378395835765, SEM-interval =
+71.98737669712817 (lower limit) SF = 3.8, Not in graph SF = 15 , mean =
+67.35015261075841, SEM-interval = 63.1545722830155 (lower limit)
 
+Schizophrenia (n=19) SF = 0.9, mean = 80.15773063582003, SEM-interval =
+85.67823213109716 (upper limit) SF = 3.8, Not in graph SF = 15 , mean =
+49.24290002390624, SEM-interval = 53.659307285135725 -
+45.709780279930435
 
 ### Calculate es from SF = 0.9
-Control (n=15)
-SF = 0.9, mean = 76.40378395835765, SEM-interval = 71.98737669712817 (lower limit)
-Schizophrenia (n=19)
-SF = 0.9, mean = 80.15773063582003, SEM-interval = 85.67823213109716 (upper limit)
+
+Control (n=15) SF = 0.9, mean = 76.40378395835765, SEM-interval =
+71.98737669712817 (lower limit) Schizophrenia (n=19) SF = 0.9, mean =
+80.15773063582003, SEM-interval = 85.67823213109716 (upper limit)
+
 ```{r}
 # SEM = (Upper limit - Lower limit) / 2
 # SEM = Upper Limit - Mean
@@ -88,9 +89,8 @@ schwartz_1987_es_scrap
 
 ```
 
-
-
 ## Summarizing table
+
 ```{r}
 schwartz_1987 <- tibble(es = schwartz_1987_es_scrap$es, se = schwartz_1987_es_scrap$se ) 
 
@@ -113,5 +113,3 @@ schwartz_1987$calculation_certainty <- "unsure" #scale is "sure", "unsure", "ver
 
 schwartz_1987
 ```
-
-
