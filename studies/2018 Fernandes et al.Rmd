@@ -24,39 +24,39 @@ Need to calculate the results from the figure (figure 1)
 ## Calculate effect size:
 ### Scrapping data from Figure 1
 Control (n=40)
-SF = 0.2 , mean = 2.2247190057682076, sd-interval = (2.297752881950083 - 2.140449346458806)
-SF = 0.6 , mean = 2.6629213627623924, sd-interval = (2.7247190700608557 - 2.6011236554639297)
-SF = 1.0 , mean = 2.8764044568177787, sd-interval = (2.9606741161271803 - 2.7584269337846163)
-SF = 2.0 , mean = 2.9943819798509415, sd-interval = (no error bars)
-SF = 5.0 , mean = 2.915730340690598 , sd-interval = (no error bars)
-SF = 10.0, mean = 2.45505616027077  , sd-interval = (no error bars)
-SF = 20.0, mean = 1.4775281122817088, sd-interval = (no error bars)
+SF = 0.2 , mean = 2.2247190057682076, se-interval = (2.297752881950083 - 2.140449346458806)
+SF = 0.6 , mean = 2.6629213627623924, se-interval = (2.7247190700608557 - 2.6011236554639297)
+SF = 1.0 , mean = 2.8764044568177787, se-interval = (2.9606741161271803 - 2.7584269337846163)
+SF = 2.0 , mean = 2.9943819798509415, se-interval = (no error bars)
+SF = 5.0 , mean = 2.915730340690598 , se-interval = (no error bars)
+SF = 10.0, mean = 2.45505616027077  , se-interval = (no error bars)
+SF = 20.0, mean = 1.4775281122817088, se-interval = (no error bars)
 
 Schizophrenia (n=40)
-SF = 0.2 , mean = 1.7584270623699119 , sd-interval = (1.8876403685306005 - 1.6067416756129886) 
-SF = 0.6 , mean = 2.2752808013538486 , sd-interval = (2.365168609397605 - 2.191011142044447)
-SF = 1.0 , mean = 2.4606741804198284 , sd-interval = (2.54494383972923 - 2.365168609397605)
-SF = 2.0 , mean = 2.6348315191876908 , sd-interval = (no error bars)
-SF = 5.0 , mean = 2.376404392525131  , sd-interval = (no error bars)
-SF = 10.0, mean = 1.8820224769668374 , sd-interval = (no error bars)
-SF = 20.0, mean = 0.42696644528136324, sd-interval = (0.5056179558564109 - 0.3370786372376072)
+SF = 0.2 , mean = 1.7584270623699119 , se-interval = (1.8876403685306005 - 1.6067416756129886) 
+SF = 0.6 , mean = 2.2752808013538486 , se-interval = (2.365168609397605 - 2.191011142044447)
+SF = 1.0 , mean = 2.4606741804198284 , se-interval = (2.54494383972923 - 2.365168609397605)
+SF = 2.0 , mean = 2.6348315191876908 , se-interval = (no error bars)
+SF = 5.0 , mean = 2.376404392525131  , se-interval = (no error bars)
+SF = 10.0, mean = 1.8820224769668374 , se-interval = (no error bars)
+SF = 20.0, mean = 0.42696644528136324, se-interval = (0.5056179558564109 - 0.3370786372376072)
 
 ### Calculate es with scrapped data
 Control (n=40)
-SF = 0.6 , mean = 2.6629213627623924, sd-interval = (2.7247190700608557 - 2.6011236554639297)
+SF = 0.6 , mean = 2.6629213627623924, se-interval = (2.7247190700608557 - 2.6011236554639297)
 Schizophrenia (n=40)
-SF = 0.6 , mean = 2.2752808013538486 , sd-interval = (2.365168609397605 - 2.191011142044447)
+SF = 0.6 , mean = 2.2752808013538486 , se-interval = (2.365168609397605 - 2.191011142044447)
 ```{r}
 #schizophrenia group: is the full group, no pooling needed
 
 # calculate SD
-# SD = (upper limit - lower limit) / 2
-sd_c_fernandes2018 = (2.7247190700608557 - 2.6011236554639297) / 2
-sd_sz_fernandes2018 = (2.365168609397605 - 2.191011142044447) / 2
+# Se = (upper limit - lower limit) / 2
+se_c_fernandes2018 = (2.7247190700608557 - 2.6011236554639297) / 2
+se_sz_fernandes2018 = (2.365168609397605 - 2.191011142044447) / 2
 
 
-fernandes_2018_es <- esc_mean_sd(grp1m = 2.6629213627623924, grp2m = 2.2752808013538486,  
-            grp1sd = sd_c_fernandes2018, grp2sd = sd_sz_fernandes2018, 
+fernandes_2018_es <- esc_mean_se(grp1m = 2.6629213627623924, grp2m = 2.2752808013538486,  
+            grp1se = se_c_fernandes2018, grp2se = se_sz_fernandes2018, 
             grp1n = 40, grp2n = 40, 
             es.type = "g")
 fernandes_2018_es
@@ -79,14 +79,10 @@ fernandes_2018$motion <- FALSE
 fernandes_2018$duration <- 0.6
 fernandes_2018$location <- 2.5
 fernandes_2018$lapses <- TRUE 
-fernandes_2018$calculation_statistic <- "m and sd"  
+fernandes_2018$calculation_statistic <- "m and se"  
 fernandes_2018$calculation_data <- "scrapping" 
 fernandes_2018$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
 
 fernandes_2018
 ```
-
-
-## Side note 1
-A es of 5 seems extremely high. Something is wrong, I don't know what.
 

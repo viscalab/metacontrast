@@ -195,7 +195,7 @@ We can modify the plot
 
 ```{r,echo=TRUE}
 forest(random_meta, layout= "JAMA", hetstat = FALSE, 
-       xlim = c(-2, 6))
+       xlim = c(-2, 2.5))
 ```
 
 

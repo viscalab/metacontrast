@@ -89,10 +89,10 @@ SF =  0.5, mean = 1.991762743296751,  95%CI = (2.2042834685074646 - 1.7545304742
 # Function to calculate SD from mean, n, and 95%CI
 calculate_sd <- function(mean, n, ci_lower, ci_upper) {
   # Calculate the z-score for the desired confidence level (e.g., 95%)
-  z <- qnorm(1 - (1 - 0.95) / 2)
+  t <- qnorm(1 - (1 - 0.95) / 2)
 
   # Calculate the standard deviation
-  sd <- (ci_upper - ci_lower) / (2 * z / sqrt(n))
+  sd <- (ci_upper - ci_lower) / (2 * t / sqrt(n))
   
   return(sd)
 }
