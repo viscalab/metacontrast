@@ -73,7 +73,7 @@ calderone_2013_es_fmri_sf0.5
 ```{r}
 calderone_2013 <- tibble(es = calderone_2013_es_f$es, se = calderone_2013_es_f$se ) 
 
-calderone_2013$study <- "Caldarone et al. 2013"
+calderone_2013$study <- "Calderone et al. 2013"
 calderone_2013$method <- "up-down transform rule" #UDTR
 calderone_2013$medication <- "medicated" #all medicated
 calderone_2013$cpz <- 783.33

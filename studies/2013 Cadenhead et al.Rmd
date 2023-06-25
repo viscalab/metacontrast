@@ -56,7 +56,7 @@ cadenhead_2013
 
 cadenhead_2013$study <- "Cadenhead et al. 2013"
 cadenhead_2013$method <- "constant stimuli paradigm"  
-cadenhead_2013$medication <- "medicated and unmedicated" #n=48 medicated, n=5 unmedicated
+cadenhead_2013$medication <- "medicated and unmedicated" #n=41 medicated, n=5 unmedicated
 cadenhead_2013$cpz <- NA  
 cadenhead_2013$task <- "2AFC" 
 cadenhead_2013$all_SF <- 1.22
