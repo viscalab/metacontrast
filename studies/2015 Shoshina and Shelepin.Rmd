@@ -78,7 +78,7 @@ Also possible to calculate the m and sd from Figure 1, but this is prone to erro
 ```{r}
 shoshina_and_shelepin_2015 <- tibble(es = shoshina_and_shelepin_2015_es_sf0.4$es, se = shoshina_and_shelepin_2015_es_sf0.4$se ) 
 
-shoshina_and_shelepin_2015$study <- "Shoshina and Shelepin. 2013"
+shoshina_and_shelepin_2015$study <- "Shoshina & Shelepin. 2015"
 shoshina_and_shelepin_2015$method <- "staircase"
 shoshina_and_shelepin_2015$medication <- "medicated" #all medicated
 shoshina_and_shelepin_2015$cpz <- NA

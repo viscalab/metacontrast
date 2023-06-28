@@ -1,0 +1,120 @@
+---
+title: "Shoshina, Hovis et al., 2021"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants:
+1) Schizophrenia n = 43
+
+2) Control n = 39
+
+
+Contrast sensitivity (p3)
+Hedges' g scz vs HC
+
+1) SF = 0.6
+p < 0.001
+Hedges' g = 1.76 with 95% CI(1.26 - 2.30)
+
+2)  SF = 2.8
+p = 0.034
+Hedges' g = 0.47 with 95% CI(0.04 - 0.92)
+
+3)  SF = 8.0
+p < 0.001
+Hedges' g = 1.99 with 95% CI(1.47 - 2.54)
+
+4)  SF = 16
+p < 0.0006
+Hedges' g = 0.62 with 95% CI(0.18 - 1.06)
+
+All frequencies, except 4.5 cpd (p=0.10), showed significant differences between scz and HC. Scz has a better CS than HC. 
+
+
+Figure 1 shows the contrast sensitivity per group per spatial frequency as boxplots.
+
+## Calculate standard error of effect size:
+SE = sqrt((n1 + n2) / (n1 * n2) + (g^2 / (2 * (n1 + n2))))
+
+### SF = 0.6
+p < 0.001
+Hedges' g = 1.76 with 95% CI(1.26 - 2.30)
+This is for scz with a better CS than HC. Thus, we make the effect size negative.
+```{r}
+#SE = sqrt((n1 + n2) / (n1 * n2) + (g^2 / (2 * (n1 + n2))))
+shoshina_hovis_2021_se_0.6 = sqrt((39 + 43) / (39 * 43) + (-1.76^2 / (2 * (39 + 43))))
+shoshina_hovis_2021_se_0.6
+```
+
+```{r}
+# calculate the variance
+#Variance = ((Upper CI - Lower CI) / (2 * 1.96))^2
+
+shoshina_hovis_2021_var_0.6 = ((-1.26 - -2.30) / (2 * 1.96))^2
+shoshina_hovis_2021_var_0.6
+```
+
+```{r}
+# calculate the weight
+#weight = 1/variance
+
+shoshina_hovis_2021_weight_0.6 = 1 / shoshina_hovis_2021_var_0.6
+shoshina_hovis_2021_weight_0.6
+```
+
+
+
+```{r}
+# Create the data frame
+es <- -1.76
+se <- shoshina_hovis_2021_se_0.6
+variance <- shoshina_hovis_2021_var_0.6
+lower_ci <- -2.30
+upper_ci <- -1.26
+weight <- shoshina_hovis_2021_weight_0.6
+
+shoshina_hovis_2021_es_0.6 <- data.frame(
+  "Effect Size" = es,
+  "Standard Error" = se,
+  "Variance" = variance,
+  "Lower CI" = lower_ci,
+  "Upper CI" = upper_ci,
+  "Weight" = weight
+)
+
+# Print the table
+print(shoshina_hovis_2021_es_0.6)
+
+```
+
+
+## Summarizing table
+```{r}
+shoshina_hovis_2021 <- tibble(es = shoshina_hovis_2021_es_0.6$Effect.Size, se = shoshina_hovis_2021_es_0.6$Standard.Error ) 
+
+shoshina_hovis_2021$study <- "Shoshina, Hovis et al. 2021"
+shoshina_hovis_2021$method <- "staircase"
+shoshina_hovis_2021$medication <- "unmedicated" #all unmedicated
+shoshina_hovis_2021$cpz <- NA
+shoshina_hovis_2021$task <- "2AFC"
+shoshina_hovis_2021$all_SF <- "0.6, 2.8, 4.5, 8.0, 16.0" 
+shoshina_hovis_2021$SF <- 0.6
+shoshina_hovis_2021$size <- 6.0
+shoshina_hovis_2021$BPRS <- NA
+shoshina_hovis_2021$motion <- FALSE 
+shoshina_hovis_2021$duration <- 550
+shoshina_hovis_2021$location <- 2.5
+shoshina_hovis_2021$lapses <-  FALSE # to avoid fatigue, encouraged to take breaks
+shoshina_hovis_2021$calculation_statistic <- "Hedges' g and 95%CI"  
+shoshina_hovis_2021$calculation_data <- "reported" 
+shoshina_hovis_2021$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+
+shoshina_hovis_2021
+```
+
+
+

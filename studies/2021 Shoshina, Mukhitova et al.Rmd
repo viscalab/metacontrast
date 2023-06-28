@@ -1,0 +1,106 @@
+---
+title: "Shoshina, Mukhitova et al., 2021"
+output: html_notebook
+---
+
+# Effect size
+
+## Gathering information:
+
+Participants:
+1) Schizophrenia n = 68
+
+2) Control n = 30
+
+3) Depression n = 25
+
+
+Contrast sensitivity (p4)
+1) SF = Low (0.4 and 0.6)
+Control: mean = 17.8 ; sd = 5.3
+Schizophrenia: mean = 12.06 ; sd = 5.3
+
+2)  SF = Medium (1.0 and 4.0)
+Control: mean = 21.4 ; sd = 8.1
+Schizophrenia: mean = 12.6 ; sd = 5.5
+
+3)  SF = High (10.0)
+Control: mean = 7.9 ; sd = 4.6
+Schizophrenia: mean = 4.2 ; sd = 2.9
+
+
+## Calculate effect size:
+Calculate based on mean and SD
+
+### SF = Low
+1) SF = Low (0.4 and 0.6)
+Control: mean = 17.8 ; sd = 5.3
+Schizophrenia: mean = 12.06 ; sd = 5.3
+```{r}
+shoshina_mukhitova_2021_es_low <- esc_mean_sd(grp1m =17.8 , grp2m = 12.06, 
+            grp1sd = 5.3, grp2sd = 5.3, 
+            grp1n = 30, grp2n = 68, 
+            es.type = "g")
+shoshina_mukhitova_2021_es_low
+```
+
+
+### SF = Medium
+2)  SF = Medium (1.0 and 4.0)
+Control: mean = 21.4 ; sd = 8.1
+Schizophrenia: mean = 12.6 ; sd = 5.5
+```{r}
+shoshina_mukhitova_2021_es_medium <- esc_mean_sd(grp1m = 21.4, grp2m = 12.6,
+            grp1sd = 8.1, grp2sd = 5.5, 
+            grp1n = 30, grp2n = 68, 
+            es.type = "g")
+shoshina_mukhitova_2021_es_medium
+```
+
+
+### SF = High
+3)  SF = High (10.0)
+Control: mean = 7.9 ; sd = 4.6
+Schizophrenia: mean = 4.2 ; sd = 2.9
+```{r}
+shoshina_mukhitova_2021_es_high <- esc_mean_sd(grp1m = 7.9, grp2m = 4.2, 
+            grp1sd = 4.6, grp2sd = 2.9, 
+            grp1n = 30, grp2n = 68, 
+            es.type = "g")
+shoshina_mukhitova_2021_es_high
+```
+
+## Summarizing table
+```{r}
+shoshina_mukhitova_2021 <- tibble(es = shoshina_mukhitova_2021_es_low$es, se = shoshina_mukhitova_2021_es_low$se ) 
+
+shoshina_mukhitova_2021$study <- "Shoshina, Mukhitova et al. 2021"
+shoshina_mukhitova_2021$method <- "staircase"
+shoshina_mukhitova_2021$medication <- "medicated" #all medicated
+shoshina_mukhitova_2021$cpz <- NA
+shoshina_mukhitova_2021$task <- "2AFC"
+shoshina_mukhitova_2021$all_SF <- "0.4, 0.6, 1.0, 4.0, 10.0" 
+shoshina_mukhitova_2021$SF <- 0.4
+shoshina_mukhitova_2021$size <- NA
+shoshina_mukhitova_2021$BPRS <- NA
+shoshina_mukhitova_2021$motion <- FALSE 
+shoshina_mukhitova_2021$duration <- NA
+shoshina_mukhitova_2021$location <- 0
+shoshina_mukhitova_2021$lapses <-  FALSE
+shoshina_mukhitova_2021$calculation_statistic <- "m and sd, low SF (0.4 and 0.6)"  
+shoshina_mukhitova_2021$calculation_data <- "reported" 
+shoshina_mukhitova_2021$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+
+shoshina_mukhitova_2021
+```
+
+
+# Side note 1
+Unsure whether sd or se.
+SD: Effect Size:   1.0745
+ Standard Error:   0.2324
+ 
+SE: Effect Size:   0.1442
+ Standard Error:   0.2194 
+ 
+I think it is wrong if the standard error of the effect size is larger than the effect size itself. So I think it is SD.

@@ -35,7 +35,7 @@ fernandes_2019$medication <- "medicated" #all medicated
 fernandes_2019$cpz <- 546.5 #combined mean of typical meds scz (615) and atypical meds scz (478)
 fernandes_2019$task <- "2AFC"
 fernandes_2019$all_SF <- "0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0"
-fernandes_2018$SF <- 0.5
+fernandes_2019$SF <- 0.5
 fernandes_2019$size <- 5
 fernandes_2019$BPRS <- 41.36 #combined mean of typical meds scz (40.42) and atypical meds scz (42.30)
 fernandes_2019$motion <- FALSE 
