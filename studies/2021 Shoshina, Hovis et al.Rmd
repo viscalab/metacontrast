@@ -106,12 +106,12 @@ shoshina_hovis_2021$SF <- 0.6
 shoshina_hovis_2021$size <- 6.0
 shoshina_hovis_2021$BPRS <- NA
 shoshina_hovis_2021$motion <- FALSE 
-shoshina_hovis_2021$duration <- 550
+shoshina_hovis_2021$duration <- 0.550
 shoshina_hovis_2021$location <- 2.5
 shoshina_hovis_2021$lapses <-  FALSE # to avoid fatigue, encouraged to take breaks
 shoshina_hovis_2021$calculation_statistic <- "Hedges' g and 95%CI"  
 shoshina_hovis_2021$calculation_data <- "reported" 
-shoshina_hovis_2021$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+shoshina_hovis_2021$calculation_certainty <- "sure" #scale is "sure", "unsure", "very unsure"
 
 shoshina_hovis_2021
 ```

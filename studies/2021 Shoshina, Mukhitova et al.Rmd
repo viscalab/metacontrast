@@ -89,7 +89,7 @@ shoshina_mukhitova_2021$location <- 0
 shoshina_mukhitova_2021$lapses <-  FALSE
 shoshina_mukhitova_2021$calculation_statistic <- "m and sd, low SF (0.4 and 0.6)"  
 shoshina_mukhitova_2021$calculation_data <- "reported" 
-shoshina_mukhitova_2021$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very unsure"
+shoshina_mukhitova_2021$calculation_certainty <- "sure" #scale is "sure", "unsure", "very unsure"
 
 shoshina_mukhitova_2021
 ```

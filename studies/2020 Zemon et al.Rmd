@@ -80,12 +80,12 @@ zemon_2020$SF <- 0.5
 zemon_2020$size <- "6x6"
 zemon_2020$BPRS <- NA
 zemon_2020$motion <- FALSE 
-zemon_2020$duration <- "33 and 500"
+zemon_2020$duration <- "0.033 and 0.500"
 zemon_2020$location <- 0
 zemon_2020$lapses <-  FALSE
 zemon_2020$calculation_statistic <- "m and sd"  
 zemon_2020$calculation_data <- "raw data" 
-zemon_2020$calculation_certainty <- "unsure" #scale is "sure", "unsure", "very 
+zemon_2020$calculation_certainty <- "sure" #scale is "sure", "unsure", "very 
 
 zemon_2020
 ```
