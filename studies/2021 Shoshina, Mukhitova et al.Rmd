@@ -74,7 +74,7 @@ shoshina_mukhitova_2021_es_high
 ```{r}
 shoshina_mukhitova_2021 <- tibble(es = shoshina_mukhitova_2021_es_low$es, se = shoshina_mukhitova_2021_es_low$se ) 
 
-shoshina_mukhitova_2021$study <- "Shoshina, Mukhitova et al. 2021"
+shoshina_mukhitova_2021$study <- "Shoshina et al. 2021b"
 shoshina_mukhitova_2021$method <- "staircase"
 shoshina_mukhitova_2021$medication <- "medicated" #all medicated
 shoshina_mukhitova_2021$cpz <- NA

@@ -247,7 +247,7 @@ We can modify the plot
 
 ```{r,echo=TRUE}
 forest(random_meta, layout= "JAMA", hetstat = FALSE, 
-       xlim = c(-2.5, 2.5), print.I2 = TRUE, leftlabs = c("Source","SMD (95% CI)"))
+       xlim = c(-2.5, 2.5), print.I2 = TRUE, leftlabs = c("Source","Estimate (95% CI)"))
 ```
 
 

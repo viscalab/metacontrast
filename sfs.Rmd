@@ -35,6 +35,7 @@ p_sfs <- ggplot() +
   geom_point(data = sfs, aes(x = study, y = sf)) +
 
   labs(y = "Spatial frequency (cycles/deg)") +
+  labs(title = "Spatial frequencies across studies", color="black")+
   coord_flip() +
   theme_minimal() +
   theme(axis.title.y = element_blank()) 

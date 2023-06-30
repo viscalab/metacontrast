@@ -96,7 +96,7 @@ print(shoshina_hovis_2021_es_0.6)
 ```{r}
 shoshina_hovis_2021 <- tibble(es = shoshina_hovis_2021_es_0.6$Effect.Size, se = shoshina_hovis_2021_es_0.6$Standard.Error ) 
 
-shoshina_hovis_2021$study <- "Shoshina, Hovis et al. 2021"
+shoshina_hovis_2021$study <- "Shoshina et al. 2021a"
 shoshina_hovis_2021$method <- "staircase"
 shoshina_hovis_2021$medication <- "unmedicated" #all unmedicated
 shoshina_hovis_2021$cpz <- NA
