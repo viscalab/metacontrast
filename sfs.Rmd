@@ -35,15 +35,16 @@ p_sfs <- ggplot() +
   geom_point(data = sfs, aes(x = study, y = sf)) +
 
   labs(y = "Spatial frequency (cycles/deg)") +
-  labs(title = "Spatial frequencies across studies", color="black")+
-  coord_flip() +
+    coord_flip() +
   theme_minimal() +
   theme(axis.title.y = element_blank()) 
 
 p_sfs
 
 ggsave("figures/sfs.pdf", p_sfs, 
-       width = 5, height = 5)
+       width = 4, height = 15)
+
+#labs(title = "Spatial frequencies across studies", color="grey")+
 ```
 
 

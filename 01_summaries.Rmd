@@ -246,15 +246,15 @@ forest(random_meta)
 We can modify the plot
 
 ```{r,echo=TRUE}
-forest(random_meta, layout= "JAMA", hetstat = FALSE, 
-       xlim = c(-2.5, 2.5), print.I2 = TRUE, leftlabs = c("Source","Estimate (95% CI)"))
+forest(random_meta, layout= "JAMA", hetstat = TRUE, 
+       xlim = c(-2.5, 2.5), print.I2 = TRUE, leftlabs = c("Source","Hedges' g (95% CI)"))
 ```
 
 
 ```{r}
 funnel.meta(random_meta,
             xlim = c(-2, 2),
-            studlab = FALSE, xlab = "Standardised Mean Difference (95% CI)" )
+            studlab = FALSE, xlab = "Hedges' g (95% CI)" )
 ```
 
 ```{r}
